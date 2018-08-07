@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.3">Jekyll</generator><link href="https://luisspuerto.net/feed.xml" rel="self" type="application/atom+xml" /><link href="https://luisspuerto.net/" rel="alternate" type="text/html" /><updated>2018-08-07T15:25:40+00:00</updated><id>https://luisspuerto.net/</id><title type="html">Luis Puerto</title><subtitle>Forestry | Research | GIS | Remote Sensing</subtitle><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><entry><title type="html">New Web in Jekyll</title><link href="https://luisspuerto.net/blog/2018/07/23/new-web-in-jekyll/" rel="alternate" type="text/html" title="New Web in Jekyll" /><published>2018-07-23T20:20:00+00:00</published><updated>2018-07-23T20:20:00+00:00</updated><id>https://luisspuerto.net/blog/2018/07/23/new-web-in-jekyll</id><content type="html" xml:base="https://luisspuerto.net/blog/2018/07/23/new-web-in-jekyll/">&lt;p&gt;As you probably have noticed, some days ago I rolled out a new version of my website, which you probably think it’s pretty similar to the previous one, at least talking about its external appearance. However, it’s really different in the inside, since it’s a &lt;a href=&quot;https://en.wikipedia.org/wiki/Static_web_page&quot;&gt;static web&lt;/a&gt; build with &lt;a href=&quot;https://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt;, while the previous one was build on Wordpress. This isn’t a change that occurred to me just out of the blue and some moths ago I made a &lt;a href=&quot;https://luisspuerto.net/blog/2018/03/04/jekyll/&quot;&gt;post about Jekyll&lt;/a&gt; where I stated my desire to change to Jekyll, or at least to try,  for several important reasons, being the main ones cost and simplicity.&lt;/p&gt;
+
+&lt;p&gt;Although building a simple site in Jekyll it’s really straightforward and simple, make a transition from Wordpress to Jekyll has more “curves” on the way than you would expect. Even more when I was trying to mimic my original website as much as possible. I used a &lt;a href=&quot;https://wordpress.org/plugins/jekyll-exporter/&quot;&gt;Wordpress to Jekyll exporter&lt;/a&gt; and although the export was smooth, some of the post had the format messed up and I had to edit them manually. It took me a solid month to have everything more or less ready in a decent way.&lt;/p&gt;
+
+&lt;figure class=&quot;align-center&quot;&gt;
+  &lt;a href=&quot;/assets/images/blog/2018/luisspuerto.net-at-20180723.png&quot;&gt;
+  &lt;img src=&quot;/assets/images/blog/2018/luisspuerto.net-at-20180723.png&quot; alt=&quot;luisspuerto.net at 23rd July 2018&quot; /&gt;&lt;/a&gt;
+  
+    &lt;figcaption&gt;luisspuerto.net at 23rd July 2018
+&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+&lt;p&gt;Right now, the site is up and running —&lt;a href=&quot;https://luisspuerto.net&quot;&gt;as you can see&lt;/a&gt;— but there are some missing features. I have a &lt;a href=&quot;https://github.com/luisspuerto/luisspuerto.net/blob/master/TODO.md&quot;&gt;TODO&lt;/a&gt; list where I’m trying to track down all those features I want to implement and the pending changes I want to make. Some are improvements from the previous version but most of them are missing features that are not implemented in Jekyll right away or they are really basic as you take your Jekyll site &lt;em&gt;out of the box&lt;/em&gt;. These shortcomings are usually related to the fact I’m hosting the web in &lt;a href=&quot;https://pages.github.com&quot;&gt;GitHub Pages&lt;/a&gt;, which is free, but you have some missing features since they build your page in &lt;code class=&quot;highlighter-rouge&quot;&gt;--safe&lt;/code&gt; mode. So, you can’t use custom plugins&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Yet Jekyll provides an archive, categories and tags &lt;em&gt;out of the box&lt;/em&gt;, those features aren’t as nice as those provided by a dynamic site. For instance, you need to create yourself the those pages —which isn’t really a problem— but then you need to create manually the pages for each category and tag a page you want to show. However, if you use a plugin like &lt;a href=&quot;https://github.com/jekyll/jekyll-archives&quot;&gt;Jekyll Archives&lt;/a&gt; all the process is much nicer and the plugin build the all the tag and category pages for you. As you can see right now, I don’t even have an archive page and I’m relying in a &lt;a href=&quot;https://luisspuerto.net/blog/&quot;&gt;paginated chronological archive&lt;/a&gt;, what, at this moment, is more than enough.&lt;/p&gt;
+
+&lt;p&gt;There are a couple of ways to overcome the shortcomings of GitHub pages if you really want to use custom plugins. The first and most obvious one is to build your site locally every time you make a change and then you push it &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; folder to GitHub. From there on, you can go the extra mile and make everything automatically in the server side, whether you use a &lt;a href=&quot;https://jekyllrb.com/docs/continuous-integration/&quot;&gt;Continuous Integration&lt;/a&gt; service or you use somethings more complex like &lt;a href=&quot;https://jekyllrb.com/docs/deployment-methods/&quot;&gt;Netlify or others&lt;/a&gt;&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;. I’ll probably try to implement the Travis CI method and then research other more sophisticated ways to deploy.&lt;/p&gt;
+
+&lt;p&gt;I’m taking this as a way of learning about Jekyll platform —&lt;a href=&quot;https://shopify.github.io/liquid/&quot;&gt;liquid&lt;/a&gt;— html, css and a little bit of other things like javascript and ruby —ruby looks like a really useful language that I would love to learn in the future. Even I improve my Git skills since to publish in Jekyll you need to push. I wanted to roll out the site before it was fully finished because I find interesting to share how I finish to build the site. I really think we live in a society where we are too fixated on the final product but usually we don’t share how we arrive to it, something that sometimes it’s even more important. This particular idea is one of the characteristics I like the most from Git and GitHub, and all other repo hostings. You can share all the changes with others and understand how and why to reached the final “product”. I hope you enjoy also “the way”, most of the times as satisfying as “the end”.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;You can see a list of the allowed plugins &lt;a href=&quot;https://pages.github.com/versions/&quot;&gt;here&lt;/a&gt;. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;There are several other services besides the ones explained in the Jekyll documentation. If you research a little bit you are going to find several more options. &lt;a href=&quot;https://sketchingdev.co.uk/blog/continuous-deployment-of-jekyll-website-with-jenkins.html&quot;&gt;Jenkins&lt;/a&gt; seems also to be able to build Jekyll. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><category term="jekyll" /><category term="blogging" /><category term="coding" /><category term="markdown" /><category term="static web" /><summary type="html">As you probably have noticed, some days ago I rolled out a new version of my website, which you probably think it’s pretty similar to the previous one, at least talking about its external appearance. However, it’s really different in the inside, since it’s a static web build with Jekyll, while the previous one was build on Wordpress. This isn’t a change that occurred to me just out of the blue and some moths ago I made a post about Jekyll where I stated my desire to change to Jekyll, or at least to try, for several important reasons, being the main ones cost and simplicity.</summary></entry><entry><title type="html">16 Personalities: Apparently I’m an Entrepreneur</title><link href="https://luisspuerto.net/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="alternate" type="text/html" title="16 Personalities: Apparently I'm an Entrepreneur" /><published>2018-05-21T18:05:16+00:00</published><updated>2018-05-21T18:05:16+00:00</updated><id>https://luisspuerto.net/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur</id><content type="html" xml:base="https://luisspuerto.net/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/">&lt;p&gt;Not long ago, while I was taking a course in Finland, they asked us to take a personality test online called &lt;a href=&quot;https://www.16personalities.com&quot;&gt;16 personalities&lt;/a&gt;. It wasn’t nothing really official or for much purpose of scrutinize us, but just to know ourselves a little bit more and we can work our strengths and weakness. To my surprise, the test told me that I have an &lt;a href=&quot;https://www.16personalities.com/profiles/aac7d80816e2d&quot;&gt;&lt;em&gt;entrepreneurial&lt;/em&gt; personality&lt;/a&gt;. I never thought about myself in that regard, and in the beginning I thought that it was a lot of bulls**t, like most the so-call psychological test. However, after reading more or less thoroughly over the description I found that I have a lot in common with an &lt;em&gt;entrepreneurial&lt;/em&gt; personality. Or at least, or at least my subconscious persona wants to be an &lt;em&gt;entrepreneur&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;After all, who don’t want to be an &lt;em&gt;entrepreneur&lt;/em&gt; these days and start dozen and dozen of companies? be in command, executive and decided? produce something new and exciting everyday, fill with technology and &lt;em&gt;bells and whistles&lt;/em&gt;? Be part of that breed of people always in the verge of society… When we think in entrepreneurs it comes to our mind people like, Steve Jobs, Sergey Bin and Larry Page, Henry Ford, and dozen of other people that begin to build something in their house’s —or parent’s— garage.&lt;/p&gt;
+
+&lt;p&gt;It’s funny, because I just finish reading &lt;a href=&quot;https://basecamp.com/books/rework&quot;&gt;Rework&lt;/a&gt; and &lt;a href=&quot;https://basecamp.com/books/remote&quot;&gt;Remote&lt;/a&gt;, where the authors talk about the term &lt;em&gt;entrepreneur&lt;/em&gt; as “&lt;em&gt;an outdated and loaded with baggage&lt;/em&gt;” one. Some kind of a “&lt;em&gt;members-only club&lt;/em&gt;”. They talk about that there are a lot of people out there starting new business, who aren’t calling themselves &lt;em&gt;entrepreneurs&lt;/em&gt; because they are just doing what they love. So they advocate for a new term… &lt;em&gt;let’s just call them starters&lt;/em&gt;. And I kind of agree with them that the term &lt;em&gt;entrepreneur _is a term stale and overused, which a lot of people use with pride trying distance from others. Like if they had some kind of _pedigree.&lt;/em&gt; Something I don’t like at all.&lt;/p&gt;
+
+&lt;p&gt;But lest return to the personality test, as they explain in the &lt;a href=&quot;https://www.16personalities.com/articles/our-theory&quot;&gt;Our Theory / Our Framework&lt;/a&gt; section of the web, they are using the &lt;a href=&quot;https://en.wikipedia.org/wiki/Myers–Briggs_Type_Indicator#Criticism&quot;&gt;Myers—Briggs Type Indicator&lt;/a&gt; —which is an evolution of &lt;a href=&quot;https://en.wikipedia.org/wiki/Psychological_Types&quot;&gt;Carl Jung’s Phycological Types&lt;/a&gt;— with the addition of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Big_Five_personality_traits&quot;&gt;Big Five personality traits model&lt;/a&gt; as an analytical base. They also, of course, add algorithms, models and theories from their own &lt;em&gt;vintage&lt;/em&gt;. I’m not a psychologist, a sociologist, or any of the sort, so I can’t by any means, build an educated critic or something similar. I just can tell you that while reading the profile I was indeed feeling in some parts related, but in others I was totally not. Also, I noticed, that while not totally true or untrue, some of the descriptions were appealing, in the sense that if I’m not like that, I would like to be.&lt;/p&gt;
+
+&lt;figure class=&quot;align-left&quot;&gt;
+  &lt;a href=&quot;/assets/images/blog/2018/Screen-Shot-2018-05-02-at-20.26.39-1.png&quot;&gt;
+  &lt;img src=&quot;/assets/images/blog/2018/Screen-Shot-2018-05-02-at-20.26.39-1.png&quot; alt=&quot;General idea of what is seems I'm&quot; /&gt;&lt;/a&gt;
+  
+    &lt;figcaption&gt;General idea of what it seems I’m
+&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+&lt;p&gt;If you check the introduction of &lt;a href=&quot;https://www.16personalities.com/profiles/aac7d80816e2d&quot;&gt;my profile&lt;/a&gt;, they say that I’m an entrepreneur with a role of an &lt;a href=&quot;https://www.16personalities.com/articles/roles-explorers&quot;&gt;explorer&lt;/a&gt; and with a strategy of &lt;a href=&quot;https://www.16personalities.com/articles/strategies-people-mastery&quot;&gt;people mastery&lt;/a&gt;. It’s funny because I’ve always considered myself an explorer, I always enjoy wondering, and wandering, discovering new places and new people. Perhaps for that reason I’ve always loved maps —they help you reach new places and imagine. However, I never considered myself a social person or people master. When I was a child I was always really shy, buy my mother always encourage talk to people and be myself. She, on the other hand, has been always a really sociable person and really outspoken, even when she was a child. Perhaps, that is something I have inside of me.&lt;/p&gt;
+
+&lt;p&gt;They also consider that I’m have a 78% extraverted, 58% observant, 58% thinking, 51% prospecting and 76% assertive personality. As you see, I only have two trails really clearly sided, while in the other three I’m quite balance. These should be translated as that I’m clearly extraverted, so “I usually prefer to be group activities”, and clearly assertive, in other words, I’m self-assured, even-tempered and resistant to stress, and I usually don’t worry too much, but I don’t puss myself too much when I have to archive goals. Both of those trails are true or at least I feel they are true.&lt;/p&gt;
+
+&lt;p&gt;In relation to the other three. I’m mostly observant (58%), which means I’m really &lt;em&gt;practical, pragmatical and down-to-earch person, focussing in what is happening or has happened&lt;/em&gt;. Yet, since I’m not clearly observant I’m also somehow an intuitive (42%) person really &lt;em&gt;interested in ideas and novelty&lt;/em&gt;. I’m mainly a thinking (53%) individual, in other words, I &lt;em&gt;focus on objectivity and rationality, prioritizing logic over emotions&lt;/em&gt;. However, I’m also a feeling (47%) being and &lt;em&gt;I listen to my feelings and like to share with others, preferring cooperation over competition&lt;/em&gt;. Finally, I’m a prospecting (52%) person so I’m &lt;em&gt;good at improvising and spotting opportunities,&lt;/em&gt; &lt;em&gt;tending to be a flexible, relaxed nonconformists person who prefer keep my options open&lt;/em&gt;. Nevertheless, it also means I have a judging (49%) personality and in consequence I’m &lt;em&gt;good planner, like clarity and I have a strong work ethic.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Of course things are a little bit more complicated than that and I plan to explain then a little bit further in the following days in a couple of posts. Why? Because always I believe that openness, sharing your personality with others and be ready for assessment make you always a better person. I’m always really to upgrade to a better version of myself. Nonetheless, I don’t want to take this kind of test too seriously since all of them are usually fundamentally flawed. You are the one judging yourself, which has it drawbacks, and sometimes the language is something like the horoscope, always fit you no matter who reads it.&lt;/p&gt;</content><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><category term="I'm the entrepreneur" /><category term="science" /><category term="work" /><summary type="html">Not long ago, while I was taking a course in Finland, they asked us to take a personality test online called 16 personalities. It wasn’t nothing really official or for much purpose of scrutinize us, but just to know ourselves a little bit more and we can work our strengths and weakness. To my surprise, the test told me that I have an entrepreneurial personality. I never thought about myself in that regard, and in the beginning I thought that it was a lot of bulls**t, like most the so-call psychological test. However, after reading more or less thoroughly over the description I found that I have a lot in common with an entrepreneurial personality. Or at least, or at least my subconscious persona wants to be an entrepreneur.</summary></entry><entry><title type="html">Installing R with Homebrew with all the capabilities</title><link href="https://luisspuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="alternate" type="text/html" title="Installing R with Homebrew with all the capabilities" /><published>2018-05-11T11:57:06+00:00</published><updated>2018-05-11T11:57:06+00:00</updated><id>https://luisspuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities</id><content type="html" xml:base="https://luisspuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">&lt;p&gt;As I explained in my &lt;a href=&quot;https://luisspuerto.net/blog/2018/05/11/homebrews-r-doesnt-have-all-the-capabilities/&quot;&gt;previous post&lt;/a&gt; if you installed R with Homebrew you have less capabilities than with a R installed from CRAN’s binary. But, &lt;strong&gt;can you have all the capabilities while you still use Homebrew to install R? Yes!&lt;/strong&gt; However… why you bother to install it with Homebrew at all instead of installing it from CRAN. Well, it’s true that CRAN install it’s easier. You just have to download the binary and that’s it. You can even use Homebrew Cask to install R that way&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew cask install r-app
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;However, if you install that way you can’t take advantage of &lt;a href=&quot;https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/#openblas-openmp&quot;&gt;OpenBlas and OpenMP&lt;/a&gt; which really enhance the speed of R processing. Well, you can take advantage of OpenMP with CRAN install if you use the &lt;a href=&quot;https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/#openblas-openmp&quot;&gt;coatless professor method&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-all-the-capabilities&quot;&gt;Getting all the capabilities&lt;/h2&gt;
+
+&lt;p&gt;To make this possible we are going to install/reinstall R, and Cairo, with the formulae &lt;a href=&quot;https://github.com/sethrfore&quot;&gt;Seth Fore&lt;/a&gt; has in his tap, &lt;a href=&quot;https://github.com/sethrfore&quot;&gt;sethrfore&lt;/a&gt;/&lt;a href=&quot;https://github.com/sethrfore/homebrew-r-srf&quot;&gt;homebrew-r-srf&lt;/a&gt;. These formulae are basically the same on &lt;a href=&quot;https://github.com/brewsci&quot;&gt;brewsci&lt;/a&gt;/&lt;a href=&quot;https://github.com/brewsci/homebrew-science&quot;&gt;homebrew-science&lt;/a&gt;, which is a legacy tap (no longer updated), which we all were using to install R with Homebrew before they merge everything to Core. Seth updated both formulae for us, so we can enjoy the last version of R and Cairo while not loosing any capability.&lt;/p&gt;
+
+&lt;p&gt;You also have to remember that this instructions are just aimed to reinstall R if you have follow my previous instructions to have a &lt;a href=&quot;https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/&quot;&gt;100% R install with Homebrew&lt;/a&gt;. And they would replace this &lt;a href=&quot;https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/#r&quot;&gt;section&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The first thing you have to do is uninstall R and Cairo if you have them installed:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew uninstall R
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew uninstall &lt;span class=&quot;nt&quot;&gt;--ignore-dependencies&lt;/span&gt; cairo
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you have &lt;a href=&quot;https://cairographics.org&quot;&gt;Cairo&lt;/a&gt; installed, it’s going to protest about dependencies, but don’t worry and we are just going to reinstall it in a minute.&lt;/p&gt;
+
+&lt;p&gt;When you don’t have R and Cairo in your system you can go ahead.&lt;/p&gt;
+
+&lt;p&gt;You begin tapping Seth’s tap.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew tap sethrfore/r-srf
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Actually, you can avoid this step since Seth’s formulae have the same name as Homebrew Core’s one we are forced to install them using the full name of the tap in combination with the formula name.&lt;/p&gt;
+
+&lt;p&gt;If you don’t have &lt;a href=&quot;https://www.xquartz.org&quot;&gt;Xquartz&lt;/a&gt; already installed in your system you can install with:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew cask install xquartz
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, you can install Cairo.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew install sethrfore/r-srf/cairo
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When Cairo finish to build you can proceed with R.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew install sethrfore/r-srf/r &lt;span class=&quot;nt&quot;&gt;--with-openblas&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-java&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-cairo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-libtiff&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-pango&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To use the Pango flag &lt;code class=&quot;highlighter-rouge&quot;&gt;--with-pango&lt;/code&gt; you must have installed in your system &lt;a href=&quot;http://www.pango.org&quot;&gt;Pango&lt;/a&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;brew install pango&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;When it end to build, you can use use &lt;code class=&quot;highlighter-rouge&quot;&gt;capabilities()&lt;/code&gt; in R console and you have to get something like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;capabilities&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jpeg&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;png&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tiff&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tcltk&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aqua&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ftp&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sockets&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libxml&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fifo&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cledit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iconv&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NLS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;profmem&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cairo&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ICU&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;long.double&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libcurl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To finish I would run:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;R CMD javareconf
+Java interpreter : /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/bin/java
+Java version     : 10.0.2
+Java home path   : /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home
+Java compiler    : /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/bin/javac
+Java headers gen.: /usr/bin/javah
+Java archive tool: /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/bin/jar
+
+trying to compile and link a JNI program
+detected JNI cpp flags    : &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include/darwin
+detected JNI linker flags : &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt;
+/usr/local/opt/llvm/bin/clang  &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/usr/local/Cellar/r/3.5.1/lib/R/include&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-DNDEBUG&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/include/darwin  &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/gettext/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/llvm/include   &lt;span class=&quot;nt&quot;&gt;-fPIC&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wall&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-pedantic&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gnu99 &lt;span class=&quot;nt&quot;&gt;-mtune&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;native &lt;span class=&quot;nt&quot;&gt;-pipe&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; conftest.c &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; conftest.o
+/usr/local/opt/llvm/bin/clang &lt;span class=&quot;nt&quot;&gt;-dynamiclib&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-headerpad_max_install_names &lt;span class=&quot;nt&quot;&gt;-undefined&lt;/span&gt; dynamic_lookup &lt;span class=&quot;nt&quot;&gt;-single_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-multiply_defined&lt;/span&gt; suppress &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/Cellar/r/3.5.1/lib/R/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/gettext/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-rpath,/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; conftest.so conftest.o &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/Cellar/r/3.5.1/lib/R/lib &lt;span class=&quot;nt&quot;&gt;-lR&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lintl&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-framework &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,CoreFoundation
+ld: warning: text-based stub file /System/Library/Frameworks//CoreFoundation.framework/CoreFoundation.tbd and library file /System/Library/Frameworks//CoreFoundation.framework/CoreFoundation are out of sync. Falling back to library file &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;linking.
+
+
+JAVA_HOME        : /Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home
+Java library path: &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server
+JNI cpp flags    : &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include/darwin
+JNI linker flags : &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt;
+Updating Java configuration &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /usr/local/Cellar/r/3.5.1/lib/R
+Done.
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To reconfigure Java on R, just in case.&lt;/p&gt;</content><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><category term="homebrew" /><category term="how to" /><category term="RSoft" /><category term="RStats" /><summary type="html">As I explained in my previous post if you installed R with Homebrew you have less capabilities than with a R installed from CRAN’s binary. But, can you have all the capabilities while you still use Homebrew to install R? Yes! However… why you bother to install it with Homebrew at all instead of installing it from CRAN. Well, it’s true that CRAN install it’s easier. You just have to download the binary and that’s it. You can even use Homebrew Cask to install R that way</summary></entry><entry><title type="html">Homebrew’s R doesn’t have all the capabilities</title><link href="https://luisspuerto.net/blog/2018/05/11/homebrews-r-doesnt-have-all-the-capabilities/" rel="alternate" type="text/html" title="Homebrew's R doesn't have all the capabilities" /><published>2018-05-11T10:35:32+00:00</published><updated>2018-05-11T10:35:32+00:00</updated><id>https://luisspuerto.net/blog/2018/05/11/homebrews-r-doesnt-have-all-the-capabilities</id><content type="html" xml:base="https://luisspuerto.net/blog/2018/05/11/homebrews-r-doesnt-have-all-the-capabilities/">&lt;p&gt;A couple of days ago I just found out that when you install R with Homebrew you don’t get all the capabilities that the binary from CRAN have. In other words, you have a kind of &lt;em&gt;second class install&lt;/em&gt;, in some regards, and depending on how you do install and for what you are going to use R.&lt;/p&gt;
+
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;capabilities&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jpeg&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;png&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tiff&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tcltk&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aqua&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ftp&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sockets&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libxml&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fifo&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cledit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iconv&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NLS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;profmem&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cairo&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ICU&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;long.double&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libcurl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;capabilities&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jpeg&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;png&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tiff&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tcltk&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aqua&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ftp&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sockets&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libxml&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fifo&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;      &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cledit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iconv&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NLS&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;profmem&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;       &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cairo&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;         &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ICU&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;long.double&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;     &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libcurl&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+       &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;        &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;How did I notice? Well basically I was about to update the &lt;a href=&quot;https://cran.r-project.org/web/packages/sm/&quot;&gt;sm package&lt;/a&gt; in one of my computers and R yield an error similar to this one (sorry I didn’t copy the original one):&lt;/p&gt;
+
+&lt;!-- this code was wrapped--&gt;
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;or&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;failed&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tcltk&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+ &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.onLoad&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;failed&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loadNamespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'tcltk'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;details&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkgname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tcl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Tk&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;support&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;not&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;available&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;In&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addition&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Warning&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;S&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as.character.tclObj&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as.character.tclVar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as.double.tclObj&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as.integer.tclObj&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as.logical.tclObj&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as.raw.tclObj&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print.tclObj&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.tclArray&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.tclArray&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.tclArray&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&amp;lt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.tclArray&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names.tclArray&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.tclArray&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length.tclArray&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.tclArray&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tclObj.tclVar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tclObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.tclVar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tclvalue.default&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tclvalue.tclObj&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tclvalue.tclVar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tclvalue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.default&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tclvalue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.tclVar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;close.tkProgressBar&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;were&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;declared&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NAMESPACE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;but&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;not&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;found&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see I’ve highlighted the key line, R doesn’t have &lt;a href=&quot;https://en.wikipedia.org/wiki/Tcl&quot;&gt;tcltk&lt;/a&gt; available and running in that system and if you run &lt;code class=&quot;highlighter-rouge&quot;&gt;capabilities()&lt;/code&gt; in the R console you’ll probably get something similar to the first code-block. After researching a little bit about the problem [&lt;a href=&quot;https://discourse.brew.sh/t/r-installs-on-high-sierra-without-tcl-tk-support/1190&quot;&gt;1&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://discourse.brew.sh/t/r-bottle-options-graphics-capabilities/1785/10&quot;&gt;2&lt;/a&gt;], I found out what I’ve already said, Homebrew R isn’t build with those capabilities. Why? Well…&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;It seems that those capabilities are optional when you build R from source and build R with those capabilities / options on Homebrew’s bottle server is “error prone”.&lt;/li&gt;
+  &lt;li&gt;To have some of the missing capabilities you must have in your system &lt;a href=&quot;https://www.xquartz.org&quot;&gt;X11/XQuartz&lt;/a&gt;, which isn’t installed in every Mac, because it’s not longer provided as macOS basic installation.&lt;/li&gt;
+  &lt;li&gt;You can install X11/XQuartz, but you have to do it with Homebrew Cask, since it can’t be build from source. As a consequence is a off project dependency and they don’t want to rely on that.&lt;/li&gt;
+  &lt;li&gt;Homebrew seems to be heading to a option-less direction where the formulas aren’t going to have any option at all. So if you want to have options or different kind of build they encourage you to have your &lt;a href=&quot;https://docs.brew.sh/How-to-Create-and-Maintain-a-Tap.html&quot;&gt;own tap&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Whether you agree or not, you have to understand that the maintainers of Homebrew-core took this direction for a reason, which is probably they have already too much work to do. Don’t forget they maintain the package manager for free. If you disagree, &lt;a href=&quot;https://discourse.brew.sh/t/r-bottle-options-graphics-capabilities/1785/9?u=luisspuerto&quot;&gt;as I do&lt;/a&gt;, at least partly, please be polite. A lot of users have been expressing their disagreement in really bad manners lately and that is not acceptable.&lt;/p&gt;
+
+&lt;p&gt;Lucky for us users, there is a solution to the problem. You can always create your own tap of Homebrew and tweak the formula to fit your needs, as maintainers suggest. As a result &lt;a href=&quot;https://discourse.brew.sh/t/r-installs-on-high-sierra-without-tcl-tk-support/1190/16?u=luisspuerto&quot;&gt;someone already did that&lt;/a&gt; and there is already a tap which you can install R with the same formula we installed R when it was in Homebrew Science, but up to day.&lt;/p&gt;
+
+&lt;p&gt;I’ll explain in &lt;a href=&quot;https://wp.me/p8vFcV-tC&quot;&gt;my next post&lt;/a&gt; how to install R using that tap.&lt;/p&gt;</content><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><category term="homebrew" /><category term="RSoft" /><category term="RStats" /><summary type="html">A couple of days ago I just found out that when you install R with Homebrew you don’t get all the capabilities that the binary from CRAN have. In other words, you have a kind of second class install, in some regards, and depending on how you do install and for what you are going to use R.</summary></entry><entry><title type="html">MBP wakes up from sleep to back screen — Solution</title><link href="https://luisspuerto.net/blog/2018/05/02/mbp-wakes-up-from-sleep-to-back-screen-solution/" rel="alternate" type="text/html" title="MBP wakes up from sleep to back screen —  Solution" /><published>2018-05-02T09:23:04+00:00</published><updated>2018-05-02T09:23:04+00:00</updated><id>https://luisspuerto.net/blog/2018/05/02/mbp-wakes-up-from-sleep-to-back-screen-solution</id><content type="html" xml:base="https://luisspuerto.net/blog/2018/05/02/mbp-wakes-up-from-sleep-to-back-screen-solution/">&lt;p&gt;A couple of weeks ago I &lt;a href=&quot;https://luisspuerto.net/blog/2018/04/13/mbp-wakes-up-from-sleep-to-back-screen/&quot;&gt;wrote about the problem I have with my old MacBook Pro wakening from sleeping to a black screen&lt;/a&gt;. I also pointed out that I was &lt;a href=&quot;https://luisspuerto.net/blog/2018/04/13/mbp-wakes-up-from-sleep-to-back-screen/#the-lidwake-on-test&quot;&gt;testing a solution&lt;/a&gt; related to the lid. I can tell that since I’ve testing this solution I haven’t suffered any wake up to a black screen, so I guess that the problem is related to the lid, either to the hinge or to the magnet that trigger the wake up and the sleep processes.&lt;/p&gt;
+
+&lt;p&gt;I’m doing two things to prevent the black screen behavior. First I’m sleeping the computer using the command line:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;shutdown &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; now
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I’ve also change the hibernation mode of the machine to zero, in other words, it doesn’t save the state in a file in the hard drive. I’ve also deleted that file from my hard drive.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rm &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; /var/vm/sleepimage
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally I’ve disable the options to wake up the computer when you connect to power source and when you open the lid.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;pmset &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; lidwake 0
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So, now to wake up the computer I have to hit any key on the computer keyboard or the trackpad after I’ve open the lid.&lt;/p&gt;
+
+&lt;p&gt;So far it has been working great.&lt;/p&gt;</content><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><category term="dGPU" /><category term="high sierra" /><category term="macOS" /><summary type="html">A couple of weeks ago I wrote about the problem I have with my old MacBook Pro wakening from sleeping to a black screen. I also pointed out that I was testing a solution related to the lid. I can tell that since I’ve testing this solution I haven’t suffered any wake up to a black screen, so I guess that the problem is related to the lid, either to the hinge or to the magnet that trigger the wake up and the sleep processes.</summary></entry><entry><title type="html">The ciabatta recipe</title><link href="https://luisspuerto.net/blog/2018/04/29/the-ciabatta-recipe/" rel="alternate" type="text/html" title="The ciabatta recipe" /><published>2018-04-29T12:49:50+00:00</published><updated>2018-04-29T12:49:50+00:00</updated><id>https://luisspuerto.net/blog/2018/04/29/the-ciabatta-recipe</id><content type="html" xml:base="https://luisspuerto.net/blog/2018/04/29/the-ciabatta-recipe/">&lt;p&gt;Lately I’ve been extending my baking skills and I’ve been practicing the ciabatta recipe from Iban Yarza’s book, &lt;a href=&quot;https://www.amazon.com/Pan-casero-Larousse-Ilustrados-Gastronom%C3%ADa/dp/8416984123/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1524834446&amp;amp;sr=1-1&quot;&gt;Pan Casero&lt;/a&gt;, which I think is delicious. I say &lt;em&gt;extending my baking skills&lt;/em&gt; because it’s the first time I’ve tried a preferment recipe and more specifically poolish. Poolish have zero complications in comparison with the straight doughs, but it’s true that in general you need extra time and the final dough is more sticky since it’s more moisturized. So you are going to need to have some experience working with dough if you don’t want to end up full of dough and even, depending how brave you are, your kitchen.&lt;/p&gt;
+
+&lt;p&gt;What you are going to need for this recipe is the same as with the previous ones, plus a tray or container to handle the dough after we finish the kneading. I recommend to review the &lt;a href=&quot;https://luisspuerto.net/blog/2017/11/16/the-preliminaries-for-bread-and-pizza-making/&quot;&gt;preliminaries for baking post&lt;/a&gt; for a full description of the methods. Take into account that the amount of yeast is specify for &lt;strong&gt;12, 8 and 3 hours for the bulk fermentation&lt;/strong&gt; of the poolish. On top of that you are going to need around &lt;strong&gt;2 hours of mixing — kneading — proofing ** after the polish is ready, plus the usually **40-50’&lt;/strong&gt; &lt;strong&gt;of baking&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;ingredients&quot;&gt;Ingredients&lt;/h2&gt;
+
+&lt;p&gt;For the poolish&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Flour&lt;/strong&gt;: 450 gr (60%).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Water&lt;/strong&gt;: 450 gr (60%).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Yeast&lt;/strong&gt;: 1 to 7 gr of fresh yeast (see below) depending on how much we want to leave the poolish resting — fermenting.
+    &lt;ul&gt;
+      &lt;li&gt;0.9 gr for 12 hour fermentation (0.12%).&lt;/li&gt;
+      &lt;li&gt;3 gr for 8 hour fermentation (0.4%).&lt;/li&gt;
+      &lt;li&gt;7 gr for 3 hours fermentation (0.93%).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For the final dough&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Poolish&lt;/strong&gt;: 900 gr (60%).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Flour&lt;/strong&gt;: 300 gr of flour (100% = 60% from poolish + 40% from the final dough)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Water&lt;/strong&gt;: 120 gr of water (76% = 60% from poolish + 16% from the final dough)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Salt&lt;/strong&gt;: 15 gr of salt (2%)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As you probably have noted the proportions are a little bit weir, this is because, as always, they are the percentage of the full amount of flour. So, if we want to end up with a 750 gr. of bread —in this case two loaves of ~375 gr.— you need the 60% of flour for the poolish and the same amount of water. From there on, you have to complete the quantities for the final dough.&lt;/p&gt;
+
+&lt;h2 id=&quot;directions&quot;&gt;Directions&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;You measure 450 gr. of flour and put into a bowl at least the double and preferably the triple of that volume.&lt;/li&gt;
+  &lt;li&gt;Measure 450 gr. of warm water (37 ºC) and mix it with the yeast. When &lt;em&gt;dissolved&lt;/em&gt;, pour into the flour and mix it, with a spoon if you want, until homogenous.&lt;/li&gt;
+  &lt;li&gt;When the mixture has double the volume (in 3, 8 or 12 hours) pour the 300 gr. flour, 120 gr. of water and the 15 gr. of salt in the poolish and mix everything with your hands using the &lt;a href=&quot;https://luisspuerto.net/blog/2017/11/16/the-preliminaries-for-bread-and-pizza-making/#the-pincer-method&quot;&gt;pincer method&lt;/a&gt;. Be aware that the dough is really sticky, so have at hand a spoon to clean your hand when you are done.&lt;/li&gt;
+  &lt;li&gt;Now you have two options, you can take the dough out of the bowl and use the &lt;a href=&quot;https://www.youtube.com/watch?v=PvdtUR-XTG0&quot;&gt;French kneading&lt;/a&gt; method for 10’ or you can take the easy way and practice the &lt;a href=&quot;https://luisspuerto.net/blog/2017/11/16/the-preliminaries-for-bread-and-pizza-making/#the-folding&quot;&gt;folding&lt;/a&gt; like 5-6 times every 10’ for the next 30’. The aim here is to develop the gluten so the dough doesn’t just flat out in the oven tray and it’s able to rise. If you don’t have experience with the French kneading I just recommend you to leave the dough in the bowl and practice the folding. A great way to avoid the dough to sticks to your hand is set it like a paddle —put your fingers tight together— and dip it in cold water before you begin to fold every 10’. I usually go a little bit the extra mile and I do the first folding repetition extra long and fold the dough for about 5’ minutes.&lt;/li&gt;
+  &lt;li&gt;After you’ve developed the gluten you take out the dough from the bowl and set in on a tray where you’ve spread olive oil so the dough doesn’t stick to it. There you fold it like a small package using the 4 sides and turn it over with the seam downwards for 30’.&lt;/li&gt;
+  &lt;li&gt;After 30’ you repeat the operation, fold again like a small package using the 4 sides and turn it over, but this time let it rest for an hour.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+  &lt;a href=&quot;/assets/images/blog/2018/IMG_5421.jpg&quot;&gt;
+  &lt;img src=&quot;/assets/images/blog/2018/IMG_5421.jpg&quot; alt=&quot;Poolish fermenting and dough resting&quot; /&gt;&lt;/a&gt;
+  
+    &lt;figcaption&gt;Poolish fermenting and dough resting
+&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+&lt;p&gt;At this point you could think to preheat the oven to 250 ºC so it’s ready after an hour. Remember to put a container with water inside so there is humidity when you introduce the bread. Preheat the oven tray too.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;After an hour you take the dough out of the tray / container —genteelly so you don’t ruin the air pockets— and put in the counter where you have sprinkle some flour. You can cut the dough in half longwise so you end up with a couple of strips of dough that are like a small mattresses.&lt;/li&gt;
+  &lt;li&gt;Now, you take the tray out of the oven and put parchment paper over it —without burn yourself— and after that you put the two stripes of dough.&lt;/li&gt;
+  &lt;li&gt;Bake them in the oven for about 20’ and remove the water.&lt;/li&gt;
+  &lt;li&gt;You can reduce a little bit the temperature now to around 230 ºC and bake for another 10’.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+  &lt;a href=&quot;/assets/images/blog/2018/IMG_5299.jpg&quot;&gt;
+  &lt;img src=&quot;/assets/images/blog/2018/IMG_5299.jpg&quot; alt=&quot;Loaves in the oven&quot; /&gt;&lt;/a&gt;
+  
+    &lt;figcaption&gt;Loaves in the oven
+&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;After 10’ I usually turn around the loaves so they get well baked on the bottom and bake for another 10’.&lt;/li&gt;
+  &lt;li&gt;Finally, turn off the oven and open the door a little bit leaving the bread there for an additional 10’.&lt;/li&gt;
+  &lt;li&gt;Take the loaves out and let them rest over the rack for at least half an hour.&lt;/li&gt;
+  &lt;li&gt;Enjoy your ciabatta.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><category term="bread" /><category term="how to" /><summary type="html">Lately I’ve been extending my baking skills and I’ve been practicing the ciabatta recipe from Iban Yarza’s book, Pan Casero, which I think is delicious. I say extending my baking skills because it’s the first time I’ve tried a preferment recipe and more specifically poolish. Poolish have zero complications in comparison with the straight doughs, but it’s true that in general you need extra time and the final dough is more sticky since it’s more moisturized. So you are going to need to have some experience working with dough if you don’t want to end up full of dough and even, depending how brave you are, your kitchen.</summary></entry><entry><title type="html">R 3.5 “Joy in Playing”</title><link href="https://luisspuerto.net/blog/2018/04/28/r-3-5-joy-in-playing/" rel="alternate" type="text/html" title="R 3.5 &quot;Joy in Playing&quot;" /><published>2018-04-28T18:52:30+00:00</published><updated>2018-04-28T18:52:30+00:00</updated><id>https://luisspuerto.net/blog/2018/04/28/r-3-5-joy-in-playing</id><content type="html" xml:base="https://luisspuerto.net/blog/2018/04/28/r-3-5-joy-in-playing/">&lt;figure class=&quot;align-center&quot;&gt;
+  &lt;a href=&quot;/assets/images/blog/2018/4421de17ce2dc4cd3843ba00b224fbe0.jpg&quot;&gt;
+  &lt;img src=&quot;/assets/images/blog/2018/4421de17ce2dc4cd3843ba00b224fbe0.jpg&quot; alt=&quot;The joy is (in the) playing&quot; /&gt;&lt;/a&gt;
+  
+    &lt;figcaption&gt;The joy is (in the) playing
+&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+&lt;p&gt;Last Monday, 23rd of April, &lt;a href=&quot;https://stat.ethz.ch/pipermail/r-announce/2018/000628.html&quot;&gt;R was updated&lt;/a&gt; to its version 3.5, codenamed The &lt;em&gt;Joy in Playing&lt;/em&gt;, which as the rest of the releases, make reference to a Peanuts’ cartoon.&lt;/p&gt;
+
+&lt;p&gt;Since it’s a &lt;a href=&quot;https://semver.org&quot;&gt;minor release&lt;/a&gt; (3.x) and not just a patch, it’s advisable to reinstall all your packages, in some cases, to make then work properly. For example, and in my case, since I’ve built all of them as a consequence of my &lt;a href=&quot;https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/&quot;&gt;Homebrew install&lt;/a&gt;, some of them where throwing me the following message&lt;/p&gt;
+
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XXXXXXXXXXX&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;was&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;installed&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;an&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;different&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;internals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;needs&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;be&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reinstalled&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So, to reinstall all the packages that haven’t been build for your current R build, you can run the following command. (Be careful, rebuild all your packages could take time and resources, so it’s recommendable to do it at some moment that you aren’t using your machine)&lt;/p&gt;
+
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;update.packages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ask&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;repos&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'cloud.r-project.org'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;checkBuild&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I would recommend to run it twice, since some packages have dependencies and they need to be installed first and I don’t know if the command follows a specific installation order to avoid this errors like this —in other words, if the dependencies aren’t installed first to this specific release, the installation is going to fail. It doesn’t hurt to run the command again since if all the packages were rebuilt with the current R version they aren’t going to be reinstalled.&lt;/p&gt;
+
+&lt;h1 id=&quot;java-and-rjava-configuration&quot;&gt;Java and rJava configuration&lt;/h1&gt;
+
+&lt;p&gt;In some of my machines I hadn’t configured the new Java 10 with the prerelease rJava so &lt;a href=&quot;https://luisspuerto.net/blog/2018/03/28/r-and-java-10/&quot;&gt;Java 10 can be run properly in R&lt;/a&gt;. If this is your case remember to run:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;R CMD javareconf
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;so you yield something similar to:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;Java interpreter : /Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/bin/java
+Java version     : 10.0.1
+Java home path   : /Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home
+Java compiler    : /Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/bin/javac
+Java headers gen.: /usr/bin/javah
+Java archive tool: /Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/bin/jar
+
+trying to compile and link a JNI program
+detected JNI cpp flags    : &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include/darwin
+detected JNI linker flags : &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt;
+/usr/local/opt/llvm/bin/clang  &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/usr/local/Cellar/r/3.5.0/lib/R/include&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-DNDEBUG&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/include/darwin  &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/gettext/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/llvm/include   &lt;span class=&quot;nt&quot;&gt;-fPIC&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wall&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-pedantic&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gnu99 &lt;span class=&quot;nt&quot;&gt;-mtune&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;native &lt;span class=&quot;nt&quot;&gt;-pipe&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; conftest.c &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; conftest.o
+/usr/local/opt/llvm/bin/clang &lt;span class=&quot;nt&quot;&gt;-dynamiclib&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-headerpad_max_install_names &lt;span class=&quot;nt&quot;&gt;-undefined&lt;/span&gt; dynamic_lookup &lt;span class=&quot;nt&quot;&gt;-single_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-multiply_defined&lt;/span&gt; suppress &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/Cellar/r/3.5.0/lib/R/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/gettext/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-rpath,/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; conftest.so conftest.o &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/Cellar/r/3.5.0/lib/R/lib &lt;span class=&quot;nt&quot;&gt;-lR&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lintl&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-framework &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,CoreFoundation
+
+
+JAVA_HOME        : /Library/Java/JavaVirtualMachines/jdk-10.0.1.jdk/Contents/Home
+Java library path: &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server
+JNI cpp flags    : &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include/darwin
+JNI linker flags : &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt;
+Updating Java configuration &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /usr/local/Cellar/r/3.5.0/lib/R
+Done.
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;So you can install / build rJava prerelease with the following command&lt;/p&gt;
+
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;install.packages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'rJava'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;repos&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'http://rforge.net'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;devemf&quot;&gt;devEMF&lt;/h1&gt;
+
+&lt;p&gt;In another machine I wasn’t being able to install devEMF package. You can see the specific error I was getting in this Stack Overflow &lt;a href=&quot;https://stackoverflow.com/questions/50075549/devemf-package-in-r-3-5-on-macos-doesnt-build/50076667#50076667&quot;&gt;question&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The problem was the &lt;a href=&quot;https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/#setting-the-final-makevars&quot;&gt;makevars&lt;/a&gt; file, which is crafted to use the &lt;a href=&quot;https://llvm.org&quot;&gt;LLVM&lt;/a&gt;. I commented all of the lines to build the package and all set. Seems that for some reason LLVM isn’t supported to build this package in this version of R (or it isn’t supported at all).&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;# Remove the comment on -fopenmp for compiling data.table packag`akevars&quot;&amp;gt;# Remove the comment on -fopenmp for compiling data.table packagakevars&quot;&amp;gt;# Remove the comment on -fopenmp for compiling data.table packag`e
+# CC=/usr/local/opt/llvm/bin/clang #-fopenmp
+# CXX=/usr/local/opt/llvm/bin/clang++ #-fopenmp
+# -O3 should be faster than -O2 (default) level optimisation ..
+# CFLAGS=-g -O3 -Wall -pedantic -std=gnu99 -mtune=native -pipe
+# CXXFLAGS=-g -O3 -Wall -pedantic -std=c++11 -mtune=native -pipe
+# LDFLAGS=-L/usr/local/opt/gettext/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib
+# CPPFLAGS=-I/usr/local/opt/gettext/include -I/usr/local/opt/llvm/include
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Remember to uncomment them after you finish the build.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Remove the comment on -fopenmp for compiling data.table package&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;CC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local/opt/llvm/bin/clang &lt;span class=&quot;c&quot;&gt;#-fopenmp&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;CXX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local/opt/llvm/bin/clang++ &lt;span class=&quot;c&quot;&gt;#-fopenmp&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# -O3 should be faster than -O2 (default) level optimisation ..&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;CFLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wall&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-pedantic&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gnu99 &lt;span class=&quot;nt&quot;&gt;-mtune&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;native &lt;span class=&quot;nt&quot;&gt;-pipe&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;CXXFLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wall&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-pedantic&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;c++11 &lt;span class=&quot;nt&quot;&gt;-mtune&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;native &lt;span class=&quot;nt&quot;&gt;-pipe&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;LDFLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/gettext/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-rpath,/usr/local/opt/llvm/lib
+&lt;span class=&quot;nv&quot;&gt;CPPFLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/gettext/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/llvm/include
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;datatable&quot;&gt;data.table&lt;/h1&gt;
+
+&lt;p&gt;Don’t forget that data.table package has also specific &lt;a href=&quot;https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/#setting-the-final-makevars&quot;&gt;makevars&lt;/a&gt; necessities if you are building it, as you should, with LLVM. Remember that the flag &lt;code class=&quot;highlighter-rouge&quot;&gt;-fopenmp&lt;/code&gt; has to be present / uncommented in the lines related to C and C++ compilers.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;CC=/usr/local/opt/llvm/bin/clang -fopenmp
+CXX=/usr/local/opt/llvm/bin/clang++ -fopenmp
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Remember to re-comment or delete the &lt;code class=&quot;highlighter-rouge&quot;&gt;-fopenmp&lt;/code&gt; after you build data.table.&lt;/p&gt;</content><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><category term="homebrew" /><category term="how to" /><category term="RSoft" /><category term="RStats" /><summary type="html">The joy is (in the) playing</summary></entry><entry><title type="html">MBP wakes up from sleep to back screen</title><link href="https://luisspuerto.net/blog/2018/04/13/mbp-wakes-up-from-sleep-to-back-screen/" rel="alternate" type="text/html" title="MBP wakes up from sleep to back screen" /><published>2018-04-13T17:37:52+00:00</published><updated>2018-04-13T17:37:52+00:00</updated><id>https://luisspuerto.net/blog/2018/04/13/mbp-wakes-up-from-sleep-to-back-screen</id><content type="html" xml:base="https://luisspuerto.net/blog/2018/04/13/mbp-wakes-up-from-sleep-to-back-screen/">&lt;p&gt;As you know, I have had problems with my old MacBook Pro Late 2011 and its &lt;a href=&quot;/tags/#dgpu&quot;&gt;dGPU&lt;/a&gt; which I’ve been able to &lt;em&gt;patch&lt;/em&gt; to make the computer work again. In the beginning, the side effect of the fix was not to be able to wake up properly the Mac from sleep mode. The computer woke up to a black or grey screen and the fans started to work at full speed to finally turn off itself. This was cause because on the wake up process the computer decided to stuck to the faulty dGPU instead to the iGPU. Luckily, this problem was solve as you can see in the &lt;a href=&quot;/blog/2017/12/11/disconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way/&quot;&gt;final fix&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, my Mac still wakes up to a black screen from time to time. This isn’t a new behavior at all, just happen to come up more often. Perhaps, in the past, this problem happened once per month or two months or even once every six months.&lt;/p&gt;
+
+&lt;p&gt;Basically, the computer wakes up from sleep mode to a black screen that remains black no matter you do or what key you punch, while the computer seems to perfectly work in the dark. In this case, the fans don’t run at full speed and seems that the computer can stay like that for long. I haven’t tried, but I guess you can even log in remotely. If your Mac happen to have the iconic glowing apple in the lid you can put there a source of light —the flashlight of your smartphone for example— and you’ll probably be able to see the login screen —just the part around the Apple logo. Basically, what is going on in most of the cases, is the computer wakes up but it doesn’t turn on the blacklight of the screen for some reason.&lt;/p&gt;
+
+&lt;p&gt;This is a quite a &lt;a href=&quot;https://www.google.com/search?newwindow=1&amp;amp;client=safari&amp;amp;rls=en&amp;amp;ei=t63QWq7hDcb_swHCg6mIBg&amp;amp;q=macbook+black+screen+wake+up&amp;amp;oq=macbook+black+screen+wa&amp;amp;gs_l=psy-ab.3.1.0j0i22i30k1l6.20990.25239.0.27396.7.6.1.0.0.0.168.909.0j6.6.0....0...1c.1.64.psy-ab..0.7.949...35i39k1j0i67k1.0.t79Q76vUQP0&quot;&gt;common problem&lt;/a&gt; on MacBooks and if you search on internet about it you are going to find multiple solutions. Till now, none of them has really worked for me, but if you have this problem perhaps some of them are going to work for your, so why not to give it a try.&lt;/p&gt;
+
+&lt;h2 id=&quot;reset-smc-and-pramnvram&quot;&gt;Reset SMC and &lt;strong&gt;PRAM/NVRAM&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;This is the most common solution you are going to find our there since perhaps the problem is related to those basic configurations. Yet, in my case I can’t do that —or I rather not— because the solution for disable the dGPU of my MPB is partly a setting on the NVRAM, so if I reset it I need to reapply the whole thing again, or at least that.&lt;/p&gt;
+
+&lt;p&gt;If you want to give it a try to can reset those settings with this directions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://support.apple.com/en-us/HT201295&quot;&gt;&lt;strong&gt;SMC&lt;/strong&gt;&lt;/a&gt;: shutdown, unplug everything except power, now hold &lt;code class=&quot;highlighter-rouge&quot;&gt;leftShift + Ctrl + Opt/Alt + Power&lt;/code&gt; for about 10” and release at the same time.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://support.apple.com/en-us/HT204063&quot;&gt;&lt;strong&gt;PRAM/NVRAM&lt;/strong&gt;&lt;/a&gt;: with the power cord on, power on and immediately later and before the chime hold &lt;code class=&quot;highlighter-rouge&quot;&gt;cmd + Opt/Alt + P + R&lt;/code&gt; at the same time until you hear the chime for the second time.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;making-it-sleep-again&quot;&gt;Making it sleep again&lt;/h2&gt;
+
+&lt;p&gt;Some people argue that the problem is related to the the lid itself that becomes a little bit faulty, either in the hinge or in the magnet, so it doesn’t send the proper signal to the computer to wake up when you open the lid. In in this camp I’ve seen like a couple of solutions.&lt;/p&gt;
+
+&lt;h4 id=&quot;try-to-log-in-and-make-it-sleep-again&quot;&gt;Try to log in and make it sleep again&lt;/h4&gt;
+
+&lt;p&gt;Since you computer seems to work properly but the screen if not receiving backlight, so it remains black, you can log in and command your computer to sleep again to reattempt to wake up properly this time. You can check if this is your case, if your lid’s Apple logo is not glowing chances are that the problem is just the backlight. You can put a source of light there —the flashlight of your smartphone, as suggested before— and see in you can spot the login screen. That means your computer is up and running perfectly.&lt;/p&gt;
+
+&lt;p&gt;Then, you can type your password, log in and after that push the power button for just a couple of seconds —no more or you are going to turn off the computer and we are trying to avoid that. That we’re trying to accomplish here is to make to show up the power / shut down menu in macOS. If we’ve succeeded we can hit the S key next and your computer should sleep again.&lt;/p&gt;
+
+&lt;figure class=&quot;align-center&quot;&gt;
+  &lt;a href=&quot;/assets/images/blog/2018/Screen-Shot-2018-04-13-at-13.16.22.png&quot;&gt;
+  &lt;img src=&quot;/assets/images/blog/2018/Screen-Shot-2018-04-13-at-13.16.22.png&quot; alt=&quot;macOS power / shut down menu&quot; /&gt;&lt;/a&gt;
+  
+    &lt;figcaption&gt;macOS power / shut down menu
+&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+&lt;p&gt;If your computer doesn’t go to sleep, don’t worry, mine either. I haven’t been able to make this solution yet a single time.&lt;/p&gt;
+
+&lt;h4 id=&quot;push-the-power-button-and-close-the-lid&quot;&gt;Push the power button and close the lid&lt;/h4&gt;
+
+&lt;p&gt;When you see that your Mac doesn’t wake up in the correct way, one of the most obvious behaviors is close the lid again —like trying to make this a bad dream— and open again, to give another try. Also pushing buttons here and there, scape key —let me get out of this nightmare, I don’t want to lose my 150 pages document that I didn’t save before and I’ve been working the whole week when I sent the Mac to sleep— and the power button and go on and so for. That has worked for me in the past sometimes, not always. Sometimes the computer turned the screen on again and some others it just reboots.&lt;/p&gt;
+
+&lt;p&gt;Some people say that the correct way to do this just push the power button and close the lid, to open it again after a couple of seconds. But I haven’t try this yet. I don’t remember if the times I’ve succeeded to be back to life the computer I’ve followed that sequence by any chance. Who knows!!&lt;/p&gt;
+
+&lt;h2 id=&quot;changing-energy-parameters&quot;&gt;Changing energy parameters&lt;/h2&gt;
+
+&lt;p&gt;Other solution I’ve read about is just change the way your Mac sleeps. You Mac can be sent to sleep in two ways, simple sleep or Safe Sleep —the last one is/was called hibernation in windows— so macOS has three different setups for sleeping —only simple sleep, only safe sleep or both. You can see your config using the command:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;pmset &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; custom
+  Battery Power:
+   lidwake              0
+   standbydelay         4200
+   standby              0
+   ttyskeepawake        1
+   hibernatemode        0
+   gpuswitch            1
+   hibernatefile        /var/vm/sleepimage
+   displaysleep         2
+   sleep                10
+   acwake               0
+   halfdim              1
+   sms                  1
+   lessbright           1
+   disksleep            10
+  AC Power:
+   lidwake              0
+   standbydelay         4200
+   standby              0
+   ttyskeepawake        1
+   hibernatemode        0
+   gpuswitch            1
+   hibernatefile        /var/vm/sleepimage
+   womp                 0
+   displaysleep         10
+   networkoversleep     0
+   sleep                0
+   acwake               0
+   halfdim              1
+   sms                  1
+   disksleep            10
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The variable that holds this setting is &lt;code class=&quot;highlighter-rouge&quot;&gt;hibernatemode&lt;/code&gt; and  &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt; is simple sleep, &lt;code class=&quot;highlighter-rouge&quot;&gt;3&lt;/code&gt; is both and &lt;code class=&quot;highlighter-rouge&quot;&gt;25&lt;/code&gt; is just safe sleep. In essence what is going on here is:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Simple Sleep — `hibernatemode 0`: Your computer keeps all the info in the RAM and stops all the rest of the computer. The RAM still has power and if you happen to run our of battery —after quite long time— you lose everything —not really, but let’s be catastrophical and think in the worse picture. However, you usually you don’t let your Mac sleeping and unplugged for more than a week, do you? I think the battery in this state can last more than a week, let be conservative here. This mode is the quickest, and usually your Mac is sleeping just after a couple of seconds you close the lid.&lt;/li&gt;
+  &lt;li&gt;Both — &lt;code class=&quot;highlighter-rouge&quot;&gt;hibenatemode 3&lt;/code&gt;: This is the standard mode and how most of the MacBooks behave. When you close the lid the Mac just normally sleep, but before it’s going to save its state in the &lt;code class=&quot;highlighter-rouge&quot;&gt;sleepimage&lt;/code&gt;. If it doesn’t run out of battery, it usually wakes up normally, from the info in the RAM and you continue working as usually. If it runs out of battery it’s going to switch to safe sleep before it loses power. In this case when you open the lid you have to push the power button and your Mac is going to recover from the &lt;code class=&quot;highlighter-rouge&quot;&gt;sleepimage&lt;/code&gt;. This is the safest… since it’s redundant, but it’s is slower than just sleep. This in modern MacBooks with SSD is call Standby Mode, and instead of waiting till the total lost of power between 1 h or 3h —depending on the year model— it goes to safe sleep.&lt;/li&gt;
+  &lt;li&gt;Safe Sleep — &lt;code class=&quot;highlighter-rouge&quot;&gt;hibernatemode 25&lt;/code&gt;: This is the hibernation mode in windows, in other words, the computer saves everything to the &lt;code class=&quot;highlighter-rouge&quot;&gt;sleepimage&lt;/code&gt; and them disconnect power from everything. This mode is also really safe, perhaps safer than the previous one for some people and cases, but it’s the slowest. Usually the sleep process is the same than in the previous one, but it’s always going to wake up from the sleepimage, regardless of it has run out of battery or not. So it’s going to take more or less time depending of the capacity of your machine to read the &lt;code class=&quot;highlighter-rouge&quot;&gt;sleepimage&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There is more info about the sleep modes &lt;a href=&quot;https://support.apple.com/en-us/HT202824&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;figure class=&quot;&quot;&gt;
+  &lt;a href=&quot;/assets/images/blog/2018/macos-sierra-mbp-progress-bar-after-deep-sleep.png&quot;&gt;
+  &lt;img src=&quot;/assets/images/blog/2018/macos-sierra-mbp-progress-bar-after-deep-sleep.png&quot; alt=&quot;Waking up from safe sleep&quot; /&gt;&lt;/a&gt;
+  
+    &lt;figcaption&gt;Waking up from safe sleep
+&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+&lt;p&gt;Some people argue that the back screen problem is related to the sleep image or the &lt;code class=&quot;highlighter-rouge&quot;&gt;hibernatemode 3&lt;/code&gt;, so you have two options, change to &lt;code class=&quot;highlighter-rouge&quot;&gt;hibernatemode 0&lt;/code&gt; —the one I have right now— or to &lt;code class=&quot;highlighter-rouge&quot;&gt;hibernatemode 25&lt;/code&gt;. If the problem is in the &lt;code class=&quot;highlighter-rouge&quot;&gt;sleepimage&lt;/code&gt; the obvious candidate is the zero mode, but I’ve tried it and I’ve just woken up to a back screen. On the other hand,  while I was trying to fix the dGPU problem I had set the 25 mode for long, but sometimes it also woke up to the back screen. So this isn’t working for me.&lt;/p&gt;
+
+&lt;p&gt;To change the sleep behavior you can run the following commands&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Just sleep mode&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;pmset &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; hibernationmode 0
+&lt;span class=&quot;c&quot;&gt;# Sleep mode + safe sleep&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;pmset &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; hibernationmode 3
+&lt;span class=&quot;c&quot;&gt;# Just safe sleep&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;pmset &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; hibernationmode 25
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-a&lt;/code&gt; is for all —when you are on power ac and battery— but you can specify different settings. &lt;code class=&quot;highlighter-rouge&quot;&gt;-b&lt;/code&gt; for battery and &lt;code class=&quot;highlighter-rouge&quot;&gt;-c&lt;/code&gt; wall power.&lt;/p&gt;
+
+&lt;p&gt;If you decide to go for &lt;code class=&quot;highlighter-rouge&quot;&gt;hibernatemode 0&lt;/code&gt; you can also delete de &lt;code class=&quot;highlighter-rouge&quot;&gt;sleepimage&lt;/code&gt; and sabe some space in your hard drive.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rm &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; /var/vm/sleepimage
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;the-lidwake-on-test&quot;&gt;The lidwake (on test)&lt;/h2&gt;
+
+&lt;p&gt;Since some people say that the problem is related to the lid I’ve decided to change the way the computer wakes up. Instead of waking it up when I open the lid I going to wake up it pushing a key after opening the lid.&lt;/p&gt;
+
+&lt;p&gt;You can achieve this changing the &lt;code class=&quot;highlighter-rouge&quot;&gt;lidwake&lt;/code&gt; parameter to &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;pmset &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; lidwake 0
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The normal value is &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s see how this pan out and I’m able to stop the back screen wake up.&lt;/p&gt;
+
+&lt;h3 id=&quot;final-thoughts&quot;&gt;Final thoughts&lt;/h3&gt;
+
+&lt;p&gt;The issue isn’t incredible problematic, even more right now that in modern system is really difficult to lose data because a force reboot. However, isn’t a normal behavior and is something that Apple should take a look to it. Seems that the problem extents across several generation of Macs and for some people has become more acute with High Sierra. Perhaps this is my case, but I don’t really know. I’ve &lt;a href=&quot;/blog/2017/11/08/updated-to-high-sierra/&quot;&gt;installed High Sierra&lt;/a&gt; around beginning of November and in the beginning of December my dGPU crashed. So it’s difficult for me if this behavior has increased due to the crash, due to High Sierra or just because my Mac is old.&lt;/p&gt;</content><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><category term="dGPU" /><category term="high sierra" /><category term="macOS" /><summary type="html">As you know, I have had problems with my old MacBook Pro Late 2011 and its dGPU which I’ve been able to patch to make the computer work again. In the beginning, the side effect of the fix was not to be able to wake up properly the Mac from sleep mode. The computer woke up to a black or grey screen and the fans started to work at full speed to finally turn off itself. This was cause because on the wake up process the computer decided to stuck to the faulty dGPU instead to the iGPU. Luckily, this problem was solve as you can see in the final fix.</summary></entry><entry><title type="html">R and Java 10</title><link href="https://luisspuerto.net/blog/2018/03/28/r-and-java-10/" rel="alternate" type="text/html" title="R and Java 10" /><published>2018-03-28T12:08:05+00:00</published><updated>2018-03-28T12:08:05+00:00</updated><id>https://luisspuerto.net/blog/2018/03/28/r-and-java-10</id><content type="html" xml:base="https://luisspuerto.net/blog/2018/03/28/r-and-java-10/">&lt;p&gt;&lt;strong&gt;Update 27th of March 2018 at 17.28 UTC+3&lt;/strong&gt;: After talk a little bit on the R mail lists [&lt;a href=&quot;http://r.789695.n4.nabble.com/R-and-Java-10-rJava-not-able-to-build-td4749125.html&quot;&gt;1&lt;/a&gt;][&lt;a href=&quot;http://r-sig-mac.29524.n8.nabble.com/R-SIG-Mac-R-and-Java-10-rJava-not-able-to-build-td136.html&quot;&gt;2&lt;/a&gt;], it’s seems that it’s a know issue and they are on the way to fix this. Till them we have to stick to Java 9.0.4 to work with R.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update 4th of April 2018 at 17.55 UTC+3&lt;/strong&gt;: The rJava author &lt;a href=&quot;http://r-sig-mac.29524.n8.nabble.com/R-SIG-Mac-R-and-Java-10-rJava-not-able-to-build-td136.html&quot;&gt;just fix this in an update&lt;/a&gt; that haven’t been fed to CRAN yet, bu you can install from source from his repo on rforge.net using the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;install.packages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'rJava'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;repos&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'http://rforge.net'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Java 10 was just released a week ago on 20 March 2018 and I just updated to it using &lt;a href=&quot;https://caskroom.github.io&quot;&gt;Homebrew Cask&lt;/a&gt;. However, I haven’t been able to make it work with R. As you know, I have a complete install of &lt;a href=&quot;https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/&quot;&gt;R with Homebrew&lt;/a&gt;, which I’m very happy with since it’s it easier to manage —in my opinion— and it’s faster. I would say also that R and Java &lt;a href=&quot;https://stackoverflow.com/questions/tagged/java+r&quot;&gt;are infamous&lt;/a&gt; for their bad relations and it’s not the first time that me and a whole bunch of people are driven nuts for not be able to configure it appropriately, even more in macOS.&lt;/p&gt;
+
+&lt;p&gt;In the moment of writing this post I’m on R 3.4.4 on macOS 10.13.3 with Java 10 and 9.0.4 installed.&lt;/p&gt;
+
+&lt;p&gt;First, I have to tell that I’m puzzle by something that it’s really intrigued, &lt;code class=&quot;highlighter-rouge&quot;&gt;R CMD javarenconf&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo R CMD javarendonf&lt;/code&gt; doesn’t yield the same result:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;R CMD javareconf
+Java interpreter : /Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/bin/java
+Java version     : 10
+Java home path   : /Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home
+Java compiler    : /Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/bin/javac
+Java headers gen.: /usr/bin/javah
+Java archive tool: /Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/bin/jar
+Non-system Java on macOS
+
+trying to compile and link a JNI program
+detected JNI cpp flags    : &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include/darwin
+detected JNI linker flags : &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt;
+/usr/local/opt/llvm/bin/clang  &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/Cellar/r/3.4.4/lib/R/include &lt;span class=&quot;nt&quot;&gt;-DNDEBUG&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/include/darwin  &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/gettext/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/llvm/include   &lt;span class=&quot;nt&quot;&gt;-fPIC&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wall&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-pedantic&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gnu99 &lt;span class=&quot;nt&quot;&gt;-mtune&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;native &lt;span class=&quot;nt&quot;&gt;-pipe&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; conftest.c &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; conftest.o
+/usr/local/opt/llvm/bin/clang++ &lt;span class=&quot;nt&quot;&gt;-dynamiclib&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-headerpad_max_install_names &lt;span class=&quot;nt&quot;&gt;-undefined&lt;/span&gt; dynamic_lookup &lt;span class=&quot;nt&quot;&gt;-single_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-multiply_defined&lt;/span&gt; suppress &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/gettext/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-rpath,/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/Cellar/r/3.4.4/lib/R/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/gettext/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-rpath,/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; conftest.so conftest.o &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/Cellar/r/3.4.4/lib/R/lib &lt;span class=&quot;nt&quot;&gt;-lR&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lintl&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-framework &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,CoreFoundation
+
+
+JAVA_HOME        : /Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home
+Java library path: &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server
+JNI cpp flags    : &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include/darwin
+JNI linker flags : &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt;
+Updating Java configuration &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /usr/local/Cellar/r/3.4.4/lib/R
+override rw-r--r--  root/admin &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; /usr/local/Cellar/r/3.4.4/lib/R/etc/Makeconf? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;y/n &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;n]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; y
+override rw-r--r--  root/admin &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; /usr/local/Cellar/r/3.4.4/lib/R/etc/ldpaths? &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;y/n &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;n]&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; y
+Done.
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;R CMD javareconf
+Java interpreter : /Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home/bin/java
+Java version     : 9.0.4
+Java home path   : /Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home
+Java compiler    : /Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home/bin/javac
+Java headers gen.: /Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home/bin/javah
+Java archive tool: /Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home/bin/jar
+Non-system Java on macOS
+
+trying to compile and link a JNI program
+detected JNI cpp flags    : &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include/darwin
+detected JNI linker flags : &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt;
+/usr/local/opt/llvm/bin/clang  &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/Cellar/r/3.4.4/lib/R/include &lt;span class=&quot;nt&quot;&gt;-DNDEBUG&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home/include/darwin  &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/gettext/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/llvm/include   &lt;span class=&quot;nt&quot;&gt;-fPIC&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wall&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-pedantic&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gnu99 &lt;span class=&quot;nt&quot;&gt;-mtune&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;native &lt;span class=&quot;nt&quot;&gt;-pipe&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; conftest.c &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; conftest.o
+/usr/local/opt/llvm/bin/clang++ &lt;span class=&quot;nt&quot;&gt;-dynamiclib&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-headerpad_max_install_names &lt;span class=&quot;nt&quot;&gt;-undefined&lt;/span&gt; dynamic_lookup &lt;span class=&quot;nt&quot;&gt;-single_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-multiply_defined&lt;/span&gt; suppress &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/gettext/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-rpath,/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/Cellar/r/3.4.4/lib/R/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/gettext/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-rpath,/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; conftest.so conftest.o &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/Cellar/r/3.4.4/lib/R/lib &lt;span class=&quot;nt&quot;&gt;-lR&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lintl&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-framework &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,CoreFoundation
+
+
+JAVA_HOME        : /Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home
+Java library path: &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server
+JNI cpp flags    : &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include/darwin
+JNI linker flags : &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt;
+Updating Java configuration &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /usr/local/Cellar/r/3.4.4/lib/R
+Done.
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I really don’t understand why… with root privileges it uses Java 9.0.4 and without it uses Java 10 and it’s not only my computer but all the rest of the Mac computers I have around, one of it with El Capitan instead of High Sierra. If you know why is like this please tell me.&lt;/p&gt;
+
+&lt;p&gt;This problem has the consequence that if I choose Java 10 —or configure R with Java without root privileges— R and Java doesn’t behave properly. In other words, I’m not able to build rJava properly.&lt;/p&gt;
+
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;n&quot;&gt;warning&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bootstrap&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;not&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conjunction&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;warning&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obsolete&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;will&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;be&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;removed&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;future&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;warning&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.6&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obsolete&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;will&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;be&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;removed&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;future&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;warning&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;To&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;suppress&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;warnings&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;about&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obsolete&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xlint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;options.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Note&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Some&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;or&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;override&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deprecated&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;API.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Note&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Recompile&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xlint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;deprecation&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;details.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Note&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Some&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unchecked&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;or&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unsafe&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;operations.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Note&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Recompile&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Xlint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unchecked&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;details.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;warnings&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;usr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;javah&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;classpath&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org.rosuda.JRI.Rengine&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Unable&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locate&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;an&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;executable&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;at&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/bin/javah&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;***&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;org_rosuda_JRI_Rengine.h&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;***&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;JRI.jar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;***&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;jri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ERROR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compilation&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;failed&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rJava&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;removing&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lpuerto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Library&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rJava&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;restoring&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;previous&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Users&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lpuerto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Library&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rJava&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;The&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;downloaded&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;packages&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;are&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;private&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;folders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;41&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gjf2mx7m7fmvfd8dr22_5h0000gn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RtmpT2kJMY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;downloaded_packages&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Warning&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;In&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;install.packages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;rJava&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;repos&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cloud.r-project.org&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;installation&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;‘&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rJava&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;’&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;had&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;non&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zero&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If we look closer to the error we can see that the source of the problem are, most probably, the highlighted lines —10 and 11— which mainly say &lt;code class=&quot;highlighter-rouge&quot;&gt;javah&lt;/code&gt; can’t be found. I checked in &lt;code class=&quot;highlighter-rouge&quot;&gt;/Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/bin/&lt;/code&gt; and it’s true that there isn’t a &lt;code class=&quot;highlighter-rouge&quot;&gt;javah&lt;/code&gt; there. However, if I go the the &lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/10-relnote-issues-4108729.html&quot;&gt;Java 10 release notes&lt;/a&gt; they mention:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;tools/javah&lt;br /&gt;
+&lt;strong&gt;➜ &lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/10-relnote-issues-4108729.html#JDK-8182758&quot;&gt;JEP 313 Remove the Native-Header Generation Tool (javah)&lt;/a&gt;&lt;/strong&gt;&lt;br /&gt;
+As previously announced, the native-header tool, &lt;code class=&quot;highlighter-rouge&quot;&gt;javah&lt;/code&gt;, has been removed.Native headers can now be generated by using the Java compiler, &lt;code class=&quot;highlighter-rouge&quot;&gt;javac&lt;/code&gt;, with the &lt;code class=&quot;highlighter-rouge&quot;&gt;-h&lt;/code&gt; option.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote class=&quot;text-right&quot;&gt;
+  &lt;p&gt;See &lt;a href=&quot;http://bugs.java.com/view_bug.do?bug_id=JDK-8182758&quot;&gt;JDK-8182758&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In other words, &lt;code class=&quot;highlighter-rouge&quot;&gt;javah&lt;/code&gt; isn’t missing, they removed it on purpose. They stated there a way to create headers with Java, &lt;em&gt;using the Java compiler, &lt;code class=&quot;highlighter-rouge&quot;&gt;javac&lt;/code&gt;, with the &lt;code class=&quot;highlighter-rouge&quot;&gt;-h&lt;/code&gt; option&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;I’ve tried to to parse the this when running &lt;code class=&quot;highlighter-rouge&quot;&gt;R CMD javareconf&lt;/code&gt; as:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;R CMD javareconf &lt;span class=&quot;nv&quot;&gt;JAVAH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/bin/javac -h&quot;&lt;/span&gt;
+/usr/local/Cellar/r/3.4.4/lib/R/bin/javareconf: line 66: &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt;: &lt;span class=&quot;nb&quot;&gt;command &lt;/span&gt;not found
+Java interpreter : /Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/bin/java
+Java version     : 10
+Java home path   : /Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home
+Java compiler    : /Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/bin/javac
+Java headers gen.: /usr/bin/javah
+Java archive tool: /Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/bin/jar
+Non-system Java on macOS
+
+trying to compile and link a JNI program
+detected JNI cpp flags    : &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include/darwin
+detected JNI linker flags : &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt;
+/usr/local/opt/llvm/bin/clang  &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/Cellar/r/3.4.4/lib/R/include &lt;span class=&quot;nt&quot;&gt;-DNDEBUG&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/include/darwin  &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/gettext/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;/usr/local/opt/llvm/include   &lt;span class=&quot;nt&quot;&gt;-fPIC&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-O3&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wall&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-pedantic&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;gnu99 &lt;span class=&quot;nt&quot;&gt;-mtune&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;native &lt;span class=&quot;nt&quot;&gt;-pipe&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; conftest.c &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; conftest.o
+/usr/local/opt/llvm/bin/clang++ &lt;span class=&quot;nt&quot;&gt;-dynamiclib&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-headerpad_max_install_names &lt;span class=&quot;nt&quot;&gt;-undefined&lt;/span&gt; dynamic_lookup &lt;span class=&quot;nt&quot;&gt;-single_module&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-multiply_defined&lt;/span&gt; suppress &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/gettext/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-rpath,/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/Cellar/r/3.4.4/lib/R/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/gettext/lib &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-rpath,/usr/local/opt/llvm/lib &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; conftest.so conftest.o &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;/usr/local/Cellar/r/3.4.4/lib/R/lib &lt;span class=&quot;nt&quot;&gt;-lR&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-lintl&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,-framework &lt;span class=&quot;nt&quot;&gt;-Wl&lt;/span&gt;,CoreFoundation
+
+
+JAVA_HOME        : /Library/Java/JavaVirtualMachines/jdk-10.jdk/Contents/Home
+Java library path: &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server
+JNI cpp flags    : &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include &lt;span class=&quot;nt&quot;&gt;-I&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/include/darwin
+JNI linker flags : &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;JAVA_HOME&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/lib/server &lt;span class=&quot;nt&quot;&gt;-ljvm&lt;/span&gt;
+Updating Java configuration &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; /usr/local/Cellar/r/3.4.4/lib/R
+Done.
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;But I haven’t succeeded since it’s using the &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/bin/javah&lt;/code&gt; as the header generator, resulting again as an error when building rJava. Perhaps I’m not doing it right or it’s something more I should do.&lt;/p&gt;
+
+&lt;p&gt;If you have any idea, you are more than welcomed. I’ve opened a question in &lt;a href=&quot;https://stackoverflow.com/questions/49519007/sudo-r-cmd-javareconf-and-r-cmd-javareconf-produce-different-output-with-java-10&quot;&gt;stackoverflow&lt;/a&gt; and a &lt;a href=&quot;https://github.com/s-u/rJava/issues/137&quot;&gt;issue&lt;/a&gt; in rJava.&lt;/p&gt;</content><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><category term="config" /><category term="error" /><category term="homebrew" /><category term="java" /><category term="RStats" /><summary type="html">Update 27th of March 2018 at 17.28 UTC+3: After talk a little bit on the R mail lists [1][2], it’s seems that it’s a know issue and they are on the way to fix this. Till them we have to stick to Java 9.0.4 to work with R.</summary></entry><entry><title type="html">Updating Homebrew, R and Python pip packages + Ruby Gems + macOS</title><link href="https://luisspuerto.net/blog/2018/03/22/updating-homebrew-r-and-python-pip-packages-ruby-gems-macos/" rel="alternate" type="text/html" title="Updating Homebrew, R and Python pip packages + Ruby Gems + macOS" /><published>2018-03-22T13:16:47+00:00</published><updated>2018-03-22T13:16:47+00:00</updated><id>https://luisspuerto.net/blog/2018/03/22/updating-homebrew-r-and-python-pip-packages-ruby-gems-macos</id><content type="html" xml:base="https://luisspuerto.net/blog/2018/03/22/updating-homebrew-r-and-python-pip-packages-ruby-gems-macos/">&lt;p&gt;&lt;strong&gt;Update Monday 2nd of April 2018&lt;/strong&gt;: I decided to add to this post how to update the RubyGems since they are a key feature of &lt;a href=&quot;https://luisspuerto.net/blog/2018/03/04/jekyll/&quot;&gt;Jekyll&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Update Thursday, 19th of April 2018 11.00 UTC+3&lt;/strong&gt;: I added info about how to update on the CLI the App Store Apps and macOS software updates.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;In the &lt;a href=&quot;https://luisspuerto.net/blog/2017/11/21/homebrew/&quot;&gt;post about Homebrew&lt;/a&gt; I think I’ve already posted how I update Homebrew packages with a single comment in the terminal. However these days I update more software via terminal, mainly packages, because it’s really handy run just a couple of commands and then see how the software it’s updated automatically and easily.&lt;/p&gt;
+
+&lt;h2 id=&quot;homebrew-packages&quot;&gt;Homebrew packages&lt;/h2&gt;
+
+&lt;p&gt;To update Homebrew packages I run:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; brew upgrade &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; brew cleanup &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; brew prune &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; brew cu &lt;span class=&quot;nt&quot;&gt;-ay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; brew cask cleanup
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;brew update&lt;/code&gt; updates Homebrew itself and download the last version of the formulae&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;brew upgrade&lt;/code&gt; updates the packages you have installed that have new formulae.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;brew cleanup&lt;/code&gt; cleans the cache of old versions of packages.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;brew prune&lt;/code&gt; clean the old symbolic links form `/usr/bin/`.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;brew cu -ay&lt;/code&gt; uses &lt;a href=&quot;https://github.com/buo&quot;&gt;buo&lt;/a&gt;/&lt;a href=&quot;https://github.com/buo/homebrew-cask-upgrade&quot;&gt;homebrew-cask-upgrade&lt;/a&gt; to update casks. &lt;code class=&quot;highlighter-rouge&quot;&gt;-ay&lt;/code&gt; flag is all and yes update all outdated apps.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;brew cask cleanup&lt;/code&gt; clean the old caches of the updated apps.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If for some reason you don’t want to update an specific package in Homebrew, you can _pin _in to an specific version or the current version.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew pin &amp;lt;formulae&amp;gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;r-packages&quot;&gt;R packages&lt;/h2&gt;
+
+&lt;p&gt;To update R packages I run:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# to see what are the old packages&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;Rscript &lt;span class=&quot;nt&quot;&gt;--vanilla&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;old.packages(repos = 'cloud.r-project.org')&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# to directly update&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;Rscript &lt;span class=&quot;nt&quot;&gt;--vanilla&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;update.packages(ask = F, repos = 'cloud.r-project.org')&quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Update R packages on terminal is done using the command &lt;code class=&quot;highlighter-rouge&quot;&gt;Rscript&lt;/code&gt; that allows us to send commands to R using the shell. I use the flag &lt;code class=&quot;highlighter-rouge&quot;&gt;--vanilla&lt;/code&gt; that combine &lt;code class=&quot;highlighter-rouge&quot;&gt;--no-save&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--no-restore&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;--no-site-file&lt;/code&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--no-init-file&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;--no-environ&lt;/code&gt;. In other words a way to load R faster and with a standard configuration.&lt;/p&gt;
+
+&lt;p&gt;I like to run &lt;code class=&quot;highlighter-rouge&quot;&gt;old.packages&lt;/code&gt; first because I like to see a list first of the packages I’m going to update and then update. I do this because some packages —data.table— need a different &lt;code class=&quot;highlighter-rouge&quot;&gt;makevars&lt;/code&gt; than the rest of the packages so just in case I needed to &lt;a href=&quot;https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/#data-table-package&quot;&gt;change&lt;/a&gt; the &lt;code class=&quot;highlighter-rouge&quot;&gt;makevars&lt;/code&gt; and rebuild that package.&lt;/p&gt;
+
+&lt;p&gt;I really think it would be cool to be able also _pin _packages in R, but I haven’t found any way to do so at system wide level. You can do easily at project level with the package &lt;a href=&quot;https://rstudio.github.io/packrat/&quot;&gt;Packrat&lt;/a&gt;. However, I really think it would be really nice to have email notifications when new versions of packages hit CRAN repository and some function to pin packages to the current version.&lt;/p&gt;
+
+&lt;h2 id=&quot;python-pip&quot;&gt;Python pip&lt;/h2&gt;
+
+&lt;p&gt;To update all the packages from pip and pip itself I run:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip install &lt;span class=&quot;nt&quot;&gt;--upgrade&lt;/span&gt; pip &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; pip freeze &lt;span class=&quot;nt&quot;&gt;--local&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'^\-e'&lt;/span&gt; | cut &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; 1  | xargs &lt;span class=&quot;nt&quot;&gt;-n1&lt;/span&gt; pip install &lt;span class=&quot;nt&quot;&gt;-U&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip3 install &lt;span class=&quot;nt&quot;&gt;--upgrade&lt;/span&gt; pip &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; pip3 freeze &lt;span class=&quot;nt&quot;&gt;--local&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'^-e'&lt;/span&gt; | cut &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; 1  | xargs &lt;span class=&quot;nt&quot;&gt;-n1&lt;/span&gt; pip3 install &lt;span class=&quot;nt&quot;&gt;-U&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I took the idea from &lt;a href=&quot;https://stackoverflow.com/questions/2720014/upgrading-all-packages-with-pip&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;pip is the package manager for packages written in Python. You can read a little bit more on the &lt;a href=&quot;https://en.wikipedia.org/wiki/Pip_(package_manager)&quot;&gt;Wikipedia&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;rubygems&quot;&gt;RubyGems&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/RubyGems&quot;&gt;RubyGems&lt;/a&gt; is a package manager for Gems that are packages written in Ruby language. &lt;a href=&quot;https://luisspuerto.net/blog/2017/11/21/homebrew/&quot;&gt;Homebrew&lt;/a&gt; is written in Ruby and &lt;a href=&quot;https://luisspuerto.net/blog/2018/03/04/jekyll/&quot;&gt;Jekyll&lt;/a&gt; too, the latter make use of several RubyGems for functionalities and extensions.&lt;/p&gt;
+
+&lt;p&gt;To update the RubyGems you run the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem update
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;app-store-and-macos-software-updates&quot;&gt;App Store and macOS software updates&lt;/h2&gt;
+
+&lt;p&gt;Although these ones are really easy and you can update them just using the Mac App Store app in your Mac, it’s possible to trigger the update checking and the update itself through CLI. macOS has a command that allow you to make this happen &lt;code class=&quot;highlighter-rouge&quot;&gt;softwareupdate&lt;/code&gt;. You can run it like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;softwareupdate &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;## to list all the updates&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;softwareupdate &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;## to install updates&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;softwareupdate &lt;span class=&quot;nt&quot;&gt;-ia&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;## to install all updates&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;softwareupdate &lt;span class=&quot;nt&quot;&gt;-iR&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;## to automatically restart if necessary by the update&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;softwareupdate &lt;span class=&quot;nt&quot;&gt;-ir&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;## install only the recommended updates&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;softwareupdate &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;## only download the updates&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you see it’s quite thorough and you can see more options with running &lt;code class=&quot;highlighter-rouge&quot;&gt;man softwareupdate&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you want something more complex you can install &lt;a href=&quot;https://github.com/mas-cli/mas&quot;&gt;mas-cli&lt;/a&gt;, which is a Mac App Store command line interface. Install you just run:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew install mas
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, you can run in your command line the following to update:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mas list &lt;span class=&quot;c&quot;&gt;## List your Mac App Store apps&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mas search &amp;lt;app&amp;gt; &lt;span class=&quot;c&quot;&gt;## Search for an app&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mas install &amp;lt;app-number&amp;gt; &lt;span class=&quot;c&quot;&gt;## Install an specific app&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mas outdated &lt;span class=&quot;c&quot;&gt;## shows the outdated apps&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mas upgrade &lt;span class=&quot;c&quot;&gt;## Upgrade all your apps&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mas upgrade &amp;lt;app-number&amp;gt; &lt;span class=&quot;c&quot;&gt;## Upgrade an specific app&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Luis Puerto</name><email>luis@luisspuerto.net</email></author><category term="app store" /><category term="homebrew" /><category term="packages" /><category term="python" /><category term="RStats" /><category term="rubygems" /><summary type="html">Update Monday 2nd of April 2018: I decided to add to this post how to update the RubyGems since they are a key feature of Jekyll.</summary></entry></feed>

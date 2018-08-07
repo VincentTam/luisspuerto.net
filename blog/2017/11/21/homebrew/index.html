@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+--><html lang="en" class="no-js">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Homebrew | Luis Puerto</title>
+<meta name="description" content="In some of my previous post [e.g. 1, 2, 3 or 4 ] I’ve been using Homebrew to install some pieces of software in my Mac using the terminal, or shell. But, perhaps you’ve been wondering what is exactly Homebrew? It defines itself as “the missing package manager for macOS”. Yet… what is a package manager? A package manager is a small piece of software that helps you to manage other software —packages— in your computer, or in other words, to install, update, setup and uninstall software. Package managers have been a classic in most linux distributions and most linux users are accustomed to the idea to install software through them, whether on a GUI (graphical user interface) or just on a CLI (command line interface). You as a macOS user probably are also used to a GUI package manager, the Mac App Store, that allow you to install Apps easily and keep it updated. It doesn’t uninstall it for you, or clean the config files, though.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Luis Puerto">
+<meta property="og:title" content="Homebrew">
+<meta property="og:url" content="https://luisspuerto.net/blog/2017/11/21/homebrew/">
+
+
+  <meta property="og:description" content="In some of my previous post [e.g. 1, 2, 3 or 4 ] I’ve been using Homebrew to install some pieces of software in my Mac using the terminal, or shell. But, perhaps you’ve been wondering what is exactly Homebrew? It defines itself as “the missing package manager for macOS”. Yet… what is a package manager? A package manager is a small piece of software that helps you to manage other software —packages— in your computer, or in other words, to install, update, setup and uninstall software. Package managers have been a classic in most linux distributions and most linux users are accustomed to the idea to install software through them, whether on a GUI (graphical user interface) or just on a CLI (command line interface). You as a macOS user probably are also used to a GUI package manager, the Mac App Store, that allow you to install Apps easily and keep it updated. It doesn’t uninstall it for you, or clean the config files, though.">
+
+
+
+  <meta property="og:image" content="https://luisspuerto.net/assets/images/blog/2018/homebrew.jpg">
+
+
+
+  <meta name="twitter:site" content="@lpuerto">
+  <meta name="twitter:title" content="Homebrew">
+  <meta name="twitter:description" content="In some of my previous post [e.g. 1, 2, 3 or 4 ] I’ve been using Homebrew to install some pieces of software in my Mac using the terminal, or shell. But, perhaps you’ve been wondering what is exactly Homebrew? It defines itself as “the missing package manager for macOS”. Yet… what is a package manager? A package manager is a small piece of software that helps you to manage other software —packages— in your computer, or in other words, to install, update, setup and uninstall software. Package managers have been a classic in most linux distributions and most linux users are accustomed to the idea to install software through them, whether on a GUI (graphical user interface) or just on a CLI (command line interface). You as a macOS user probably are also used to a GUI package manager, the Mac App Store, that allow you to install Apps easily and keep it updated. It doesn’t uninstall it for you, or clean the config files, though.">
+  <meta name="twitter:url" content="https://luisspuerto.net/blog/2017/11/21/homebrew/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://luisspuerto.net/assets/images/blog/2018/homebrew.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2017-11-21T18:57:30+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://luisspuerto.net/blog/2017/11/21/homebrew/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://luisspuerto.net",
+      "logo": "https://luisspuerto.net/assets/images/pages/header-splash.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Luis Puerto",
+      "url": "https://luisspuerto.net",
+      "sameAs": ["https://twitter.com/lpuerto","https://www.linkedin.com/in/lpuerto","https://github.com/luisspuerto","https://www.flickr.com/photos/luisspuerto"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="2AztHRijor0b6F_0DFrw0mYxhQVvLKT3rlFp7PxTS1M">
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Luis Puerto Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link href="https://fonts.googleapis.com/css?family=Mr+Dafoe" rel="stylesheet">
+
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Luis Puerto</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/">Home</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/aboutme">About Me</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/resume">Résumé</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/blog">Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/contact">Contact</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay" style="
+          background-image:
+            url('/assets/images/blog/2018/homebrew.jpg');
+          ">
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Homebrew
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="/aboutme">
+          <img src="/assets/images/pages/20121231-035-ol.jpg" alt="Luis Puerto" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="/aboutme"><h3 class="author__name" itemprop="name">Luis Puerto</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Born in Ponferrada, Spain. A Forest Engineer interested in Science and Technology. Fascinated about almost everything
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">🇪🇺🇪🇸🇸🇪🇫🇮🇺🇸</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:luis@luisspuerto.net">
+            <meta itemprop="email" content="luis@luisspuerto.net">
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://instagram.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://luisspuerto.tumblr.com" itemprop="sameAs">
+            <i class="fab fa-fw fa-tumblr-square" aria-hidden="true"></i> Tumblr
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.flickr.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-flickr" aria-hidden="true"></i> Flickr
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Homebrew">
+    <meta itemprop="description" content="In some of my previous post [e.g. 1, 2, 3 or 4 ] I’ve been using Homebrew to install some pieces of software in my Mac using the terminal, or shell. But, perhaps you’ve been wondering what is exactly Homebrew? It defines itself as “the missing package manager for macOS”. Yet… what is a package manager? A package manager is a small piece of software that helps you to manage other software —packages— in your computer, or in other words, to install, update, setup and uninstall software. Package managers have been a classic in most linux distributions and most linux users are accustomed to the idea to install software through them, whether on a GUI (graphical user interface) or just on a CLI (command line interface). You as a macOS user probably are also used to a GUI package manager, the Mac App Store, that allow you to install Apps easily and keep it updated. It doesn’t uninstall it for you, or clean the config files, though.">
+    <meta itemprop="datePublished" content="Tuesday, 21 November 2017 18:57 UTC">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  7 minute read
+</p>
+      
+
+        
+
+      <section class="page__content" itemprop="text">
+        
+        <div class="post__content">
+          <p>In some of my <a href="https://www.google.com/search?newwindow=1&amp;source=hp&amp;ei=0I0SWunYHYzfwQLtsILIAg&amp;q=site%3Aluisspuerto.net+homebrew&amp;oq=site%3Aluisspuerto.net+homebrew&amp;gs_l=psy-ab.3...1475.7353.0.7624.31.26.0.0.0.0.231.2445.6j13j1.20.0....0...1.1.64.psy-ab..11.3.421.0..0j46j35i39k1j0i46k1j0i20i263k1j0i10k1.0.iYax6bPPbHc">previous post</a> [e.g. <a href="https://luisspuerto.net/blog/2017/10/19/trash-instead-of-rm/">1</a>, <a href="https://luisspuerto.net/blog/2017/11/04/installing-pgp-signing-for-git-on-macos/">2</a>, <a href="https://luisspuerto.net/blog/2017/11/05/set-rstudio-with-homebrews-git/">3</a> or <a href="https://luisspuerto.net/blog/2017/11/10/media-buttons-behavior-changed-high-sierra/">4</a> ] I’ve been using <a href="https://brew.sh">Homebrew</a> to install some <em>pieces of software</em> in my Mac using the terminal, or shell. But, perhaps you’ve been wondering what is exactly Homebrew? It defines itself as “the missing <a href="https://en.wikipedia.org/wiki/Package_manager">package manager</a> for macOS”. Yet… what is a package manager? A package manager is a small piece of software that helps you to manage other software —packages— in your computer, or in other words, to install, update, setup and uninstall software. Package managers have been a classic in most linux distributions and most linux users are accustomed to the idea to install software through them, whether on a GUI (graphical user interface) or just on a CLI (command line interface). You as a macOS user probably are also used to a GUI package manager, the <a href="https://en.wikipedia.org/wiki/Mac_App_Store">Mac App Store</a>, that allow you to install Apps easily and keep it updated. It doesn’t uninstall it for you, or clean the config files, though.</p>
+
+<p>However, you usually need more software that the one you can find in the Mac App Store, and even more if you are a bit of an advance user. For example, you probably need to install <a href="https://en.wikipedia.org/wiki/Java_(programming_language)">Java</a>, <a href="https://en.wikipedia.org/wiki/Adobe_Flash_Player">Flash</a>, <a href="https://en.wikipedia.org/wiki/Git">Git</a>, <a href="https://en.wikipedia.org/wiki/R_(programming_language)">R (the stats software)</a> or other apps that aren’t available on the Mac App Store for different reasons. To manage that software and apps Homebrew was created.</p>
+
+<figure class="">
+  <a href="/assets/images/blog/2018/Screen-Shot-2017-11-19-at-21.22.27.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2017-11-19-at-21.22.27.png" alt="List of all my installed forumulas"></a>
+  
+    <figcaption>List of all my installed formulas
+</figcaption>
+  
+</figure>
+
+<p>Homebrew is a really simple thing, it’s just a Git <a href="https://github.com/Homebrew/homebrew-core">repository</a> full of Ruby scripts that you download to your machine and they install, update or uninstall the software with a given set of parameters or options that user can set. Those scripts are called <em>formulas</em> in the Homebrew terminology —as you soon will discover, Homebrew terminology is everything about beer. You can easily install Homebrew using your terminal with the following command.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>/usr/bin/ruby <span class="nt">-e</span> <span class="s2">"</span><span class="k">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">"</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>From there on, you can start to use Homebrew in the same way as any other command on terminal. To use Homebrew you just have to type <code class="highlighter-rouge">info</code> if you want more info about it. Homebrew install itself on the folder <code class="highlighter-rouge">/usr/local/Homebrew</code> and it’s going to install your software in the folder <code class="highlighter-rouge">/usr/local/Cellar</code>.</p>
+
+<figure class="">
+  <a href="/assets/images/blog/2018/Screen-Shot-2017-11-20-at-10.33.04.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2017-11-20-at-10.33.04.png" alt="The Cellar of Homebrew"></a>
+  
+    <figcaption>The Cellar of Homebrew
+</figcaption>
+  
+</figure>
+
+<p>When you install a <em>formula</em> with Homebrew, it usually creates symbolic links to the folder <code class="highlighter-rouge">/usr/local</code> —usually to the <code class="highlighter-rouge">/usr/local/bin</code>. but it could create more links to other folders there— to make that software available to the whole system. However, there are some <em>formulas</em> that aren’t linked to <code class="highlighter-rouge">/usr/local</code> and they are considered <em>keg-only</em>, or in other words, they are there just to be used for other formulas as dependencies. You can change that, though, and link it manually with <code class="highlighter-rouge">brew link</code>. Sometimes when you install a formula with Homebrew, you need to link it manually and/or force the linking, just because your system has already a symbolic link on <code class="highlighter-rouge">/usr/local/bin</code> for that same software but not manage by Homebrew. Like with the <a href="https://luisspuerto.net/blog/2017/11/05/set-rstudio-with-homebrews-git/">Git case</a>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>brew link <span class="nt">-f</span> formula-name <span class="c"># -f is a flag to force the linking in case there were already a symbolic link on /usr/local/bin</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>What are the advantages of using Homebrew? Mainly that you can forget about download any software yourself and keep it updated manually. Now, you just can download and install your software with a simple command on your terminal, and update or uninstall it. After you install Homebrew you just need to type this in your shell to install a <em>formula</em>:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>brew install formula-name
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>But you probably are wondering… How can I know the name of the formula I want to install? It’s quite easy, most of them are really intuitive, like for example Git one.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>brew install git
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>Some other aren’t that easy, but Homebrew has a search engine included.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>brew search formula-name
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>And of course, you can look on internet for them. There are even some websites that are specialized on formulas, like <a href="http://brewformulas.org">http://brewformulas.org</a>.</p>
+
+<p>One of the advantages of Homebrew is you can install more than one formula at once, and you can even create shell scripts to install, uninstall or configure several formulas.</p>
+
+<p>If you want to install more than one formula, it’s pretty easy.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>brew install formula-name-1 formula-name-2 formula-name-n ...
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>Another advantage of Homebrew is you can also choose how to install your software and you can even compile yourself from source code. If possible, Homebrew is going to install in your system a <em>bottle</em> by default, the binaries of the already compiled software. Yet, you can ask Homebrew to download the source code and compile it in your computer. Compiling has advantages and disadvantages. The main disadvantage is that it takes time, for some packages up to half an hour or more to compile, really depends on your machine. Also takes resources. On the other hand you can really personalize your install and the software, giving you fully control of the software you install in your computer, giving extras from the original or <em>standard</em> install. Even you can install software that is under development or it isn’t available for Mac yet.</p>
+
+<p>For example, I have a full Homebrew R install that allow me to have the last version of R before is available for Mac in CRAN. Since I’ve compiled it myself, I’ve <a href="https://www.r-bloggers.com/for-faster-r-use-openblas-instead-better-than-atlas-trivial-to-switch-to-on-ubuntu/">compiled with OpenBLAS</a> which make R a little bit faster. I’ll try to make a post soon about my installation of R and how to do yourself one.</p>
+
+<p>Finally one of the best things about Homebrew is you can update all the software installed with it just with one command. Ok, the true is you need two, but you can chain them on just one.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>brew update <span class="o">&amp;&amp;</span> brew upgrade
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>The first command is to update the list of <em>formulas</em> you have available in the Homebrew repository and download to your computer. It’s basically a <code class="highlighter-rouge">upgrade</code>, what you are doing is comparing the formulas you have installed with the Homebrew repository ones. If there is new versions of the formulas you have, Homebrew will installed them for you.</p>
+
+<p>Besides of <em>formulas</em>, <em>kegs</em> and <em>bottles</em>, Homebrew has also <em>taps</em>. Taps are third-party repositories additional to the core Homebrew. I think that the most famous one is <a href="https://caskroom.github.io">Homebrew-Cask</a> <code class="highlighter-rouge">caskroom/cask</code>. Cask allows you to install GUI apps that are installed in <code class="highlighter-rouge">/Applications</code> folder of your Mac. To install Apps with cask is very simple.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>brew cask install cask-name
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>There are several other <em>taps</em> you can add and most of them are to add functionalities or are thematic, like for example <code class="highlighter-rouge">homebrew/science</code> for formulas related to science packages or <code class="highlighter-rouge">osgeo/osgeo4mac</code> for formulas related to geography and GIS. As you’ve noticed the name of the <em>taps</em> are somethings like this: <code class="highlighter-rouge">some-name/some-name</code>. The reason for that is because <em>taps</em> are GitHub repositories by default although you can <em>tap</em> any git repository, even local ones, so the <em>tap</em> names correspond to <code class="highlighter-rouge">github-username/repository</code>. Therefore, and through this simple mechanism, you can create your own <em>taps</em> and share them with anyone, and, conversely, add anyone taps.</p>
+
+<p>For example I’ve installed a <em>tap</em> that adds functionalities to Homebrew-Cask, since the update capabilities aren’t as great as with <code class="highlighter-rouge">homebrew/core</code>. The name of this <em>tap</em> is <code class="highlighter-rouge">buo/cask-upgrade</code> and you can check the repository <a href="https://github.com/buo/homebrew-cask-upgrade">here</a>. With the original Cask functionalities you can only know which casks are outdated using <code class="highlighter-rouge">brew cask outdate</code> and force brew to “update” each of them with:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>brew cask install <span class="nt">-f</span> cask-formula-name <span class="c"># -f to force to force the install of the new version</span>
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>However if you use buo’s <em>tap</em> you just need to type:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>brew cu
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>and that’s it. You can even add the flags <code class="highlighter-rouge">-a</code> and <code class="highlighter-rouge">-y</code> to autoupdate and to not ask questions. Yet, you have to be aware that <a href="https://github.com/caskroom/homebrew-cask/issues/29301">some people on the team of homebrew cask doesn’t like buo’s tap or at the very least they think it has some caveats</a>. So be careful when you implement it.</p>
+
+<figure class="">
+  <a href="/assets/images/blog/2018/Screen-Shot-2017-11-21-at-09.32.02.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2017-11-21-at-09.32.02.png" alt="brew cu on my machine"></a>
+  
+    <figcaption>brew cu on my machine
+</figcaption>
+  
+</figure>
+
+<p>There are more commands you can use inside of Homebrew and Hombre-Cask. You can find more documentation about Homebrew <a href="https://docs.brew.sh">here</a>, and about Hombrew-Cask <a href="https://github.com/caskroom/homebrew-cask#learn-more">here</a>.</p>
+
+<p>I don’t want to finalize without sharing with you the line I use to update and upgrade my Homebrew.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+<td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td>
+<td class="rouge-code"><pre><span class="nv">$ </span>brew update <span class="o">&amp;&amp;</span> brew upgrade <span class="o">&amp;&amp;</span> brew cleanup <span class="o">&amp;&amp;</span> brew prune <span class="o">&amp;&amp;</span> brew cu <span class="nt">-ay</span> <span class="o">&amp;&amp;</span> brew cask cleanup
+</pre></td>
+</tr></tbody></table></code></pre></div></div>
+
+<p>You already know the purpose of <code class="highlighter-rouge">prune</code> deletes the unnecessary symbolic links.</p>
+
+<p>Happy brewing <img class="emoji" title=":beers:" alt=":beers:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37b.png" height="20" width="20">!</p>
+
+        </div>
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/homebrew" class="page__taxonomy-item" rel="tag">homebrew</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/how-to" class="page__taxonomy-item" rel="tag">how to</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/macos" class="page__taxonomy-item" rel="tag">macOS</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/professional" class="page__taxonomy-item" rel="tag">Professional</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/technology" class="page__taxonomy-item" rel="tag">Technology</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-11-21T18:57:30+00:00">Tuesday, 21 November 2017 18:57 UTC</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lpuerto&amp;text=Homebrew%20https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F11%2F21%2Fhomebrew%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F11%2F21%2Fhomebrew%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F11%2F21%2Fhomebrew%2F&amp;title=Homebrew" class="btn btn--reddit" title="Share on Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F11%2F21%2Fhomebrew%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/2017/11/19/about-baking-stones/" class="pagination--pager" title="About baking stones
+">Previous</a>
+    
+    
+      <a href="/blog/2017/11/29/first-heavy-snowfall/" class="pagination--pager" title="First Heavy Snowfall
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">
+              <img src="/assets/images/blog/2018/jekyll.png" alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">New Web in Jekyll
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As you probably have noticed, some days ago I rolled out a new version of my website, which you probably think it’s pretty similar to the previous one, at least talking about its external appearance. However, it’s really different in the inside, since it’s a static web build with Jekyll, while the previous one was build on Wordpress. This isn’t ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">
+              <img src="/assets/images/blog/2018/Luis-Puerto-The-Entreprenour2.jpg" alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">16 Personalities: Apparently I’m an Entrepreneur
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Not long ago, while I was taking a course in Finland, they asked us to take a personality test online called 16 personalities. It wasn’t nothing really official or for much purpose of scrutinize us, but just to know ourselves a little bit more and we can work our strengths and weakness. To my surprise, the test told me that I have an entrepreneu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">
+              <img src="/assets/images/blog/2018/R-Homebrew.jpg" alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">Installing R with Homebrew with all the capabilities
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As I explained in my previous post if you installed R with Homebrew you have less capabilities than with a R installed from CRAN’s binary. But, can you have all the capabilities while you still use Homebrew to install R? Yes! However… why you bother to install it with Homebrew at all instead of installing it from CRAN. Well, it’s true that CRAN ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap">
+<div class="search-searchbar"></div>
+    <div class="search-hits"></div>
+</div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lpuerto"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+      <li><a href="https://www.linkedin.com/in/lpuerto"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+    
+    
+    
+      <li><a href="https://github.com/luisspuerto"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+<!--
+    
+    
+-->
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">© 2018 Luis Puerto |
+  
+  <a href="https://github.com/luisspuerto/luisspuerto.net-src"><i class="fas fa-code" aria-hidden="true"></i> Source Code</a> | 
+  
+Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: 'NSAWFR2G1K',
+  apiKey: 'b63bbd39b0bf76207cf9bebdb9c2b7dd',
+  indexName: 'luisspuerto-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://luisspuerto.net/blog/2017/11/21/homebrew/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/blog/2017/11/21/homebrew"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://luisspuerto-net.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+
+
+  
+
+
+    <script>
+//open external links in a new window
+function external_new_window() {
+    for(var c = document.getElementsByTagName("a"), a = 0;a < c.length;a++) {
+    var b = c[a];
+    b.getAttribute("href") && b.hostname !== location.hostname && (b.target = "_blank")
+    }
+}
+//open PDF links in a new window
+function pdf_new_window ()
+{
+    if (!document.getElementsByTagName) return false;
+    var links = document.getElementsByTagName("a");
+    for (var eleLink=0; eleLink < links.length; eleLink ++) {
+    if ((links[eleLink].href.indexOf('.pdf') !== -1)||(links[eleLink].href.indexOf('.doc') !== -1)||(links[eleLink].href.indexOf('.docx') !== -1)) {
+        links[eleLink].onclick =
+        function() {
+            window.open(this.href);
+            return false;
+        }
+    }
+    }
+} 
+pdf_new_window()
+external_new_window();
+</script>
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+  </body>
+</html>

@@ -1,0 +1,1018 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Set rStudio with Homebrew’s Git | Luis Puerto</title>
+<meta name="description" content="As I’ll try to explain in the future, I have a full Homebrew R install. I also try to use Homebrew to install as much applications and utilities I can because I think it’s really handy to be able to install or update just with a simple command in the shell. Although sometimes it give you a little bit of a headache, as this time.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Luis Puerto">
+<meta property="og:title" content="Set rStudio with Homebrew’s Git">
+<meta property="og:url" content="https://luisspuerto.net/blog/2017/11/05/set-rstudio-with-homebrews-git/">
+
+
+  <meta property="og:description" content="As I’ll try to explain in the future, I have a full Homebrew R install. I also try to use Homebrew to install as much applications and utilities I can because I think it’s really handy to be able to install or update just with a simple command in the shell. Although sometimes it give you a little bit of a headache, as this time.">
+
+
+
+  <meta property="og:image" content="https://luisspuerto.net/assets/images/blog/2018/rstudiobrewgit-1.jpg">
+
+
+
+  <meta name="twitter:site" content="@lpuerto">
+  <meta name="twitter:title" content="Set rStudio with Homebrew’s Git">
+  <meta name="twitter:description" content="As I’ll try to explain in the future, I have a full Homebrew R install. I also try to use Homebrew to install as much applications and utilities I can because I think it’s really handy to be able to install or update just with a simple command in the shell. Although sometimes it give you a little bit of a headache, as this time.">
+  <meta name="twitter:url" content="https://luisspuerto.net/blog/2017/11/05/set-rstudio-with-homebrews-git/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://luisspuerto.net/assets/images/blog/2018/rstudiobrewgit-1.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2017-11-05T14:05:53+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://luisspuerto.net/blog/2017/11/05/set-rstudio-with-homebrews-git/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://luisspuerto.net",
+      "logo": "https://luisspuerto.net/assets/images/pages/header-splash.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Luis Puerto",
+      "url": "https://luisspuerto.net",
+      "sameAs": ["https://twitter.com/lpuerto","https://www.linkedin.com/in/lpuerto","https://github.com/luisspuerto","https://www.flickr.com/photos/luisspuerto"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="2AztHRijor0b6F_0DFrw0mYxhQVvLKT3rlFp7PxTS1M" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Luis Puerto Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link href="https://fonts.googleapis.com/css?family=Mr+Dafoe" rel="stylesheet">
+
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Luis Puerto</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/" >Home</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/aboutme" >About Me</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/resume" >Résumé</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/blog" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/contact" >Contact</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="
+          background-image:
+            url('/assets/images/blog/2018/rstudiobrewgit-1.jpg');
+          "
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Set rStudio with Homebrew’s Git
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="/aboutme">
+          <img src="/assets/images/pages/20121231-035-ol.jpg" alt="Luis Puerto" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="/aboutme"><h3 class="author__name" itemprop="name">Luis Puerto</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Born in Ponferrada, Spain. A Forest Engineer interested in Science and Technology. Fascinated about almost everything
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">🇪🇺🇪🇸🇸🇪🇫🇮🇺🇸</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:luis@luisspuerto.net">
+            <meta itemprop="email" content="luis@luisspuerto.net" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://instagram.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://luisspuerto.tumblr.com" itemprop="sameAs">
+            <i class="fab fa-fw fa-tumblr-square" aria-hidden="true"></i> Tumblr
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.flickr.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-flickr" aria-hidden="true"></i> Flickr
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Set rStudio with Homebrew’s Git">
+    <meta itemprop="description" content="As I’ll try to explain in the future, I have a full Homebrew R install. I also try to use Homebrew to install as much applications and utilities I can because I think it’s really handy to be able to install or update just with a simple command in the shell. Although sometimes it give you a little bit of a headache, as this time.">
+    <meta itemprop="datePublished" content="Sunday, 05 November 2017 14:05 UTC">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+      
+
+        </header>
+
+      <section class="page__content" itemprop="text">
+        
+        <div class="post__content">
+          <p>As I’ll try to explain in the future, I have a full <a href="https://brew.sh">Homebrew</a> R install. I also try to use Homebrew to install as much applications and utilities I can because I think it’s really handy to be able to install or update just with a simple command in the shell. Although sometimes it give you a little bit of a headache, as this time.</p>
+
+<figure class="align-left">
+  <a href="/assets/images/blog/2018/Screen-Shot-2017-11-05-at-12.08.19.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2017-11-05-at-12.08.19.png" alt="Apple vs Homebrew's Git version" /></a>
+  
+    <figcaption>Apple vs Homebrew’s Git version
+</figcaption>
+  
+</figure>
+
+<p>Apple ships with their systems a really to use version of Git, but it’s usually a bit outdated and you can’t update that version —I don’t really know what version they have shipped with High Sierra<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. This is usually not a really big deal, since, as you seen in the left picture, the versions aren’t really far away and most of the people don’t use Git in their everyday lives, but if you really need, or want to be, up to-day you are going to need to do some tweaks here and there.</p>
+
+<p>First of all, you need to install the last Git using Homebrew:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install git
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You are probably going to need to relink by force <code class="highlighter-rouge">-f</code> your new Git to make the system to use it.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew link <span class="nt">-f</span> git
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Know if you ask the system, your version of Git have to be different —superior—  to the one Apple provides. In my case and under El Capitan is like this:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>usr/bin/git <span class="nt">--version</span>
+git version 2.10.1 <span class="o">(</span>Apple Git-78<span class="o">)</span> <span class="c"># Apple's version</span>
+<span class="nv">$ </span>/usr/local/Cellar/git/2.15.0/bin/git <span class="nt">--version</span>
+git version 2.15.0 <span class="c"># Homebrew's version</span>
+<span class="nv">$ </span>git <span class="nt">--version</span>
+git version 2.15.0 <span class="c"># System's version, now linked to Homebrew's one.</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If you are user of <a href="https://www.rstudio.com">rStudio</a>, you’ll probably know that you can use Git in your rStudio projects, as you should, as in any coding project. rStudio developers, to save us with the fuss of installing and configuring Git —and to save them to explain us how, set up rStudio to use the Apple’s Git by default, pointing to <code class="highlighter-rouge">/usr/bin/git</code>  in the user settings</p>
+
+<figure class="">
+  <a href="/assets/images/blog/2018/Screen-Shot-2015-11-09-at-4.59.40-PM.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2015-11-09-at-4.59.40-PM.png" alt="rStudio's version control options" /></a>
+  
+    <figcaption>rStudio’s version control options
+</figcaption>
+  
+</figure>
+
+<p>If you want to use your own downloaded Git you just have to change that value in the settings and that’s it. However, it’s a little bit more complicated than that in practice. Since we’re using Homebrew to manage our apps the directory of the app changes every time you update it to show the version it’s storing, just in case you wanted to have more than one version. The path to the directory of Homebrew’s Git looks something like this, as you saw before in a code chuck:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/usr/local/Cellar/git/2.15.0/bin/git
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If you updated Git using Homebrew, the new path would look something like this.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/usr/local/Cellar/git/2.XX.X/bin/git
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Where the <code class="highlighter-rouge">X</code> are the new version numbers.</p>
+
+<p>To make things easier, Homebrew just create <a href="https://en.wikipedia.org/wiki/Symbolic_link">symbolic links</a> to the directory <code class="highlighter-rouge">/usr/local/bin/</code>  to make the system find the app files. That is what you did when you used the command <code class="highlighter-rouge">brew link</code>  and you had to use the flag <code class="highlighter-rouge">-f</code>  —force— to overwrite the already existent links to Apple’s Git in <code class="highlighter-rouge">usr/bin/git</code> .</p>
+
+<p>So, you’re probably thinking that you just have to set the path to Git executable in rStudio to <code class="highlighter-rouge">/usr/local/bin/git</code>  and problem fixed. Yes and not. Yes because that is the path you need to end up in settings, but is something you can’t make to happen using rStudio interface. Every time you change the path to <code class="highlighter-rouge">/usr/local/bin/git</code>  using the browse button in the settings you are going to end up with <code class="highlighter-rouge">/usr/local/Cellar/git/2.XX.X/bin/git</code>  and in consequence when you update Git using Homebrew rStudio isn’t going to be able to find the Git executable. In consequence, you will end up without Git support in rStudio. This happens because rStudio interface follows the symbolic link instead of stuck with the route you set with the browse button.</p>
+
+<p>Then… What we should do? You need to open the user setting’s file of rStudio located in a hidden directory in your user folder <code class="highlighter-rouge">~/.rstudio/monitored/user-settings/user-settings</code>  with the following command.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>open ~/.rstudio/monitored/user-settings/user-settings
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<figure class="">
+  <a href="/assets/images/blog/2018/Screen-Shot-2017-11-02-at-17.24.00.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2017-11-02-at-17.24.00.png" alt="rStudio user setting's file." /></a>
+  
+    <figcaption>rStudio user setting’s file.
+</figcaption>
+  
+</figure>
+
+<p>Towards the end of the file, there is a variable called <code class="highlighter-rouge">vcsGitExePath</code>  that set your personalized options for the path of Git executable. With your rStudio closed, you can change it in the file to this:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">vcsGitExePath</span><span class="o">=</span>“/usr/local/bin/git<span class="s2">"
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>and save the file.</p>
+
+<p>If you open again rStudio and go to your user settings, the version control settings have to look like this:</p>
+
+<figure class="align-center">
+  <a href="/assets/images/blog/2018/Screen-Shot-2017-11-05-at-13.47.17-1.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2017-11-05-at-13.47.17-1.png" alt="Version Control Settings on rStudio." /></a>
+  
+    <figcaption>Version Control Settings on rStudio.
+</figcaption>
+  
+</figure>
+
+<p>Now you can update without any problem your Git using Homebrew and it will keep working.</p>
+
+<figure class="align-center">
+  <a href="/assets/images/blog/2018/Screen-Shot-2017-11-09-at-18.00.27.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2017-11-09-at-18.00.27.png" alt="Git's version in High Sierra" /></a>
+  
+    <figcaption>Git’s version in High Sierra
+</figcaption>
+  
+</figure>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>I just updated to High Sierra, and I can confirm that the Git’s version is a little bit more up to to day, but it isn’t the latest. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </div>
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/git" class="page__taxonomy-item" rel="tag">git</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/homebrew" class="page__taxonomy-item" rel="tag">homebrew</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/how-to" class="page__taxonomy-item" rel="tag">how to</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/rsoft" class="page__taxonomy-item" rel="tag">RSoft</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/rstudio" class="page__taxonomy-item" rel="tag">RStudio</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/professional" class="page__taxonomy-item" rel="tag">Professional</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/rstats" class="page__taxonomy-item" rel="tag">RStats</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/technology" class="page__taxonomy-item" rel="tag">Technology</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-11-05T14:05:53+00:00">Sunday, 05 November 2017 14:05 UTC</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lpuerto&text=Set+rStudio+with+Homebrew%27s+Git%20https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F11%2F05%2Fset-rstudio-with-homebrews-git%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F11%2F05%2Fset-rstudio-with-homebrews-git%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F11%2F05%2Fset-rstudio-with-homebrews-git%2F&title=Set rStudio with Homebrew's Git" class="btn btn--reddit" title="Share on Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F11%2F05%2Fset-rstudio-with-homebrews-git%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/2017/11/04/installing-pgp-signing-for-git-on-macos/" class="pagination--pager" title="Installing PGP signing for Git on macOS
+">Previous</a>
+    
+    
+      <a href="/blog/2017/11/08/updated-to-high-sierra/" class="pagination--pager" title="Updated to High Sierra
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/jekyll.png"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">New Web in Jekyll
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As you probably have noticed, some days ago I rolled out a new version of my website, which you probably think it’s pretty similar to the previous one, at least talking about its external appearance. However, it’s really different in the inside, since it’s a static web build with Jekyll, while the previous one was build on Wordpress. This isn’t ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/Luis-Puerto-The-Entreprenour2.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">16 Personalities: Apparently I’m an Entrepreneur
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Not long ago, while I was taking a course in Finland, they asked us to take a personality test online called 16 personalities. It wasn’t nothing really official or for much purpose of scrutinize us, but just to know ourselves a little bit more and we can work our strengths and weakness. To my surprise, the test told me that I have an entrepreneu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/R-Homebrew.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">Installing R with Homebrew with all the capabilities
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As I explained in my previous post if you installed R with Homebrew you have less capabilities than with a R installed from CRAN’s binary. But, can you have all the capabilities while you still use Homebrew to install R? Yes! However… why you bother to install it with Homebrew at all instead of installing it from CRAN. Well, it’s true that CRAN ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><div class="search-searchbar"></div>
+    <div class="search-hits"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lpuerto"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+      <li><a href="https://www.linkedin.com/in/lpuerto"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+    
+    
+    
+      <li><a href="https://github.com/luisspuerto"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+<!--
+    
+    
+-->
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Luis Puerto |
+  
+  <a href="https://github.com/luisspuerto/luisspuerto.net-src"><i class="fas fa-code" aria-hidden="true"></i> Source Code</a> | 
+  
+Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: 'NSAWFR2G1K',
+  apiKey: 'b63bbd39b0bf76207cf9bebdb9c2b7dd',
+  indexName: 'luisspuerto-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://luisspuerto.net/blog/2017/11/05/set-rstudio-with-homebrews-git/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/blog/2017/11/05/set-rstudio-with-homebrews-git"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://luisspuerto-net.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+    <script>
+//open external links in a new window
+function external_new_window() {
+    for(var c = document.getElementsByTagName("a"), a = 0;a < c.length;a++) {
+    var b = c[a];
+    b.getAttribute("href") && b.hostname !== location.hostname && (b.target = "_blank")
+    }
+}
+//open PDF links in a new window
+function pdf_new_window ()
+{
+    if (!document.getElementsByTagName) return false;
+    var links = document.getElementsByTagName("a");
+    for (var eleLink=0; eleLink < links.length; eleLink ++) {
+    if ((links[eleLink].href.indexOf('.pdf') !== -1)||(links[eleLink].href.indexOf('.doc') !== -1)||(links[eleLink].href.indexOf('.docx') !== -1)) {
+        links[eleLink].onclick =
+        function() {
+            window.open(this.href);
+            return false;
+        }
+    }
+    }
+} 
+pdf_new_window()
+external_new_window();
+</script>
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+  </body>
+</html>

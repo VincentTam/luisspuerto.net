@@ -1,0 +1,2724 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Install R 100% Homebrew Edition With OpenBlas &amp; OpenMP — My Version | Luis Puerto</title>
+<meta name="description" content="Update Friday, 10th of May 2018: If you want to install R with all the capabilities you need to read this post too, and perhaps this one too.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Luis Puerto">
+<meta property="og:title" content="Install R 100% Homebrew Edition With OpenBlas &amp; OpenMP — My Version">
+<meta property="og:url" content="https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/">
+
+
+  <meta property="og:description" content="Update Friday, 10th of May 2018: If you want to install R with all the capabilities you need to read this post too, and perhaps this one too.">
+
+
+
+  <meta property="og:image" content="https://luisspuerto.net/assets/images/blog/2018/R-Homebrew.jpg">
+
+
+
+  <meta name="twitter:site" content="@lpuerto">
+  <meta name="twitter:title" content="Install R 100% Homebrew Edition With OpenBlas &amp; OpenMP — My Version">
+  <meta name="twitter:description" content="Update Friday, 10th of May 2018: If you want to install R with all the capabilities you need to read this post too, and perhaps this one too.">
+  <meta name="twitter:url" content="https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://luisspuerto.net/assets/images/blog/2018/R-Homebrew.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2018-01-12T20:16:56+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://luisspuerto.net",
+      "logo": "https://luisspuerto.net/assets/images/pages/header-splash.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Luis Puerto",
+      "url": "https://luisspuerto.net",
+      "sameAs": ["https://twitter.com/lpuerto","https://www.linkedin.com/in/lpuerto","https://github.com/luisspuerto","https://www.flickr.com/photos/luisspuerto"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="2AztHRijor0b6F_0DFrw0mYxhQVvLKT3rlFp7PxTS1M" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Luis Puerto Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link href="https://fonts.googleapis.com/css?family=Mr+Dafoe" rel="stylesheet">
+
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Luis Puerto</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/" >Home</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/aboutme" >About Me</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/resume" >Résumé</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/blog" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/contact" >Contact</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="
+          background-image:
+            url('/assets/images/blog/2018/R-Homebrew.jpg');
+          "
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Install R 100% Homebrew Edition With OpenBlas &amp; OpenMP — My Version
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="/aboutme">
+          <img src="/assets/images/pages/20121231-035-ol.jpg" alt="Luis Puerto" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="/aboutme"><h3 class="author__name" itemprop="name">Luis Puerto</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Born in Ponferrada, Spain. A Forest Engineer interested in Science and Technology. Fascinated about almost everything
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">🇪🇺🇪🇸🇸🇪🇫🇮🇺🇸</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:luis@luisspuerto.net">
+            <meta itemprop="email" content="luis@luisspuerto.net" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://instagram.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://luisspuerto.tumblr.com" itemprop="sameAs">
+            <i class="fab fa-fw fa-tumblr-square" aria-hidden="true"></i> Tumblr
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.flickr.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-flickr" aria-hidden="true"></i> Flickr
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Install R 100% Homebrew Edition With OpenBlas &amp; OpenMP — My Version">
+    <meta itemprop="description" content="Update Friday, 10th of May 2018: If you want to install R with all the capabilities you need to read this post too, and perhaps this one too.">
+    <meta itemprop="datePublished" content="Friday, 12 January 2018 20:16 UTC">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  27 minute read
+</p>
+      
+
+        </header>
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-chart-line"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#openblas--openmp">OpenBLAS &amp; OpenMP</a></li>
+  <li><a href="#caveats">Caveats</a></li>
+  <li><a href="#how-to-install">How to install?</a>
+    <ul>
+      <li><a href="#homebrew">Homebrew</a></li>
+      <li><a href="#uninstalling-previous-r-install">Uninstalling previous R install</a></li>
+      <li><a href="#xcode-command-line-tools">XCode Command Line Tools</a></li>
+      <li><a href="#cc-compilers-and-libraries">C/C++ Compilers and Libraries</a></li>
+      <li><a href="#miscellaneous-graphical-libraries--optional">Miscellaneous graphical libraries -optional</a></li>
+      <li><a href="#ssl-ssh-libs">SSL/SSH Libraries -optional</a></li>
+      <li><a href="#libxml2">Libxml2</a></li>
+      <li><a href="#boost--optional">Boost -optional</a></li>
+      <li><a href="#gpg--git">GPG &amp; Git</a></li>
+      <li><a href="#x-server">X-Server</a></li>
+      <li><a href="#latex">Latex</a></li>
+      <li><a href="#java">Java</a></li>
+      <li><a href="#python">Python</a></li>
+      <li><a href="#r--related">R &amp; related</a></li>
+      <li><a href="#rstudio">RStudio</a></li>
+      <li><a href="#additional-related-languages--optional">Additional related languages -optional</a></li>
+      <li><a href="#some-gis-libraries--soft--optional">Some GIS Libraries &amp; Soft -optional</a></li>
+      <li><a href="#shell-profiles">Shell Profiles</a></li>
+    </ul>
+  </li>
+  <li><a href="#the-end">The End</a></li>
+</ul>
+            </nav>
+          </aside>
+        
+        <div class="post__content">
+          <p><strong>Update Friday, 10th of May 2018</strong>: If you want to install R with all the capabilities you need to read this <a href="https://luisspuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">post</a> too, and perhaps this <a href="https://luisspuerto.net/blog/2018/05/11/homebrews-r-doesnt-have-all-the-capabilities/">one</a> too.</p>
+
+<p><strong>Update Tuesday, 27th of March 2018:</strong> I just found out that seems you don’t just need to run <code class="highlighter-rouge">sudo R CMD javareconf</code> to configure Java an R, at least with the versions of Java 9.0.4 and R 3.4.4.</p>
+
+<p><strong>Update Thursday, 22nd of March 2018:</strong> I have to add <code class="highlighter-rouge">-fopenmp</code> to both <code class="highlighter-rouge">clang</code> and <code class="highlighter-rouge">clang++</code> variables in my <code class="highlighter-rouge">makevars</code> to be able to build data.table package correctly. This is not exactly what the <a href="https://github.com/Rdatatable/data.table/wiki/Installation#openmp-enabled-compiler-for-mac">Data Table wiki</a> recommends. I update the <a href="https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/#data-table-package">section about the Data Table Package</a> accordingly.</p>
+
+<hr />
+
+<p>As you know I’m a big fan of <a href="/tags/#homebrew">Homebrew</a> as a manager of part of the software of my Mac, since it make things easier. There are a lot of guides out there about <a href="https://www.google.com/search?client=safari&amp;rls=en&amp;q=r+homebrew&amp;ie=UTF-8&amp;oe=UTF-8">how to have a R installation 100% Homebrew</a> and some people, like me, like to have this kind of setup because it’s convenient and for the sake of lear a little bit more about how R works in more detail. However, Homebrew setup isn’t officially supported by the <a href="https://scholar.google.com/citations?user=yvS1QUEAAAAJ">R Core Team</a>, so if you find problems with your R installation you aren’t going to get support from them. Nevertheless, you are going to be able to get support from <a href="https://github.com/Homebrew/homebrew-core">Homebrew</a> and of course, from the <a href="https://www.r-project.org/help.html">regular channels to get help for R</a>, like the <a href="https://www.r-project.org/mail.html">mail list</a>.</p>
+
+<p>The biggest advantage, besides of the regular advantages of installing something with HomeBrew, is you can create your own version of R, you can compile it, therefore you can compile it with steroids, so you can take advantage of the OpenBlas and OpenMP libraries.</p>
+
+<h2 id="openblas--openmp">OpenBLAS &amp; OpenMP</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/OpenBLAS">OpenBLAS</a> is a open implementation of the BLAS (Basic Linear Algebra Subprograms) API. Basically, it optimizes your processor when you are doing mathematical operations, like when you are using R. It’s usually a huge leap in performance when you begin to make complex mathematical operations.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/OpenMP">OpenMP</a> is a library for Open Multi-Processing, or in other words, be able to use all the cores of your processor when you are compiling C, C++, and Fortran. If also make R to process faster since some packages are able to use all the cores of your computer after you compile them with OpenMP.</p>
+
+<p>In other words, you are going to increase your performance a lot with this setup, as Mauricio Vargas demonstrate in his last two post (<a href="https://www.r-bloggers.com/why-is-r-slow-some-explanations-and-mklopenblas-setup-to-try-to-fix-this/">Why is R slow? some explanations and MKL/OpenBLAS setup to try to fix this</a> and Is <a href="http://pacha.hk/blog/2017/12/02/is-microsoft-r-open-faster-than-cran-r/">Microsoft R Open faster than CRAN R?</a>).</p>
+
+<p>We also did a small test since we wanted to get this setup in one of our computers, a MacBook Air from 2013. So, we used the <a href="https://cran.r-project.org/web/packages/microbenchmark/index.html">MicroBenchmarks</a> package with the below script (from <a href="http://www.alexejgossmann.com/benchmarking_r/">Alexej Gossmann’s Blog</a>) and we got the following results.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td><td class="rouge-code"><pre><span class="n">library</span><span class="p">(</span><span class="n">microbenchmark</span><span class="p">)</span><span class="w">
+
+</span><span class="n">set.seed</span><span class="p">(</span><span class="m">2017</span><span class="p">)</span><span class="w">
+</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">10000</span><span class="w">
+</span><span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100</span><span class="w">
+</span><span class="n">X</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">p</span><span class="p">),</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)</span><span class="w">
+
+</span><span class="n">check_for_equal_coefs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">tol</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1e-12</span><span class="w">
+  </span><span class="n">max_error</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">values</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">values</span><span class="p">[[</span><span class="m">2</span><span class="p">]]),</span><span class="w">
+                     </span><span class="nf">abs</span><span class="p">(</span><span class="n">values</span><span class="p">[[</span><span class="m">2</span><span class="p">]]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">values</span><span class="p">[[</span><span class="m">3</span><span class="p">]]),</span><span class="w">
+                     </span><span class="nf">abs</span><span class="p">(</span><span class="n">values</span><span class="p">[[</span><span class="m">1</span><span class="p">]]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">values</span><span class="p">[[</span><span class="m">3</span><span class="p">]])))</span><span class="w">
+  </span><span class="n">max_error</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tol</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">mbm</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">microbenchmark</span><span class="p">(</span><span class="s2">"lm"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lm</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="o">$</span><span class="n">coef</span><span class="w"> </span><span class="p">},</span><span class="w">
+               </span><span class="s2">"pseudoinverse"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
+                 </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">solve</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">y</span><span class="w">
+               </span><span class="p">},</span><span class="w">
+               </span><span class="s2">"linear system"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w">
+                 </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">solve</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">%*%</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w">
+               </span><span class="p">},</span><span class="w">
+               </span><span class="n">check</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">check_for_equal_coefs</span><span class="p">)</span><span class="w">
+
+</span><span class="n">mbm</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>We got this results on a Macbook Pro 2010:</p>
+
+<figure class="align-center">
+  <a href="/assets/images/blog/2018/Screen-Shot-2018-05-11-at-10.42.09.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2018-05-11-at-10.42.09.png" alt="" /></a>
+  
+</figure>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="c1"># Base R benchmarks results</span><span class="w">
+
+</span><span class="n">Unit</span><span class="o">:</span><span class="w"> </span><span class="n">milliseconds</span><span class="w">
+          </span><span class="n">expr</span><span class="w">      </span><span class="n">min</span><span class="w">       </span><span class="n">lq</span><span class="w">     </span><span class="n">mean</span><span class="w">   </span><span class="n">median</span><span class="w">       </span><span class="n">uq</span><span class="w">      </span><span class="n">max</span><span class="w"> </span><span class="n">neval</span><span class="w">
+            </span><span class="n">lm</span><span class="w"> </span><span class="m">299.5747</span><span class="w"> </span><span class="m">319.5861</span><span class="w"> </span><span class="m">339.4531</span><span class="w"> </span><span class="m">324.8694</span><span class="w"> </span><span class="m">331.7090</span><span class="w"> </span><span class="m">521.0330</span><span class="w">   </span><span class="m">100</span><span class="w">
+ </span><span class="n">pseudoinverse</span><span class="w"> </span><span class="m">326.1059</span><span class="w"> </span><span class="m">344.3830</span><span class="w"> </span><span class="m">358.1566</span><span class="w"> </span><span class="m">351.7829</span><span class="w"> </span><span class="m">359.7690</span><span class="w"> </span><span class="m">508.8802</span><span class="w">   </span><span class="m">100</span><span class="w">
+ </span><span class="n">linear</span><span class="w"> </span><span class="n">system</span><span class="w"> </span><span class="m">199.0780</span><span class="w"> </span><span class="m">206.6064</span><span class="w"> </span><span class="m">218.7704</span><span class="w"> </span><span class="m">210.2198</span><span class="w"> </span><span class="m">218.2907</span><span class="w"> </span><span class="m">327.6886</span><span class="w">   </span><span class="m">100</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="c1"># R with openblas and LLVM</span><span class="w">
+
+</span><span class="n">Unit</span><span class="o">:</span><span class="w"> </span><span class="n">milliseconds</span><span class="w">
+          </span><span class="n">expr</span><span class="w">       </span><span class="n">min</span><span class="w">        </span><span class="n">lq</span><span class="w">      </span><span class="n">mean</span><span class="w">    </span><span class="n">median</span><span class="w">        </span><span class="n">uq</span><span class="w">      </span><span class="n">max</span><span class="w"> </span><span class="n">neval</span><span class="w">
+            </span><span class="n">lm</span><span class="w"> </span><span class="m">262.22400</span><span class="w"> </span><span class="m">272.39873</span><span class="w"> </span><span class="m">287.72378</span><span class="w"> </span><span class="m">277.65483</span><span class="w"> </span><span class="m">286.07772</span><span class="w"> </span><span class="m">361.0826</span><span class="w">   </span><span class="m">100</span><span class="w">
+ </span><span class="n">pseudoinverse</span><span class="w">  </span><span class="m">60.50899</span><span class="w">  </span><span class="m">62.65356</span><span class="w">  </span><span class="m">82.10815</span><span class="w">  </span><span class="m">70.40881</span><span class="w">  </span><span class="m">75.11090</span><span class="w"> </span><span class="m">169.7922</span><span class="w">   </span><span class="m">100</span><span class="w">
+ </span><span class="n">linear</span><span class="w"> </span><span class="n">system</span><span class="w">  </span><span class="m">38.01025</span><span class="w">  </span><span class="m">39.48672</span><span class="w">  </span><span class="m">52.82579</span><span class="w">  </span><span class="m">45.81922</span><span class="w">  </span><span class="m">49.36025</span><span class="w"> </span><span class="m">121.0351</span><span class="w">   </span><span class="m">100</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>I really think the results speak for themselves.</p>
+
+<h2 id="caveats">Caveats</h2>
+
+<p>Of course there are some problems when you have this kind of install. The first one is the complication of the install process. If it were as simple as install R binaries from CRAN I wouldn’t be doing this guide. The second one and more important, <strong>you are going to need to compile the packages you install from now on</strong>, without exception. You aren’t going to be able to install the binaries of the packages anymore. This has advantages and disadvantages. The main advantage is that they are going to make use of the libraries you have installed in your your system like OpenBLAS, OpenMP or LLVM, to mention some. However, this means that you are going to need some other libraries to compile and you have to have them correctly linked, like Java or libxml2 or some of the packages aren’t going to compile and you aren’t going to be able to have it on your system.</p>
+
+<p>In case you get any problem internet is your friend. You can look for the error R is returning when it tries to compile. If you are the first one to get that error you can ask in communities like <a href="https://stackoverflow.com">Stackoverflow</a> or the mail list for <a href="https://www.r-project.org/mail.html">R help</a>. All of these is going to make you understand R much better and your are going to be a better R user. So take it with patience and consider it like an advance course for R.</p>
+
+<p>Take into account that sometimes even the CRAN install binaries pose problems, mostly with it’s link to Java. Before I decided to have this kind of install with R I had in the past multiple problems with Java and rJava package. So nothing is perfect, but you didn’t decided to use R because it was simple, did you?</p>
+
+<h2 id="how-to-install">How to install?</h2>
+
+<p>I’ve used as inspiration for this guide mainly two main sources. On one hand, <a href="https://www.karambelkar.info/2017/01/setup-osx-for-r/">Bhaskar Karambelar’s installation guide</a>, and on the other <a href="http://pacha.hk/blog/2017/01/08/install-r-and-python-via-homebrew/">Mauricio Vargas’ one</a>. Bhaskar’s one was the first I used, more than 6 months ago, while we were in the United Stated, and really worked well in that moment. Problem with it is, it installs a lot or libraries to program in C/C++ what unless you are a C/C++ programmer you aren’t going to use, although you never know. At that moment, I installed everything due to lack of knowledge, but probably right now I wouldn’t. It’s up to you if you want to install those libraries and programing languages. However, I have more than enough space in my hard drive and I don’t mind to have then, perhaps they are going to to be useful in the future. Besides, this has been a way to discover then and know more about C/C++ programing. Mauricio’s guide goes more to the point and it just helps you to install a really fast and quick version of R that use OpenMP and OpenBlas.</p>
+
+<p>Through this guide I just want to try to show you how I ended with my installation, that is an updated mixture of both guides.  However, take into account that mine guide is going to be a little bit different, even more taking into account that <a href="https://luisspuerto.net/blog/2018/01/09/iterm2-oh-my-zsh-powerlevel9k-monaco-nerd-complete-font/">I use Zsh</a> as my shell.</p>
+
+<h3 id="homebrew">Homebrew</h3>
+
+<p>You probably have Homebrew already installed, if you don’t, please, <a href="https://luisspuerto.net/blog/2017/11/21/homebrew/">install it</a>. Then, I recommend you to connect to the cask tap if you haven’t done it already:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew tap caskroom/cask <span class="c"># Tap to install regular app with user interface (GUI)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>As you probably you’ve noticed, I don’t tap a lot of repos that Bhaskar taped. This is mainly because those taps are deprecated and its formulae are now included in the Homebrew Core. I decided not to tap other repos because I’m not going to use them.</p>
+
+<p>I recommend to add the following lines in your Zsh and/or Bash profiles running the following:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="c"># For zsh</span>
+<span class="nb">echo</span> <span class="s1">'# Setting language and localization variables
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8'</span> <span class="o">&gt;&gt;</span> ~/.zshrc
+
+<span class="c"># For bash</span>
+<span class="nb">echo</span> <span class="s1">'# Setting language and localization variables
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8'</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="uninstalling-previous-r-install">Uninstalling previous R install</h3>
+
+<p>If you already have R installed I recommend you to uninstall R completely. Before you do it, you perhaps want to do a copy of your installed packages, just make a list because you are going to need to compile all of them with this homebrew install. You can run the following code in R to make a copy of your packages.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="c1"># How to list installed packajes</span><span class="w">
+
+</span><span class="n">package_matrix</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">installed.packages</span><span class="p">()</span><span class="w">
+
+</span><span class="n">package_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">package_matrix</span><span class="p">)</span><span class="w">
+
+</span><span class="n">package_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">package_df</span><span class="p">[</span><span class="nf">is.na</span><span class="p">(</span><span class="n">package_df</span><span class="o">$</span><span class="n">Priority</span><span class="p">),</span><span class="w"> </span><span class="s2">"Package"</span><span class="p">]</span><span class="w">
+
+</span><span class="n">packages</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.character</span><span class="p">(</span><span class="n">package_list</span><span class="p">)</span><span class="w">
+
+</span><span class="n">write</span><span class="p">(</span><span class="n">packages</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"packages"</span><span class="p">)</span><span class="w">
+
+</span><span class="n">save</span><span class="p">(</span><span class="n">packages</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"packages.RData"</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now you are going to have a file in your working folder packages.RData that is going to store a variable with a list of all your packages. To reinstall all the packages you just need to load that file in R and run:</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="n">install.packages</span><span class="p">(</span><span class="n">packages</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now that you have a list of your installed packages you can <a href="https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Uninstalling-under-macOS">delete R from your system</a>. Run the following on terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>rm <span class="nt">-rf</span> /Library/Frameworks/R.framework /Applications/R.app /usr/local/bin/R /usr/local/bin/Rscript
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="xcode-command-line-tools">XCode Command Line Tools</h3>
+
+<p>You need to have installed the <a href="https://developer.apple.com/download/more/">Command Line Tools for XCode</a>. Please be aware that if you already has installed, XCode you probably still need to install the CLT. The best way to know is running the following command in terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>xcode-select <span class="nt">--install</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="cc-compilers-and-libraries">C/C++ Compilers and Libraries</h3>
+
+<p>Now, you need to install the C/C++ necessary compilers and other useful libraries.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install gcc ccache cmake pkg-config autoconf automake
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You can</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cd</span> /usr/local/bin
+<span class="nv">$ </span>ln <span class="nt">-s</span> gcov-7 gcov
+<span class="nv">$ </span>ln <span class="nt">-s</span> gcc-7 gcc
+<span class="nv">$ </span>ln <span class="nt">-s</span> g++-7 g++
+<span class="nv">$ </span>ln <span class="nt">-s</span> cpp-7 cpp
+<span class="nv">$ </span>ln <span class="nt">-s</span> c++-7 c++
+<span class="nv">$ </span><span class="nb">cd</span> ~
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You can ask fo the versions to check if everything is correctly installed. You have to get something similar to this:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>gcc <span class="nt">--version</span>
+gcc <span class="o">(</span>Homebrew GCC 7.2.0<span class="o">)</span> 7.2.0
+Copyright <span class="o">(</span>C<span class="o">)</span> 2017 Free Software Foundation, Inc.
+This is free software<span class="p">;</span> see the <span class="nb">source </span><span class="k">for </span>copying conditions.  There is NO
+warranty<span class="p">;</span> not even <span class="k">for </span>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+<span class="nv">$ </span>gfortran <span class="nt">-v</span>
+Using built-in specs.
+<span class="nv">COLLECT_GCC</span><span class="o">=</span>gfortran
+<span class="nv">COLLECT_LTO_WRAPPER</span><span class="o">=</span>/usr/local/Cellar/gcc/7.2.0/libexec/gcc/x86_64-apple-darwin17.2.0/7.2.0/lto-wrapper
+Target: x86_64-apple-darwin17.2.0
+Configured with: ../configure <span class="nt">--build</span><span class="o">=</span>x86_64-apple-darwin17.2.0 <span class="nt">--prefix</span><span class="o">=</span>/usr/local/Cellar/gcc/7.2.0 <span class="nt">--libdir</span><span class="o">=</span>/usr/local/Cellar/gcc/7.2.0/lib/gcc/7 <span class="nt">--enable-languages</span><span class="o">=</span>c,c++,objc,obj-c++,fortran <span class="nt">--program-suffix</span><span class="o">=</span><span class="nt">-7</span> <span class="nt">--with-gmp</span><span class="o">=</span>/usr/local/opt/gmp <span class="nt">--with-mpfr</span><span class="o">=</span>/usr/local/opt/mpfr <span class="nt">--with-mpc</span><span class="o">=</span>/usr/local/opt/libmpc <span class="nt">--with-isl</span><span class="o">=</span>/usr/local/opt/isl <span class="nt">--with-system-zlib</span> <span class="nt">--enable-checking</span><span class="o">=</span>release <span class="nt">--with-pkgversion</span><span class="o">=</span><span class="s1">'Homebrew GCC 7.2.0'</span> <span class="nt">--with-bugurl</span><span class="o">=</span>https://github.com/Homebrew/homebrew-core/issues <span class="nt">--disable-nls</span> <span class="nt">--with-native-system-header-dir</span><span class="o">=</span>/usr/include <span class="nt">--with-sysroot</span><span class="o">=</span>/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk
+Thread model: posix
+gcc version 7.2.0 <span class="o">(</span>Homebrew GCC 7.2.0<span class="o">)</span>
+
+<span class="nv">$ </span>ccache <span class="nt">--v</span>
+ccache version 3.3.4
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You can check also if the OpenMP from GCC is working running the following on terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cat</span> <span class="o">&gt;</span> omp-test.c &lt;&lt;<span class="s2">"END"</span>
+<span class="c">#include &lt;omp.h&gt;</span>
+<span class="c">#include &lt;stdio.h&gt;</span>
+int main<span class="o">()</span> <span class="o">{</span>
+    <span class="c">#pragma omp parallel</span>
+    <span class="nb">printf</span><span class="o">(</span><span class="s2">"Hello from thread %d, nthreads %d</span><span class="se">\n</span><span class="s2">"</span>, omp_get_thread_num<span class="o">()</span>, omp_get_num_threads<span class="o">())</span><span class="p">;</span>
+<span class="o">}</span>
+END
+gcc <span class="nt">-fopenmp</span> <span class="nt">-o</span> omp-test omp-test.c
+./omp-test
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And you should get something similar to:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre>Hello from thread 1, nthreads 8
+Hello from thread 6, nthreads 8
+Hello from thread 4, nthreads 8
+Hello from thread 2, nthreads 8
+Hello from thread 5, nthreads 8
+Hello from thread 0, nthreads 8
+Hello from thread 3, nthreads 8
+Hello from thread 7, nthreads 8
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="miscellaneous-graphical-libraries--optional">Miscellaneous graphical libraries -optional</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install freetype fontconfig pixman gettext
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Some of these libraries aren’t strictly necessary for R, but they are to install other related apps like QGIS, GRASS or PostGIS. I think that if you don’t want to install then you don’t need to do it right now, since that software install its on dependencies</p>
+
+<h3 id="ssl-ssh-libs">SSL/SSH Libraries -optional</h3>
+
+<p>If you already have Git you probably have OpenSSL, the other two are optional.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install openssl libressl libssh2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>/usr/local/opt/openssl/bin/openssl version
+OpenSSL 1.0.2n  7 Dec 2017
+
+<span class="nv">$ </span>/usr/local/opt/libressl/bin/openssl version
+LibreSSL 2.2.7
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="libxml2">Libxml2</h3>
+
+<p>It’s highly recomendable to install this library since it’s somehow necessary to install some packages depending on the version of your macOS system. It’s really small (10 mb) so you are losing nothing installing it.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install libxml2
+<span class="nv">$ </span>brew link libxml2 <span class="nt">--force</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="boost--optional">Boost -optional</h3>
+
+<p><a href="http://www.boost.org">Boost</a> is one of those libraries that you only install if you program in C/C++. If you want to install it you need to have Libxml2 installed and then proceed as following:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install icu4c libiconv libxslt
+<span class="nv">$ </span>brew install boost <span class="nt">--with-icu4c</span> <span class="nt">--without-single</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then you can test if it’s correctly installed</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cat</span> <span class="o">&gt;</span> first.cpp <span class="o">&lt;&lt;</span><span class="no">END</span><span class="sh">
+#include&lt;iostream&gt;
+#include&lt;boost/any.hpp&gt;
+int main()
+{
+    boost::any a(5);
+    a = 1.61803;
+    std::cout &lt;&lt; boost::any_cast&lt;double&gt;(a) &lt;&lt; std::endl;
+}
+</span><span class="no">END
+</span>clang++ <span class="nt">-I</span>/usr/local/include <span class="nt">-L</span>/usr/local/lib  <span class="nt">-o</span> first first.cpp
+./first
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>1.61803
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cat</span> <span class="o">&gt;</span> second.cpp <span class="o">&lt;&lt;</span><span class="no">END</span><span class="sh">
+#include&lt;iostream&gt;
+#include &lt;boost/filesystem.hpp&gt;
+int main()
+{
+    boost::filesystem::path full_path( boost::filesystem::current_path() );
+    if ( boost::filesystem::exists( "second.cpp" ) )
+    {
+        std::cout &lt;&lt; "Found second.cpp file in " &lt;&lt; full_path &lt;&lt; std::endl;
+    } else {
+        std::cerr &lt;&lt; "Argh!, Something not working" &lt;&lt; std::endl;
+        return 1;
+    }
+}
+</span><span class="no">END
+</span>clang++ <span class="nt">-I</span>/usr/local/include <span class="nt">-L</span>/usr/local/lib  <span class="nt">-o</span> second second.cpp <span class="se">\</span>
+    <span class="nt">-lboost_filesystem-mt</span> <span class="nt">-lboost_system-mt</span>
+./second
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>Found second.cpp file <span class="k">in</span> <span class="s2">"/Users/brewmaster"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="gpg--git">GPG &amp; Git</h3>
+
+<p>I’ve already explained how to install <a href="https://luisspuerto.net/blog/2017/11/04/installing-pgp-signing-for-git-on-macos/">GPG in a previous post</a> to use it with <a href="https://luisspuerto.net/blog/2017/11/05/set-rstudio-with-homebrews-git/">Git</a>. How to install Git was also <a href="https://luisspuerto.net/blog/2017/11/05/set-rstudio-with-homebrews-git/">explained</a>.</p>
+
+<h3 id="x-server">X-Server</h3>
+
+<p>You are going to probably need X-Server down the road.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew cask install xquartz
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="latex">Latex</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/LaTeX">Latex</a> is a set of applications and libraries to be able to write beautiful mathematical formulas and documents, mainly. But can be use to write any kind of documents.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew cask install mactex
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="java">Java</h3>
+
+<p>If you don’t have <a href="https://en.wikipedia.org/wiki/Java_(programming_language)">Java</a> installed it’s a good moment to do so and to do it with Homebrew.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew cask install java
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>java <span class="nt">-version</span>
+java version <span class="s2">"9.0.1"</span>
+Java<span class="o">(</span>TM<span class="o">)</span> SE Runtime Environment <span class="o">(</span>build 9.0.1+11<span class="o">)</span>
+Java HotSpot<span class="o">(</span>TM<span class="o">)</span> 64-Bit Server VM <span class="o">(</span>build 9.0.1+11, mixed mode<span class="o">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="python">Python</h3>
+
+<p>It’s recommended to install <a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a> 2 and 3 as a complement to R although R itself doesn’t use it.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install python
+<span class="nv">$ </span><span class="nb">sudo </span>easy_install pip
+<span class="nv">$ </span>pip install <span class="nt">--upgrade</span> pip setuptools
+<span class="nv">$ </span>pip install markdown rpy2
+<span class="nv">$ </span>python <span class="nt">-V</span> <span class="c"># checking the version</span>
+Python 2.7.10
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>rply2 is probably to give you an error untill you install R. You can try to install it right now and if it give you the error install again lately.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install python3
+<span class="nv">$ </span>pip3 install <span class="nt">--upgrade</span> pip setuptools wheel
+<span class="nv">$ </span>python3 <span class="nt">-V</span> <span class="c"># Checking the version</span>
+Python 3.6.4
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="r--related">R &amp; related</h3>
+
+<p>We are going to install some things before we install R itself. <a href="https://en.wikipedia.org/wiki/Pandoc">Pandoc</a> is really useful when you have R to convert documents in different formats. <a href="https://en.wikipedia.org/wiki/Cairo_(graphics)">Cairo</a> is a graphical library that can be use for in R and it’s need for <a href="https://en.wikipedia.org/wiki/QGIS">QGIS</a>. Libsvg and librsvg are optional</p>
+
+<p><strong>Important!</strong>: If you want to have R with all the capabilities you need to install Cairo with the instructions in this <a href="https://luisspuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">post</a>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install pandoc cairo libsvg librsvg
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="openblas">OpenBLAS</h4>
+
+<p>Let’s install OpenBLAS, this is one of the key pieces of this installation.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install openblas <span class="nt">--with-openmp</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now you can test if OpenBlas has been correctly installed.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cat</span> <span class="o">&gt;</span> test-openblas.c &lt;&lt;<span class="s2">"END"</span>
+<span class="c">#include &lt;cblas.h&gt;</span>
+<span class="c">#include &lt;stdio.h&gt;</span>
+
+void main<span class="o">()</span>
+<span class="o">{</span>
+  int <span class="nv">i</span><span class="o">=</span>0<span class="p">;</span>
+  double A[6] <span class="o">=</span> <span class="o">{</span>1.0,2.0,1.0,-3.0,4.0,-1.0<span class="o">}</span><span class="p">;</span>
+  double B[6] <span class="o">=</span> <span class="o">{</span>1.0,2.0,1.0,-3.0,4.0,-1.0<span class="o">}</span><span class="p">;</span>
+  double C[9] <span class="o">=</span> <span class="o">{</span>.5,.5,.5,.5,.5,.5,.5,.5,.5<span class="o">}</span><span class="p">;</span>
+  cblas_dgemm<span class="o">(</span>CblasColMajor, CblasNoTrans, CblasTrans,
+      3,3,2,1,A, 3, B, 3,2,C,3<span class="o">)</span><span class="p">;</span>
+
+  <span class="k">for</span><span class="o">(</span><span class="nv">i</span><span class="o">=</span>0<span class="p">;</span> i&lt;9<span class="p">;</span> i++<span class="o">)</span>
+    <span class="nb">printf</span><span class="o">(</span><span class="s2">"%lf "</span>, C[i]<span class="o">)</span><span class="p">;</span>
+  <span class="nb">printf</span><span class="o">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">)</span><span class="p">;</span>
+<span class="o">}</span>
+END
+
+clang <span class="nt">-L</span>/usr/local/opt/openblas/lib <span class="se">\</span>
+    <span class="nt">-I</span>/usr/local/opt/openblas/include <span class="se">\</span>
+    <span class="nt">-lopenblas</span> <span class="nt">-lpthread</span> <span class="se">\</span>
+    <span class="nt">-o</span> test-openblas test-openblas.c
+
+./test-openblas
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>11.000000 <span class="nt">-9</span>.000000 5.000000 <span class="nt">-9</span>.000000 21.000000 <span class="nt">-1</span>.000000 5.000000 <span class="nt">-1</span>.000000 3.000000
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="armadillo-and-other-libraries--optional">Armadillo and other libraries -optional</h4>
+
+<p>Now, you can also install, if you want, <a href="https://en.wikipedia.org/wiki/Armadillo_(C%2B%2B_library)">Armadillo</a>, which is other library that it’s useful if you program in C/C++ and take advantage of OpenBLAS.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install eigen armadillo v8-315
+<span class="nv">$ </span>brew link v8-315 <span class="nt">--force</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You can test Armadillo with the following code since the new Armadillo doesn’t provide examples, or at least I haven’t found them.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cat</span> <span class="o">&gt;</span> example1.cpp <span class="o">&lt;&lt;</span><span class="no">END</span><span class="sh">
+
+#include
+
+#include "armadillo"
+
+using namespace arma;
+
+using namespace std;
+
+int main(int argc, char** argv)
+
+  {
+
+  cout &lt;&lt; "Armadillo version: " &lt;&lt; arma_version::as_string() &lt;&lt; endl;
+
+  // directly specify the matrix size (elements are uninitialised)
+
+  mat A(2,3);
+
+  // .n_rows = number of rows    (read only)
+
+  // .n_cols = number of columns (read only)
+
+  cout &lt;&lt; "A.n_rows = " &lt;&lt; A.n_rows &lt;&lt; endl;
+
+  cout &lt;&lt; "A.n_cols = " &lt;&lt; A.n_cols &lt;&lt; endl;
+
+  // directly access an element (indexing starts at 0)
+
+  A(1,2) = 456.0;
+
+  A.print("A:");
+
+  // scalars are treated as a 1x1 matrix,
+
+  // hence the code below will set A to have a size of 1x1
+
+  A = 5.0;
+
+  A.print("A:");
+
+  // if you want a matrix with all elements set to a particular value
+
+  // the .fill() member function can be used
+
+  A.set_size(3,3);
+
+  A.fill(5.0);
+
+  A.print("A:");
+
+  mat B;
+
+  // endr indicates "end of row"
+
+  B &lt;&lt; 0.555950 &lt;&lt; 0.274690 &lt;&lt; 0.540605 &lt;&lt; 0.798938 &lt;&lt; endr
+
+    &lt;&lt; 0.108929 &lt;&lt; 0.830123 &lt;&lt; 0.891726 &lt;&lt; 0.895283 &lt;&lt; endr
+
+    &lt;&lt; 0.948014 &lt;&lt; 0.973234 &lt;&lt; 0.216504 &lt;&lt; 0.883152 &lt;&lt; endr
+
+    &lt;&lt; 0.023787 &lt;&lt; 0.675382 &lt;&lt; 0.231751 &lt;&lt; 0.450332 &lt;&lt; endr;
+
+  // print to the cout stream
+
+  // with an optional string before the contents of the matrix
+
+  B.print("B:");
+
+  // the &lt;&lt; operator can also be used to print the matrix
+
+  // to an arbitrary stream (cout in this case)
+
+  cout &lt;&lt; "B:" &lt;&lt; endl &lt;&lt; B &lt;&lt; endl;
+
+  // save to disk
+
+  B.save("B.txt", raw_ascii);
+
+  // load from disk
+
+  mat C;
+
+  C.load("B.txt");
+
+  C += 2.0 * B;
+
+  C.print("C:");
+
+  // submatrix types:
+
+  //
+
+  // .submat(first_row, first_column, last_row, last_column)
+
+  // .row(row_number)
+
+  // .col(column_number)
+
+  // .cols(first_column, last_column)
+
+  // .rows(first_row, last_row)
+
+  cout &lt;&lt; "C.submat(0,0,3,1) =" &lt;&lt; endl;
+
+  cout &lt;&lt; C.submat(0,0,3,1) &lt;&lt; endl;
+
+  // generate the identity matrix
+
+  mat D = eye&lt;mat&gt;(4,4);
+
+  D.submat(0,0,3,1) = C.cols(1,2);
+
+  D.print("D:");
+
+  // transpose
+
+  cout &lt;&lt; "trans(B) =" &lt;&lt; endl;
+
+  cout &lt;&lt; trans(B) &lt;&lt; endl;
+
+  // maximum from each column (traverse along rows)
+
+  cout &lt;&lt; "max(B) =" &lt;&lt; endl;
+
+  cout &lt;&lt; max(B) &lt;&lt; endl;
+
+  // maximum from each row (traverse along columns)
+
+  cout &lt;&lt; "max(B,1) =" &lt;&lt; endl;
+
+  cout &lt;&lt; max(B,1) &lt;&lt; endl;
+
+  // maximum value in B
+
+  cout &lt;&lt; "max(max(B)) = " &lt;&lt; max(max(B)) &lt;&lt; endl;
+
+  // sum of each column (traverse along rows)
+
+  cout &lt;&lt; "sum(B) =" &lt;&lt; endl;
+
+  cout &lt;&lt; sum(B) &lt;&lt; endl;
+
+  // sum of each row (traverse along columns)
+
+  cout &lt;&lt; "sum(B,1) =" &lt;&lt; endl;
+
+  cout &lt;&lt; sum(B,1) &lt;&lt; endl;
+
+  // sum of all elements
+
+  cout &lt;&lt; "sum(sum(B)) = " &lt;&lt; sum(sum(B)) &lt;&lt; endl;
+
+  cout &lt;&lt; "accu(B)     = " &lt;&lt; accu(B) &lt;&lt; endl;
+
+  // trace = sum along diagonal
+
+  cout &lt;&lt; "trace(B)    = " &lt;&lt; trace(B) &lt;&lt; endl;
+
+  // random matrix -- values are uniformly distributed in the [0,1] interval
+
+  mat E = randu&lt;mat&gt;(4,4);
+
+  E.print("E:");
+
+  cout &lt;&lt; endl;
+
+  // row vectors are treated like a matrix with one row
+
+  rowvec r;
+
+  r &lt;&lt; 0.59499 &lt;&lt; 0.88807 &lt;&lt; 0.88532 &lt;&lt; 0.19968;
+
+  r.print("r:");
+
+  // column vectors are treated like a matrix with one column
+
+  colvec q;
+
+  q &lt;&lt; 0.81114 &lt;&lt; 0.06256 &lt;&lt; 0.95989 &lt;&lt; 0.73628;
+
+  q.print("q:");
+
+  // dot or inner product
+
+  cout &lt;&lt; "as_scalar(rq) = " &lt;&lt; as_scalar(rq) &lt;&lt; endl;
+
+  // outer product
+
+  cout &lt;&lt; "q*r =" &lt;&lt; endl;
+
+  cout &lt;&lt; q*r &lt;&lt; endl;
+
+  // multiply-and-accumulate operation
+
+  // (no temporary matrices are created)
+
+  cout &lt;&lt; "accu(B % C) = " &lt;&lt; accu(B % C) &lt;&lt; endl;
+
+  // sum of three matrices (no temporary matrices are created)
+
+  mat F = B + C + D;
+
+  F.print("F:");
+
+  // imat specifies an integer matrix
+
+  imat AA;
+
+  imat BB;
+
+  AA &lt;&lt; 1 &lt;&lt; 2 &lt;&lt; 3 &lt;&lt; endr &lt;&lt; 4 &lt;&lt; 5 &lt;&lt; 6 &lt;&lt; endr &lt;&lt; 7 &lt;&lt; 8 &lt;&lt; 9;
+
+  BB &lt;&lt; 3 &lt;&lt; 2 &lt;&lt; 1 &lt;&lt; endr &lt;&lt; 6 &lt;&lt; 5 &lt;&lt; 4 &lt;&lt; endr &lt;&lt; 9 &lt;&lt; 8 &lt;&lt; 7;
+
+  // comparison of matrices (element-wise)
+
+  // output of a relational operator is a umat
+
+  umat ZZ = (AA &gt;= BB);
+
+  ZZ.print("ZZ =");
+
+  // 2D field of arbitrary length row vectors
+
+  // (fields can also store abitrary objects, e.g. instances of std::string)
+
+  field&lt;rowvec&gt; xyz(3,2);
+
+  xyz(0,0) = randu(1,2);
+
+  xyz(1,0) = randu(1,3);
+
+  xyz(2,0) = randu(1,4);
+
+  xyz(0,1) = randu(1,5);
+
+  xyz(1,1) = randu(1,6);
+
+  xyz(2,1) = randu(1,7);
+
+  cout &lt;&lt; "xyz:" &lt;&lt; endl;
+
+  cout &lt;&lt; xyz &lt;&lt; endl;
+
+  // cubes ("3D matrices")
+
+  cube Q( B.n_rows, B.n_cols, 2 );
+
+  Q.slice(0) = B;
+
+  Q.slice(1) = 2.0 * B;
+
+  Q.print("Q:");
+
+  return 0;
+
+  }
+</span><span class="no">
+END
+
+</span>clang++   <span class="nt">-O2</span>   <span class="nt">-o</span> example1  example1.cpp  <span class="nt">-larmadillo</span> <span class="nt">-framework</span> Accelerate
+
+./example1
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You are going to get something like:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+</pre></td><td class="rouge-code"><pre>Armadillo version: 8.300.3 <span class="o">(</span>Tropical Shenanigans<span class="o">)</span>
+A.n_rows <span class="o">=</span> 2
+A.n_cols <span class="o">=</span> 3
+A:
+  1.8965e-256  6.9531e-310  6.9531e-310
+  6.9531e-310  4.9407e-324   4.5600e+02
+A:
+   5.0000
+A:
+   5.0000   5.0000   5.0000
+   5.0000   5.0000   5.0000
+   5.0000   5.0000   5.0000
+B:
+   0.5560   0.2747   0.5406   0.7989
+   0.1089   0.8301   0.8917   0.8953
+   0.9480   0.9732   0.2165   0.8832
+   0.0238   0.6754   0.2318   0.4503
+B:
+   0.5560   0.2747   0.5406   0.7989
+   0.1089   0.8301   0.8917   0.8953
+   0.9480   0.9732   0.2165   0.8832
+   0.0238   0.6754   0.2318   0.4503
+
+C:
+   1.6679   0.8241   1.6218   2.3968
+   0.3268   2.4904   2.6752   2.6858
+   2.8440   2.9197   0.6495   2.6495
+   0.0714   2.0261   0.6953   1.3510
+C.submat<span class="o">(</span>0,0,3,1<span class="o">)</span> <span class="o">=</span>
+   1.6679   0.8241
+   0.3268   2.4904
+   2.8440   2.9197
+   0.0714   2.0261
+
+D:
+   0.8241   1.6218        0        0
+   2.4904   2.6752        0        0
+   2.9197   0.6495   1.0000        0
+   2.0261   0.6953        0   1.0000
+trans<span class="o">(</span>B<span class="o">)</span> <span class="o">=</span>
+   0.5560   0.1089   0.9480   0.0238
+   0.2747   0.8301   0.9732   0.6754
+   0.5406   0.8917   0.2165   0.2318
+   0.7989   0.8953   0.8832   0.4503
+
+max<span class="o">(</span>B<span class="o">)</span> <span class="o">=</span>
+   0.9480   0.9732   0.8917   0.8953
+
+max<span class="o">(</span>B,1<span class="o">)</span> <span class="o">=</span>
+   0.7989
+   0.8953
+   0.9732
+   0.6754
+
+max<span class="o">(</span>max<span class="o">(</span>B<span class="o">))</span> <span class="o">=</span> 0.973234
+sum<span class="o">(</span>B<span class="o">)</span> <span class="o">=</span>
+   1.6367   2.7534   1.8806   3.0277
+
+sum<span class="o">(</span>B,1<span class="o">)</span> <span class="o">=</span>
+   2.1702
+   2.7261
+   3.0209
+   1.3813
+
+sum<span class="o">(</span>sum<span class="o">(</span>B<span class="o">))</span> <span class="o">=</span> 9.2984
+accu<span class="o">(</span>B<span class="o">)</span>     <span class="o">=</span> 9.2984
+trace<span class="o">(</span>B<span class="o">)</span>    <span class="o">=</span> 2.05291
+E:
+   7.8264e-06   5.3277e-01   6.7930e-01   8.3097e-01
+   1.3154e-01   2.1896e-01   9.3469e-01   3.4572e-02
+   7.5561e-01   4.7045e-02   3.8350e-01   5.3462e-02
+   4.5865e-01   6.7886e-01   5.1942e-01   5.2970e-01
+
+r:
+   0.5950   0.8881   0.8853   0.1997
+q:
+   0.8111
+   0.0626
+   0.9599
+   0.7363
+as_scalar<span class="o">(</span>r<span class="k">*</span>q<span class="o">)</span> <span class="o">=</span> 1.53501
+q<span class="k">*</span>r <span class="o">=</span>
+   0.4826   0.7203   0.7181   0.1620
+   0.0372   0.0556   0.0554   0.0125
+   0.5711   0.8524   0.8498   0.1917
+   0.4381   0.6539   0.6518   0.1470
+
+accu<span class="o">(</span>B % C<span class="o">)</span> <span class="o">=</span> 20.9962
+F:
+   3.0479   2.7206   2.1624   3.1958
+   2.9261   5.9957   3.5669   3.5811
+   6.7118   4.5424   1.8660   3.5326
+   2.1213   3.3968   0.9270   2.8013
+ZZ <span class="o">=</span>
+        0        1        1
+        0        1        1
+        0        1        1
+xyz:
+<span class="o">[</span>field column 0]
+   0.6711   0.0077
+
+   0.3834   0.0668   0.4175
+
+   0.6868   0.5890   0.9304   0.8462
+
+
+<span class="o">[</span>field column 1]
+   0.5269   0.0920   0.6539   0.4160   0.7012
+
+   0.9103   0.7622   0.2625   0.0475   0.7361   0.3282
+
+   0.6326   0.7564   0.9910   0.3653   0.2470   0.9826   0.7227
+
+
+
+Q:
+<span class="o">[</span>cube slice 0]
+   0.5560   0.2747   0.5406   0.7989
+   0.1089   0.8301   0.8917   0.8953
+   0.9480   0.9732   0.2165   0.8832
+   0.0238   0.6754   0.2318   0.4503
+
+<span class="o">[</span>cube slice 1]
+   1.1119   0.5494   1.0812   1.5979
+   0.2179   1.6602   1.7835   1.7906
+   1.8960   1.9465   0.4330   1.7663
+   0.0476   1.3508   0.4635   0.9007
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You can also test V8</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'quit()'</span> | v8
+V8 version 3.15.11.18 <span class="o">[</span>sample shell]
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="r">R</h4>
+
+<p>Important!: If you want to have R with all the capabilities you have to follow the instructions in this <a href="https://luisspuerto.net/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/">post</a>, then you can continue.</p>
+
+<p>Let’s finally install R.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install R <span class="nt">--with-openblas</span> <span class="nt">--with-java</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then if you are using english (american english) as your main language I recommend you to run the following:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>defaults write org.R-project.R force.LANG en_US.UTF-8
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="java9r">Java9+R</h4>
+
+<p>First you have to insert the following line in your Zsh and/or Bash profiles.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="c"># For zsh</span>
+<span class="nb">echo</span> <span class="s1">'# Setting $JAVA_HOME
+export JAVA_HOME="$(/usr/libexec/java_home)"'</span> <span class="o">&gt;&gt;</span> ~/.zshrc
+
+<span class="c"># For bash</span>
+<span class="nb">echo</span> <span class="s1">'# Setting $JAVA_HOME
+export JAVA_HOME="$(/usr/libexec/java_home)"'</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And then run the following command in the terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>R CMD javareconf <span class="nv">JAVA_CPPFLAGS</span><span class="o">=</span><span class="s1">'-I/System/Library/Frameworks/JavaVM.framework/Headers -I/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/'</span> <span class="c"># this is a specific command for Java 9.0.1</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>It seems that with Java 9.0.4 and R 3.4.4 you can run instead just:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>R CMD javareconf
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>or perhaps:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>R CMD javareconf <span class="nv">JAVA_CPPFLAGS</span><span class="o">=</span><span class="s1">'-I/$JAVA_HOME'</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You have to get something similar to this:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre>/usr/local/Cellar/r/3.4.3/lib/R/bin/javareconf: line 66: <span class="nt">-I</span>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/: No such file or directory
+Java interpreter : /Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/java
+Java version     : 9.0.1
+Java home path   : /Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
+Java compiler    : /Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/javac
+Java headers gen.: /Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/javah
+Java archive tool: /Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/bin/jar
+Non-system Java on macOS
+
+trying to compile and link a JNI program
+detected JNI cpp flags    : <span class="nt">-I</span><span class="k">$(</span>JAVA_HOME<span class="k">)</span>/include <span class="nt">-I</span><span class="k">$(</span>JAVA_HOME<span class="k">)</span>/include/darwin
+detected JNI linker flags : <span class="nt">-L</span><span class="k">$(</span>JAVA_HOME<span class="k">)</span>/lib/server <span class="nt">-ljvm</span>
+/usr/local/opt/llvm/bin/clang <span class="nt">-I</span>/usr/local/Cellar/r/3.4.3/lib/R/include <span class="nt">-DNDEBUG</span> <span class="nt">-I</span>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/include <span class="nt">-I</span>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/include/darwin  <span class="nt">-I</span>/usr/local/opt/gettext/include <span class="nt">-I</span>/usr/local/opt/llvm/include   <span class="nt">-fPIC</span>  <span class="nt">-g</span> <span class="nt">-O3</span> <span class="nt">-Wall</span> <span class="nt">-pedantic</span> <span class="nt">-std</span><span class="o">=</span>gnu99 <span class="nt">-mtune</span><span class="o">=</span>native <span class="nt">-pipe</span> <span class="nt">-c</span> conftest.c <span class="nt">-o</span> conftest.o
+/usr/local/opt/llvm/bin/clang <span class="nt">-dynamiclib</span> <span class="nt">-Wl</span>,-headerpad_max_install_names <span class="nt">-undefined</span> dynamic_lookup <span class="nt">-single_module</span> <span class="nt">-multiply_defined</span> suppress <span class="nt">-L</span>/usr/local/Cellar/r/3.4.3/lib/R/lib <span class="nt">-L</span>/usr/local/opt/gettext/lib <span class="nt">-L</span>/usr/local/opt/llvm/lib <span class="nt">-Wl</span>,-rpath,/usr/local/opt/llvm/lib <span class="nt">-o</span> conftest.so conftest.o <span class="nt">-L</span>/Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home/lib/server <span class="nt">-ljvm</span> <span class="nt">-L</span>/usr/local/Cellar/r/3.4.3/lib/R/lib <span class="nt">-lR</span> <span class="nt">-lintl</span> <span class="nt">-Wl</span>,-framework <span class="nt">-Wl</span>,CoreFoundation
+
+
+JAVA_HOME        : /Library/Java/JavaVirtualMachines/jdk-9.0.1.jdk/Contents/Home
+Java library path: <span class="k">$(</span>JAVA_HOME<span class="k">)</span>/lib/server
+JNI cpp flags    : <span class="nt">-I</span><span class="k">$(</span>JAVA_HOME<span class="k">)</span>/include <span class="nt">-I</span><span class="k">$(</span>JAVA_HOME<span class="k">)</span>/include/darwin
+JNI linker flags : <span class="nt">-L</span><span class="k">$(</span>JAVA_HOME<span class="k">)</span>/lib/server <span class="nt">-ljvm</span>
+Updating Java configuration <span class="k">in</span> /usr/local/Cellar/r/3.4.3/lib/R
+Done.
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="folder-for-r-packages">Folder for R Packages</h4>
+
+<p>Let’s create our own folder to store the installed packages for R. This way R, or us, doesn’t have to move all the packages every time we install a new R version. Run the following in terminal.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>mkdir <span class="nt">-p</span> <span class="nv">$HOME</span>/Library/R/3.x/library
+<span class="nv">$ </span><span class="nb">cat</span> <span class="o">&gt;</span> <span class="nv">$HOME</span>/.Renviron <span class="o">&lt;&lt;</span><span class="no">END</span><span class="sh">
+R_LIBS_USER=</span><span class="nv">$HOME</span><span class="sh">/Library/R/3.x/library
+</span><span class="no">END
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You should also add this variable to your zsh and/or bash profiles.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>  <span class="c"># For zsh</span>
+<span class="nb">echo</span> <span class="s1">'export R_LIBS_USER=$HOME/Library/R/3.x/library'</span> <span class="o">&gt;&gt;</span> ~/.zshrc
+
+<span class="c"># For bash</span>
+<span class="nb">echo</span> <span class="s1">'export R_LIBS_USER=$HOME/Library/R/3.x/library'</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="llvm">LLVM</h4>
+
+<p><a href="https://en.wikipedia.org/wiki/LLVM">LLVM</a> or _Low Level Virtual Machine _is a library that allow us to compile faster some R packages using OpenMP and also make that those packages use OpenMP when we are normally using R. To install it you run on your terminal the following:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install llvm
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then insert the LLVM location to your path in your Zsh and/or Bash profiles:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="c"># For zsh</span>
+<span class="nb">echo</span> <span class="s1">'export PATH=/usr/local/opt/llvm/bin:$PATH'</span> <span class="o">&gt;&gt;</span> ~/.zshrc
+
+<span class="c"># For bash</span>
+<span class="nb">echo</span> <span class="s1">'export PATH=/usr/local/opt/llvm/bin:$PATH'</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="data-table-package">Data Table Package</h4>
+
+<p>The package <a href="https://github.com/Rdatatable/data.table/wiki">Data Table</a> need a <a href="https://github.com/Rdatatable/data.table/wiki/Installation#openmp-enabled-compiler-for-mac">specific</a> <a href="https://www.rdocumentation.org/packages/tools/versions/3.4.3/topics/makevars">makevars</a> file. Makevars file is the file that tells R how and with what libraries it has to compile the packages we download from source. So we are going to install Data Table first, with that specific configuration and then set the final makevars file.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>mkdir ~/.R
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"CC=/usr/local/opt/llvm/bin/clang -fopenmp
+CXX=/usr/local/opt/llvm/bin/clang++ -fopenmp
+# -O3 should be faster than -O2 (default) level optimisation ..
+CFLAGS=-g -O3 -Wall -pedantic -std=gnu99 -mtune=native -pipe
+CXXFLAGS=-g -O3 -Wall -pedantic -std=c++11 -mtune=native -pipe
+LDFLAGS=-L/usr/local/opt/gettext/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib
+CPPFLAGS=-I/usr/local/opt/gettext/include -I/usr/local/opt/llvm/include"</span> <span class="o">&gt;&gt;</span> ~/.R/Makevars
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now we can install Data Table package on terminal. To do so just run on terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>R <span class="nt">--vanilla</span> <span class="o">&lt;&lt;</span> <span class="no">EOF</span><span class="sh">
+install.packages('data.table', repos='http://cran.us.r-project.org')
+q()
+</span><span class="no">EOF
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="setting-the-final-makevars">Setting the final Makevars</h4>
+
+<p>First, we delete the previous makevars file.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>rm ~/.R/Makevars
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Set the final Makevars file.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"CC=/usr/local/opt/llvm/bin/clang
+CXX=/usr/local/opt/llvm/bin/clang++
+# -O3 should be faster than -O2 (default) level optimisation ..
+CFLAGS=-g -O3 -Wall -pedantic -std=gnu99 -mtune=native -pipe
+CXXFLAGS=-g -O3 -Wall -pedantic -std=c++11 -mtune=native -pipe
+LDFLAGS=-L/usr/local/opt/gettext/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib
+CPPFLAGS=-I/usr/local/opt/gettext/include -I/usr/local/opt/llvm/include"</span> <span class="o">&gt;&gt;</span> ~/.R/Makevars
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>As you probably have noticed the change is just the <code class="highlighter-rouge">-fopenmp</code> flag on the second line. In case you have to reinstall, or update Data Table, you just have to add that flag and then delete it. Really easy and you can even do it from RStudio.</p>
+
+<h3 id="rstudio">RStudio</h3>
+
+<p>When you install R from Homebrew and you compile it, you don’t have anymore the R shell as an application on your Applications folder. But you can install any other graphical interface like <a href="https://www.rstudio.com">RStudio</a>. To do it you just run in your terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew cask install rstudio
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Usually RStudio is able to recognize R install and you don’t need to do anything else.</p>
+
+<h3 id="additional-related-languages--optional">Additional related languages -optional</h3>
+
+<p>You can also install some additional related languages like:</p>
+
+<h4 id="node-js">Node.js</h4>
+
+<p>From Wikipedia:</p>
+
+<blockquote>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Node.js">Node.js</a></strong> is an <a href="https://en.wikipedia.org/wiki/Open-source_software">open-source</a>, <a href="https://en.wikipedia.org/wiki/Cross-platform">cross-platform</a> <a href="https://en.wikipedia.org/wiki/JavaScript">JavaScript</a> <a href="https://en.wikipedia.org/wiki/Runtime_system">run-time environment</a> that executes JavaScript code outside the browser.</p>
+</blockquote>
+
+<p>To install it just run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install node phantomjs casperjs
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="scala">Scala</h4>
+
+<p>From Wikipedia:</p>
+
+<blockquote>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Scala_(programming_language)">Scala</a></strong> (<a href="https://en.wikipedia.org/wiki/Help:IPA/English">/ˈskɑːlɑː/</a> <a href="https://en.wikipedia.org/wiki/Help:Pronunciation_respelling_key"><em>SKAH-lah</em></a>)[<a href="https://en.wikipedia.org/wiki/Scala_(programming_language)#cite_note-9">9]</a> is a <a href="https://en.wikipedia.org/wiki/General-purpose_programming_language">general-purpose</a> <a href="https://en.wikipedia.org/wiki/Programming_language">programming language</a> providing support for <a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a> and a strong <a href="https://en.wikipedia.org/wiki/Static_typing">static</a> <a href="https://en.wikipedia.org/wiki/Type_system">type system</a>. Designed to be concise,[<a href="https://en.wikipedia.org/wiki/Scala_(programming_language)#cite_note-10">10]</a> many of Scala’s design decisions aimed to address <a href="https://en.wikipedia.org/wiki/Criticism_of_Java">criticisms of Java</a>.[<a href="https://en.wikipedia.org/wiki/Scala_(programming_language)#cite_note-overview-8">8]</a></p>
+</blockquote>
+
+<p>To install it just run in your terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install scala
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="golang">golang</h4>
+
+<p>From Wikipedia:</p>
+
+<blockquote>
+  <p><strong><a href="https://en.wikipedia.org/wiki/Go_(programming_language)">Go</a></strong> (often referred to as <strong>Golang</strong>) is a <a href="https://en.wikipedia.org/wiki/Programming_language">programming language</a> created at <a href="https://en.wikipedia.org/wiki/Google">Google</a>[<a href="https://en.wikipedia.org/wiki/Go_(programming_language)#cite_note-techcrunch-12">12]</a> in 2009 by Robert Griesemer, <a href="https://en.wikipedia.org/wiki/Rob_Pike">Rob Pike</a>, and <a href="https://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a>.[<a href="https://en.wikipedia.org/wiki/Go_(programming_language)#cite_note-langfaq-10">10]</a> Go is a <a href="https://en.wikipedia.org/wiki/Static_typing">statically typed</a>, <a href="https://en.wikipedia.org/wiki/Compiled_language">compiled</a> language in the tradition of <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C</a>, with <a href="https://en.wikipedia.org/wiki/Memory_safety">memory safety</a>, <a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">garbage collection</a>, <a href="https://en.wikipedia.org/wiki/Structural_type_system">structural typing</a>,[<a href="https://en.wikipedia.org/wiki/Go_(programming_language)#cite_note-structural_typing-3">3]</a> and <a href="https://en.wikipedia.org/wiki/Communicating_sequential_processes">CSP</a>-style <a href="https://en.wikipedia.org/wiki/Concurrency_(computer_science)">concurrency</a>.[<a href="https://en.wikipedia.org/wiki/Go_(programming_language)#cite_note-boldly-13">13]</a></p>
+</blockquote>
+
+<p>To install it just run in your terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install golang
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You need to modify your zsh and/or bash profile like the following</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="c"># For zsh</span>
+<span class="nb">echo</span> <span class="s1">'## Path for Golang
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin'</span> <span class="o">&gt;&gt;</span> ~/.zshrc
+
+<span class="c"># For bash</span>
+<span class="nb">echo</span> <span class="s1">'## Path for Golang
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin'</span> <span class="o">&gt;&gt;</span> ~/.bash_profile
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="some-gis-libraries--soft--optional">Some GIS Libraries &amp; Soft -optional</h3>
+
+<p>You can also install some GIS libraries. This libraries could be mandatory if you are going to install geographical packages:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew tap osgeo/osgeo4mac <span class="c"># Tap for geospatial software</span>
+<span class="nv">$ </span>brew install postgresql geos proj
+<span class="nv">$ </span>brew install gdal2 <span class="nt">--with-complete</span> <span class="nt">--with-opencl</span> <span class="nt">--with-armadillo</span> <span class="nt">--with-unsupported</span> <span class="nt">--with-libkml</span> <span class="nt">--with-postgresql</span>
+<span class="nv">$ </span>brew install postgis <span class="nt">--with-gui</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="shell-profiles">Shell Profiles</h3>
+
+<p>You’ve been adding things to your Zsh and/or Bash profiles. I recommend you to make those profiles tidy, it’s going to be easier to modify things in the future.</p>
+
+<p>This is how I have then:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre></td><td class="rouge-code"><pre><span class="c"># Setting language and localization variables</span>
+<span class="nb">export </span><span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8
+<span class="nb">export </span><span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+
+<span class="c"># Setting $JAVA_HOME</span>
+<span class="nb">export </span><span class="nv">JAVA_HOME</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>/usr/libexec/java_home<span class="k">)</span><span class="s2">"</span>
+
+<span class="c"># Setting $PATH</span>
+<span class="c">## If you come from bash you might have to change your $PATH.</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/sbin:<span class="nv">$PATH</span>
+<span class="c"># export PATH=/usr/local/bin:$PATH</span>
+<span class="c">## Path for LLVM install</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/opt/llvm/bin:<span class="nv">$PATH</span>
+<span class="c">## Path for Golang</span>
+<span class="nb">export </span><span class="nv">GOPATH</span><span class="o">=</span><span class="nv">$HOME</span>/golang
+<span class="nb">export </span><span class="nv">GOROOT</span><span class="o">=</span>/usr/local/opt/go/libexec
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$GOPATH</span>/bin
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$GOROOT</span>/bin
+
+<span class="c"># Setting R variables</span>
+<span class="nb">export </span><span class="nv">R_LIBS_USER</span><span class="o">=</span><span class="nv">$HOME</span>/Library/R/3.x/library
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You can see those files running the following:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="c"># If you have atom.</span>
+<span class="c"># zsh</span>
+<span class="nv">$ </span>atom ~/.zshrc
+<span class="c"># bash</span>
+<span class="nv">$ </span>atom ~/.bash_profile
+
+<span class="c"># If you don't have atom</span>
+<span class="c">#zsh</span>
+<span class="nv">$ </span>open <span class="nt">-a</span> TextEdit ~/.zshrc
+<span class="c">#bash</span>
+<span class="nv">$ </span>open <span class="nt">-a</span> TextEdit ~/.bash_profile
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="the-end">The End</h2>
+
+<p>Now you can begin to use your new R.</p>
+
+        </div>
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/homebrew" class="page__taxonomy-item" rel="tag">homebrew</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/how-to" class="page__taxonomy-item" rel="tag">how to</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/optimization" class="page__taxonomy-item" rel="tag">optimization</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/rsoft" class="page__taxonomy-item" rel="tag">RSoft</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/rstats" class="page__taxonomy-item" rel="tag">RStats</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/professional" class="page__taxonomy-item" rel="tag">Professional</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/rstats" class="page__taxonomy-item" rel="tag">RStats</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/technology" class="page__taxonomy-item" rel="tag">Technology</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-01-12T20:16:56+00:00">Friday, 12 January 2018 20:16 UTC</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lpuerto&text=Install+R+100%25+Homebrew+Edition+With+OpenBlas+%26+OpenMP+%E2%80%94+My+Version%20https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F01%2F12%2Finstall-r-100-homebrew-edition-with-openblas-openmp-my-version%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F01%2F12%2Finstall-r-100-homebrew-edition-with-openblas-openmp-my-version%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F01%2F12%2Finstall-r-100-homebrew-edition-with-openblas-openmp-my-version%2F&title=Install R 100% Homebrew Edition With OpenBlas & OpenMP — My Version" class="btn btn--reddit" title="Share on Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F01%2F12%2Finstall-r-100-homebrew-edition-with-openblas-openmp-my-version%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/2018/01/09/iterm2-oh-my-zsh-powerlevel9k-monaco-nerd-complete-font/" class="pagination--pager" title="iTerm2 + Oh My Zsh + Powerlevel9k + Monaco Nerd Complete Font
+">Previous</a>
+    
+    
+      <a href="/blog/2018/01/18/convert-you-pi-in-an-airplay-receiver/" class="pagination--pager" title="Convert your Pi in an AirPlay receiver
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/jekyll.png"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">New Web in Jekyll
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As you probably have noticed, some days ago I rolled out a new version of my website, which you probably think it’s pretty similar to the previous one, at least talking about its external appearance. However, it’s really different in the inside, since it’s a static web build with Jekyll, while the previous one was build on Wordpress. This isn’t ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/Luis-Puerto-The-Entreprenour2.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">16 Personalities: Apparently I’m an Entrepreneur
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Not long ago, while I was taking a course in Finland, they asked us to take a personality test online called 16 personalities. It wasn’t nothing really official or for much purpose of scrutinize us, but just to know ourselves a little bit more and we can work our strengths and weakness. To my surprise, the test told me that I have an entrepreneu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/R-Homebrew.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">Installing R with Homebrew with all the capabilities
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As I explained in my previous post if you installed R with Homebrew you have less capabilities than with a R installed from CRAN’s binary. But, can you have all the capabilities while you still use Homebrew to install R? Yes! However… why you bother to install it with Homebrew at all instead of installing it from CRAN. Well, it’s true that CRAN ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><div class="search-searchbar"></div>
+    <div class="search-hits"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lpuerto"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+      <li><a href="https://www.linkedin.com/in/lpuerto"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+    
+    
+    
+      <li><a href="https://github.com/luisspuerto"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+<!--
+    
+    
+-->
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Luis Puerto |
+  
+  <a href="https://github.com/luisspuerto/luisspuerto.net-src"><i class="fas fa-code" aria-hidden="true"></i> Source Code</a> | 
+  
+Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: 'NSAWFR2G1K',
+  apiKey: 'b63bbd39b0bf76207cf9bebdb9c2b7dd',
+  indexName: 'luisspuerto-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://luisspuerto.net/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/blog/2018/01/12/install-r-100-homebrew-edition-with-openblas-openmp-my-version"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://luisspuerto-net.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+    <script>
+//open external links in a new window
+function external_new_window() {
+    for(var c = document.getElementsByTagName("a"), a = 0;a < c.length;a++) {
+    var b = c[a];
+    b.getAttribute("href") && b.hostname !== location.hostname && (b.target = "_blank")
+    }
+}
+//open PDF links in a new window
+function pdf_new_window ()
+{
+    if (!document.getElementsByTagName) return false;
+    var links = document.getElementsByTagName("a");
+    for (var eleLink=0; eleLink < links.length; eleLink ++) {
+    if ((links[eleLink].href.indexOf('.pdf') !== -1)||(links[eleLink].href.indexOf('.doc') !== -1)||(links[eleLink].href.indexOf('.docx') !== -1)) {
+        links[eleLink].onclick =
+        function() {
+            window.open(this.href);
+            return false;
+        }
+    }
+    }
+} 
+pdf_new_window()
+external_new_window();
+</script>
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+  </body>
+</html>

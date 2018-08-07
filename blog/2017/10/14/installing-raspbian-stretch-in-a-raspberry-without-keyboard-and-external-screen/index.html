@@ -1,0 +1,1127 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Installing Raspbian in a Raspberry without keyboard and external screen | Luis Puerto</title>
+<meta name="description" content="A few months ago we acquired a Raspberry Pi 3 Model 3 in the hopes to play a little bit around with it to learn some Linux and perhaps to use it as a computer to host rStudio Server and run some scripts on it. But things have been little by little been delayed, mainly because we didn’t have at hand a proper monitor nor USB keyboard.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Luis Puerto">
+<meta property="og:title" content="Installing Raspbian in a Raspberry without keyboard and external screen">
+<meta property="og:url" content="https://luisspuerto.net/blog/2017/10/14/installing-raspbian-stretch-in-a-raspberry-without-keyboard-and-external-screen/">
+
+
+  <meta property="og:description" content="A few months ago we acquired a Raspberry Pi 3 Model 3 in the hopes to play a little bit around with it to learn some Linux and perhaps to use it as a computer to host rStudio Server and run some scripts on it. But things have been little by little been delayed, mainly because we didn’t have at hand a proper monitor nor USB keyboard.">
+
+
+
+  <meta property="og:image" content="https://i.imgur.com/b7WS6uG.png">
+
+
+
+  <meta name="twitter:site" content="@lpuerto">
+  <meta name="twitter:title" content="Installing Raspbian in a Raspberry without keyboard and external screen">
+  <meta name="twitter:description" content="A few months ago we acquired a Raspberry Pi 3 Model 3 in the hopes to play a little bit around with it to learn some Linux and perhaps to use it as a computer to host rStudio Server and run some scripts on it. But things have been little by little been delayed, mainly because we didn’t have at hand a proper monitor nor USB keyboard.">
+  <meta name="twitter:url" content="https://luisspuerto.net/blog/2017/10/14/installing-raspbian-stretch-in-a-raspberry-without-keyboard-and-external-screen/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://i.imgur.com/b7WS6uG.png">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2017-10-14T18:47:55+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://luisspuerto.net/blog/2017/10/14/installing-raspbian-stretch-in-a-raspberry-without-keyboard-and-external-screen/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://luisspuerto.net",
+      "logo": "https://luisspuerto.net/assets/images/pages/header-splash.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Luis Puerto",
+      "url": "https://luisspuerto.net",
+      "sameAs": ["https://twitter.com/lpuerto","https://www.linkedin.com/in/lpuerto","https://github.com/luisspuerto","https://www.flickr.com/photos/luisspuerto"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="2AztHRijor0b6F_0DFrw0mYxhQVvLKT3rlFp7PxTS1M" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Luis Puerto Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link href="https://fonts.googleapis.com/css?family=Mr+Dafoe" rel="stylesheet">
+
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Luis Puerto</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/" >Home</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/aboutme" >About Me</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/resume" >Résumé</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/blog" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/contact" >Contact</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="
+          background-image:
+            url('https://i.imgur.com/b7WS6uG.png');
+          "
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Installing Raspbian in a Raspberry without keyboard and external screen
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">Remote desktop of Raspberry Pi.
+</span>
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="/aboutme">
+          <img src="/assets/images/pages/20121231-035-ol.jpg" alt="Luis Puerto" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="/aboutme"><h3 class="author__name" itemprop="name">Luis Puerto</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Born in Ponferrada, Spain. A Forest Engineer interested in Science and Technology. Fascinated about almost everything
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">🇪🇺🇪🇸🇸🇪🇫🇮🇺🇸</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:luis@luisspuerto.net">
+            <meta itemprop="email" content="luis@luisspuerto.net" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://instagram.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://luisspuerto.tumblr.com" itemprop="sameAs">
+            <i class="fab fa-fw fa-tumblr-square" aria-hidden="true"></i> Tumblr
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.flickr.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-flickr" aria-hidden="true"></i> Flickr
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Installing Raspbian in a Raspberry without keyboard and external screen">
+    <meta itemprop="description" content="A few months ago we acquired a Raspberry Pi 3 Model 3 in the hopes to play a little bit around with it to learn some Linux and perhaps to use it as a computer to host rStudio Server and run some scripts on it. But things have been little by little been delayed, mainly because we didn’t have at hand a proper monitor nor USB keyboard.">
+    <meta itemprop="datePublished" content="Saturday, 14 October 2017 18:47 UTC">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+</p>
+      
+
+        </header>
+
+      <section class="page__content" itemprop="text">
+        
+        <div class="post__content">
+          <p>A few months ago we acquired a <a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b/">Raspberry Pi 3 Model 3</a> in the hopes to play a little bit around with it to learn some Linux and perhaps to use it as a computer to host rStudio Server and run some scripts on it. But things have been little by little been delayed, mainly because we didn’t have at hand a proper monitor nor USB keyboard.</p>
+
+<p>So… last week I finally decided to do something with the Pi and started to research if it would be possible to do an install without keyboard and screen… and it turned out that it’s totally possible.</p>
+
+<p>First I want to mention that I’m doing this from MacBook Pro with El Capitan installed, and I’m going to install the Stretch version of Raspbian, the last one at the moment. The way we are going to configure Raspbian remotely is connecting to the Pi through <a href="https://en.wikipedia.org/wiki/Secure_Shell">SSH</a> (Secure SHell) and we are going to access to the remote desktop using <a href="https://en.wikipedia.org/wiki/Virtual_Network_Computing">VNC</a> (Virtual Network Computing).</p>
+
+<h2 id="getting-ready">Getting ready</h2>
+
+<p>The first thing you need to do is download the OS image from the <a href="https://www.raspberrypi.org/downloads/raspbian/">Raspberry Pi site</a>, where at least in my case I chose the desktop one, and you should too if you want to have a desktop where you log in later, even if it’s just remotely.</p>
+
+<p>To flash the OS in the memory card you can just use <a href="https://etcher.io">Etcher</a>, what makes thinks a little bit easier. You just have drag and drop the unzipped image to the app window and then choose the flash card you want to put the OS in, after you’ve inserted it in the computer. Once you have flashed the card and to make it possible to log in after in the OS from the ssh console you have to create a file named “ssh” without extension in the root of the FAT partition of the card. The FAT partition is the one that you can access from your Mac after you flash OS in the card. You can do it in the terminal using this command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>touch /Volumes/boot/ssh
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<figure class="align-center">
+  <a href="https://i.imgur.com/t8tmcl4.png">
+  <img src="https://i.imgur.com/t8tmcl4.png" alt="File named ssh with extension on the FAT partition." /></a>
+  
+    <figcaption>File named ssh with extension on the FAT partition.
+</figcaption>
+  
+</figure>
+
+<p>From then on, you just have to put the SD card in the Pi and wait for the rest of the installation to finish, which probably won’t take more than a couple of minutes, and connect the Pi through LAN to the same network you are connected. In my case I connected the Pi to one of my Airport Express, but you can plug it in directly to your router.</p>
+
+<h2 id="connecting-to-the-pi">Connecting to the Pi</h2>
+
+<p>Now you just have to open terminal and type</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>ssh pi@192.168.1.X
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Where ssh is the command in terminal to establish the ssh connection, pi is the default username in  on Raspbian, and 192.168.1.X is the usual IP the router is going to assign to the IP, being the X a number between 1 and 255 (well actually from 2 to 255, because the 1 usually is the router). Please, be aware that your IP could be totally different and depends on how your router is configure.</p>
+
+<p>To find out what are the IP of your Pi you just need to log into your router and check the device list or IP table. Other option is just download an IP scan software (like <a href="http://angryip.org">Angry IP Scanner</a>) and run it on your computer to see the different IPs of the devices on your network. You can also try to establish contact using the hostname instead of the IP, which in this case is like this:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>ssh pi@raspberrypi.local
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then you’ll be faced with a screen similar to this one.</p>
+
+<figure class="align-center">
+  <a href="https://i.imgur.com/GFGXPE3.png">
+  <img src="https://i.imgur.com/GFGXPE3.png" alt="Login into the Pi using the SSH connection" /></a>
+  
+    <figcaption>Login into the Pi using the SSH connection
+</figcaption>
+  
+</figure>
+
+<p>Where you are going to be asked about adding the key fingerprint of your Pi to your <em>knowhost</em> file of your Mac for secure connections (yes, you want to continue connecting) and then you’ll be prompted for the password of the Pi. The default password is: <em>raspberry</em>.</p>
+
+<h3 id="configuring-the-pi">Configuring the Pi</h3>
+
+<p>Now, you are logged on the terminal/shell of your Pi, and you can start configuring using shell commands. First of all is to login as root user to make things a little bit easier and then enter in the <em>configuration wizard</em> (or software configuration tool) using the command <code class="highlighter-rouge">raspi-config</code>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>su <span class="c"># if you want to login as root and don't type sudo in every command</span>
+<span class="nv">$ </span><span class="nb">sudo </span>raspi-config
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<figure class="align-center">
+  <a href="https://i.imgur.com/rx0pdss.png">
+  <img src="https://i.imgur.com/rx0pdss.png" alt="Raspberry config tool" /></a>
+  
+    <figcaption>Raspberry config tool
+</figcaption>
+  
+</figure>
+
+<p>Now, from here, you can change your password, the hostname, etc as you can see in the screenshot. I recommend you to change your password and leave your hostname as it is, unless you have more than one pi in your network. You should activate the VCN interface, in the <em>Interface Options</em> and set your <em>Localization Options</em>, or at least take a look to check that everything is OK. When you hit <em>Finish</em>.</p>
+
+<p>If you want to connect your Pi to your network via wi-fi, you can also do it. You can find more info in this <a href="https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md">tutorial</a>, but basically you first scan for wi-fi networks.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>iwlist wlan0 scan
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And then you edit the <code class="highlighter-rouge">wpa_supplicant.conf</code> configuration file with the info of the network you want to connect.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>nano /etc/wpa_supplicant/wpa_supplicant.conf
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Using the previous command you open the config file on nano (a really simple editor) and you add at the end of the file.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>network={
+    ssid="your wifi network name"
+    psk="the password for your network"
+}
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>To save you press crtl-o and to exit crtl-x.</p>
+
+<p>Now you can disconnect the LAN cable from your Pi to the router if you wish and restart the SSH connection using the command <code class="highlighter-rouge">exit</code>   and reconnect whether using the new IP that was assigned to the wi-fi connection or again the host (raspberrypi.local if you didn’t change it). Sometimes you need to reboot the Pi, to make it work.</p>
+
+<p>You can see the wi-fi config with the following command.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>ifconfig wlan0
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Perhaps, it’s also a good idea <a href="https://www.raspberrypi.org/documentation/raspbian/updating.md">update and upgrade the system</a> before you continue.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>apt-get update
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get dist-upgrade
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="installing-the-vnc-server">Installing the VNC Server</h3>
+
+<p>When you are done, you can install the VNC server in the Pi. You can find a more detailed tutorial <a href="https://www.raspberrypi.org/documentation/remote-access/vnc/">here</a>, but basically you type in the SSH connection:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>apt-get install realvnc-vnc-server realvnc-vnc-viewer
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You also have to install the <a href="https://www.realvnc.com/download/viewer/">VNC client</a> in your Mac, set it up and then log into the Pi using as username <em>pi</em> and as password <em>raspberry</em> or the one you’ve set up.</p>
+
+<figure class="align-center">
+  <a href="https://i.imgur.com/b7WS6uG.png">
+  <img src="https://i.imgur.com/b7WS6uG.png" alt="Remote desktop of Raspberry Pi." /></a>
+  
+    <figcaption>Remote desktop of Raspberry Pi.
+</figcaption>
+  
+</figure>
+
+<figure class="align-left">
+  <a href="https://i.imgur.com/g8LfJie.png">
+  <img src="https://i.imgur.com/g8LfJie.png" alt="VNC server dialog" /></a>
+  
+    <figcaption>VNC server dialog
+</figcaption>
+  
+</figure>
+
+<p>There are further configuration you can do in the server-side of the VNC connection, as it’s explained in the tutorial. I would recommend you to activate the <em>experimental direct capture mode</em> to be able to see apps that are directly render remotely (like Minecraft and I believe some of the settings windows). To do that you go to the VNC server dialog in your Pi and you click on the <em>Menu</em> and go to** **<em>Options &gt; Troubleshooting</em> and select <em>Enable experimental direct capture</em> mode.</p>
+
+<figure class="align-center">
+  <a href="https://i.imgur.com/aEqa9Kw.png">
+  <img src="https://i.imgur.com/aEqa9Kw.png" alt="Menu in the VNC server on Pi" /></a>
+  
+    <figcaption>Menu in the VNC server on Pi
+</figcaption>
+  
+</figure>
+
+<p>Now you can access completely to your Raspberry Pi desktop and you didn’t need and won’t need a keyboard or an additional screen.</p>
+
+<p>Addendum: There is <a href="https://smittytone.wordpress.com/2016/03/02/mac_remote_desktop_pi/">another options to access to the remote desktop of your Pi</a>, that doesn’t need to install any additional software on your Mac, since the connection is carried out by the Finder.app, but they aren’t as optimal as this one that it’s recommended by the official Raspberry Pi documentation.</p>
+
+<h3 id="additional-configuration">Additional configuration</h3>
+
+<p>Perhaps you are interested into mount NTFS, exFAT and samba volumes, i.e. hard drives that whether you connect to the USB port or you connect through your local network.</p>
+
+<p>The first two things are pretty easy to make it to happen. You just have to type in the SSH console or in the shell on the desktop:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>apt-get install ntfs-3g
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get install exfat-fuse
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<figure class="align-center">
+  <a href="https://i.imgur.com/IijptYB.png">
+  <img src="https://i.imgur.com/IijptYB.png" alt="Mounting a usb stick on the Pi" /></a>
+  
+    <figcaption>Mounting a usb stick on the Pi
+</figcaption>
+  
+</figure>
+
+<p>With this you are going to mount more or less any drive you want. Usually drives mount automatically, when you connect them to the Pi, and you can find them on <code class="highlighter-rouge">/home/pi/Media/pi</code>.</p>
+
+<p>Now please, remember that like in Mac you have you unmount your units - volumes before you extract them from the USB port. You do so you can clip on the <em>eject</em> icon on the top right corner of the desktop.</p>
+
+<p>If you wanted to do the same in the terminal or in the SSH console you have to use the command <code class="highlighter-rouge">mount</code>  . A little bit more info about how to mount exFAT and NTFS can be found <a href="https://raspberrypi.stackexchange.com/questions/32890/how-to-mount-ntfs-drive-on-a-raspberry-pi-b">here</a> and <a href="https://miqu.me/blog/2015/01/14/tip-exfat-hdd-with-raspberry-pi/">here</a>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>fdisk <span class="nt">-f</span> <span class="c"># this is to list all the volumes available</span>
+mkdir /mnt/usb <span class="c"># directory where you are going to mount</span>
+<span class="nb">sudo </span>mount /dev/sda1 /mnt/usb <span class="c"># mounting the unit</span>
+<span class="nb">sudo </span>ntfs-3g /dev/sda1 /mnt/usb <span class="c"># alternative way of mounting if it's NTFS</span>
+<span class="nb">sudo </span>umount /mnt/usb <span class="c"># to unmount the volume</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now, if you want to mount some samba shares you have connected in your network, like in your router or in the Time Capsule, like it’s my case you have to proceed as follows, being aware that you have to create the mounting (point) directory before.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-t</span> cifs //192.168.1.X/share /mnt/box/
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Change the IP for the one of your sharing device and “share” for the path to the volume / hard drive in that device. If the name of the volume you are sharing in that device has a space, you have to introduce <code class="highlighter-rouge">\040</code> in the spaces. For example is the name of your share is “<em>share with spaces</em>” and you want to mount in the route <code class="highlighter-rouge">/mnt/my share</code> you type.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>mount <span class="nt">-t</span> cifs //192.168.1.2/share<span class="se">\0</span>40with<span class="se">\0</span>40spaces /mnt/my<span class="se">\0</span>40share/
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now, if you want to mount any those shares on boot, to make it available all the time for other apps, you have to modify <code class="highlighter-rouge">fstab</code>  file. To do that you have to run this command on the shell.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>nano /etc/fstab
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And now you add to the end of the file:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>//192.168.1.2/share\040with\040spaces /mnt/my\040share/ cifs user=youruser,pass=yourpassword,rw,uid=1000,iocharset=utf8,sec=ntlm 0 0
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And as previously you did in nano, to save you press <code class="highlighter-rouge">crtl-o</code>  and to exit <code class="highlighter-rouge">crtl-x</code> .</p>
+
+<p>You have to also tell the pi to wait until the network it’s up to boot. For that you have to run again raspi-config.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>raspi-config
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And in boot options you select <em>Wait for Network at Boot</em>.</p>
+
+<p>And that’s it, now you have a Raspberry Pi to play around.</p>
+
+        </div>
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/how-to" class="page__taxonomy-item" rel="tag">how to</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/linux" class="page__taxonomy-item" rel="tag">linux</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/raspberry-pi" class="page__taxonomy-item" rel="tag">raspberry pi</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/raspbian" class="page__taxonomy-item" rel="tag">raspbian</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/professional" class="page__taxonomy-item" rel="tag">Professional</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/technology" class="page__taxonomy-item" rel="tag">Technology</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-10-14T18:47:55+00:00">Saturday, 14 October 2017 18:47 UTC</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lpuerto&text=Installing+Raspbian+in+a+Raspberry+without+keyboard+and+external+screen%20https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F10%2F14%2Finstalling-raspbian-stretch-in-a-raspberry-without-keyboard-and-external-screen%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F10%2F14%2Finstalling-raspbian-stretch-in-a-raspberry-without-keyboard-and-external-screen%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F10%2F14%2Finstalling-raspbian-stretch-in-a-raspberry-without-keyboard-and-external-screen%2F&title=Installing Raspbian in a Raspberry without keyboard and external screen" class="btn btn--reddit" title="Share on Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F10%2F14%2Finstalling-raspbian-stretch-in-a-raspberry-without-keyboard-and-external-screen%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/2017/10/13/blade-runner/" class="pagination--pager" title="Blade Runner
+">Previous</a>
+    
+    
+      <a href="/blog/2017/10/16/jaakarhut/" class="pagination--pager" title="Jääkarhut
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/jekyll.png"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">New Web in Jekyll
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As you probably have noticed, some days ago I rolled out a new version of my website, which you probably think it’s pretty similar to the previous one, at least talking about its external appearance. However, it’s really different in the inside, since it’s a static web build with Jekyll, while the previous one was build on Wordpress. This isn’t ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/Luis-Puerto-The-Entreprenour2.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">16 Personalities: Apparently I’m an Entrepreneur
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Not long ago, while I was taking a course in Finland, they asked us to take a personality test online called 16 personalities. It wasn’t nothing really official or for much purpose of scrutinize us, but just to know ourselves a little bit more and we can work our strengths and weakness. To my surprise, the test told me that I have an entrepreneu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/R-Homebrew.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">Installing R with Homebrew with all the capabilities
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As I explained in my previous post if you installed R with Homebrew you have less capabilities than with a R installed from CRAN’s binary. But, can you have all the capabilities while you still use Homebrew to install R? Yes! However… why you bother to install it with Homebrew at all instead of installing it from CRAN. Well, it’s true that CRAN ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><div class="search-searchbar"></div>
+    <div class="search-hits"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lpuerto"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+      <li><a href="https://www.linkedin.com/in/lpuerto"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+    
+    
+    
+      <li><a href="https://github.com/luisspuerto"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+<!--
+    
+    
+-->
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Luis Puerto |
+  
+  <a href="https://github.com/luisspuerto/luisspuerto.net-src"><i class="fas fa-code" aria-hidden="true"></i> Source Code</a> | 
+  
+Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: 'NSAWFR2G1K',
+  apiKey: 'b63bbd39b0bf76207cf9bebdb9c2b7dd',
+  indexName: 'luisspuerto-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://luisspuerto.net/blog/2017/10/14/installing-raspbian-stretch-in-a-raspberry-without-keyboard-and-external-screen/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/blog/2017/10/14/installing-raspbian-stretch-in-a-raspberry-without-keyboard-and-external-screen"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://luisspuerto-net.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+    <script>
+//open external links in a new window
+function external_new_window() {
+    for(var c = document.getElementsByTagName("a"), a = 0;a < c.length;a++) {
+    var b = c[a];
+    b.getAttribute("href") && b.hostname !== location.hostname && (b.target = "_blank")
+    }
+}
+//open PDF links in a new window
+function pdf_new_window ()
+{
+    if (!document.getElementsByTagName) return false;
+    var links = document.getElementsByTagName("a");
+    for (var eleLink=0; eleLink < links.length; eleLink ++) {
+    if ((links[eleLink].href.indexOf('.pdf') !== -1)||(links[eleLink].href.indexOf('.doc') !== -1)||(links[eleLink].href.indexOf('.docx') !== -1)) {
+        links[eleLink].onclick =
+        function() {
+            window.open(this.href);
+            return false;
+        }
+    }
+    }
+} 
+pdf_new_window()
+external_new_window();
+</script>
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+  </body>
+</html>

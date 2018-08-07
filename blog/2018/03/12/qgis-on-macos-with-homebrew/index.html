@@ -1,0 +1,2371 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>QGIS on macOS with Homebrew | Luis Puerto</title>
+<meta name="description" content="Update Monday, 26th of March: Almost the next day or the following day I published this post KyngChaos just published the QGIS 3 release for macOS. You can download here.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Luis Puerto">
+<meta property="og:title" content="QGIS on macOS with Homebrew">
+<meta property="og:url" content="https://luisspuerto.net/blog/2018/03/12/qgis-on-macos-with-homebrew/">
+
+
+  <meta property="og:description" content="Update Monday, 26th of March: Almost the next day or the following day I published this post KyngChaos just published the QGIS 3 release for macOS. You can download here.">
+
+
+
+  <meta property="og:image" content="https://luisspuerto.net/assets/images/blog/2018/QGIS_logo_2017.svg.png">
+
+
+
+  <meta name="twitter:site" content="@lpuerto">
+  <meta name="twitter:title" content="QGIS on macOS with Homebrew">
+  <meta name="twitter:description" content="Update Monday, 26th of March: Almost the next day or the following day I published this post KyngChaos just published the QGIS 3 release for macOS. You can download here.">
+  <meta name="twitter:url" content="https://luisspuerto.net/blog/2018/03/12/qgis-on-macos-with-homebrew/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://luisspuerto.net/assets/images/blog/2018/QGIS_logo_2017.svg.png">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2018-03-12T14:31:26+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://luisspuerto.net/blog/2018/03/12/qgis-on-macos-with-homebrew/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://luisspuerto.net",
+      "logo": "https://luisspuerto.net/assets/images/pages/header-splash.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Luis Puerto",
+      "url": "https://luisspuerto.net",
+      "sameAs": ["https://twitter.com/lpuerto","https://www.linkedin.com/in/lpuerto","https://github.com/luisspuerto","https://www.flickr.com/photos/luisspuerto"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="2AztHRijor0b6F_0DFrw0mYxhQVvLKT3rlFp7PxTS1M" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Luis Puerto Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link href="https://fonts.googleapis.com/css?family=Mr+Dafoe" rel="stylesheet">
+
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Luis Puerto</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/" >Home</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/aboutme" >About Me</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/resume" >Résumé</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/blog" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/contact" >Contact</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="
+          background-image:
+            url('/assets/images/blog/2018/QGIS_logo_2017.svg.png');
+          "
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          QGIS on macOS with Homebrew
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="/aboutme">
+          <img src="/assets/images/pages/20121231-035-ol.jpg" alt="Luis Puerto" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="/aboutme"><h3 class="author__name" itemprop="name">Luis Puerto</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Born in Ponferrada, Spain. A Forest Engineer interested in Science and Technology. Fascinated about almost everything
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">🇪🇺🇪🇸🇸🇪🇫🇮🇺🇸</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:luis@luisspuerto.net">
+            <meta itemprop="email" content="luis@luisspuerto.net" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://instagram.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://luisspuerto.tumblr.com" itemprop="sameAs">
+            <i class="fab fa-fw fa-tumblr-square" aria-hidden="true"></i> Tumblr
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.flickr.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-flickr" aria-hidden="true"></i> Flickr
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="QGIS on macOS with Homebrew">
+    <meta itemprop="description" content="Update Monday, 26th of March: Almost the next day or the following day I published this post KyngChaos just published the QGIS 3 release for macOS. You can download here.">
+    <meta itemprop="datePublished" content="Monday, 12 March 2018 14:31 UTC">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  21 minute read
+</p>
+      
+
+        </header>
+
+      <section class="page__content" itemprop="text">
+        
+        <div class="post__content">
+          <p><strong>Update Monday, 26th of March</strong>: Almost the next day or the following day I published this post <a href="http://www.kyngchaos.com">KyngChaos</a> just published the QGIS 3 release for macOS. You can download <a href="http://www.kyngchaos.com/software/qgis">here</a>.</p>
+
+<hr />
+
+<p>Just a couple days ago I was about to write a post about how difficult, or almost impossible, is to install the last versions of QGIS on macOS right now. Everything started, I believe, when <a href="http://www.gdal.org">gdal</a> package got update at the beginning of the week and that broke my install of QGIS 2 even thought, and to be honest, I really don’t know if all this mess was caused for that update, or by the update of the python formulae in Homebrew. Anyhow, usually these problems are solved just rebuilding the app from source using the new packages, but in this occasion that solution wasn’t working.</p>
+
+<p>Homebrew decided that on the first of March the behavior of the Python formulae and the name, and I believe the name of the formulae, was going to change to be more consistent. To sum a little bit up, after the change <code class="highlighter-rouge">python</code> was going to point to <code class="highlighter-rouge">python3</code> in your shell and <code class="highlighter-rouge">python2</code> is going point to so <code class="highlighter-rouge">python2</code> —or something like that. However, the change in the command in the CLI  broke a truckload of third party software, and seems that also wasn’t compliant with <a href="https://www.python.org/dev/peps/pep-0394/">Python’s policy</a>. So… they decided <a href="https://discourse.brew.sh/t/python-and-pep-394/1813">to change some things back</a> —CLI commands, no formulae names— and now seems that <code class="highlighter-rouge">python</code> ➜ <code class="highlighter-rouge">python2</code> and <code class="highlighter-rouge">python3</code> ➜ <code class="highlighter-rouge">python3</code>. If you are confused, don’t worry, am I also. Besides, since I’m not an expert in the matter and I’ve perhaps missed something in all this chaos. In consequence… <strong><a href="https://media1.tenor.com/images/499592e35e9cdf56bfdcb11eaf9d891d/tenor.gif?itemid=5607416">I really don’t know!</a></strong>.</p>
+
+<p>Anyhow and right now, with the current state of Homebrew and the <a href="https://github.com/OSGeo/homebrew-osgeo4mac">OSGeo/homebrew-osgeo4mac</a> tap, it’s quite difficult to install the last versions of QGIS in macOS. A few weeks ago, QGIS released QGIS 3 Girona, however it’s only possible to install it right now in Windows and Linux. Usually on macOS the releases has been a little bit slower than in other platforms basically because QGIS has really few developers able to work on macOS and seems that things aren’t as easy as in other platforms. Traditionally, Homebrew has come to the rescue with <a href="https://github.com/OSGeo/homebrew-osgeo4mac">OSGeo/homebrew-osgeo4mac</a> tap, which you can build your own version of QGIS, but that repo hasn’t been update almost since the beginning of December. This time the delay not only mean that the macOS users not only can’t install the last small incremental change version, but that for more than 3 weeks we aren’t able to install the last version, which means a big leap from version 2 to 3.</p>
+
+<p>This left the macOS users a little bit hanging although we still can download the <em>official</em> build for macOS in the <a href="http://www.kyngchaos.com/software/qgis">KyngChaos</a>{.reference.external} download page, where you can find the 2.18.14 version. The problem is that version isn’t even the last version of the <a href="https://en.wikipedia.org/wiki/Long-term_support">long-term repository release</a>, which is 2.18.17.</p>
+
+<p>Nevertheless, this weekend I was able to rebuild the last version of the LTR of QGIS 2 and the developer version of QGIS3. I really don’t know how stable is the QGIS 3 developer version, but at least at first sight everything works and the app even open faster than the QGIS 2.</p>
+
+<h2 id="how-to-install-the-last-version-of-qgis-2">How to install the last version of QGIS 2?</h2>
+
+<p>What I did was just reinstall <code class="highlighter-rouge">python</code>, <code class="highlighter-rouge">python2</code>, <code class="highlighter-rouge">gdal</code>, <code class="highlighter-rouge">gdal2</code>, and finally <code class="highlighter-rouge">qgis2</code>. More or less as follows:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew reinstall python2 python bison <span class="o">&amp;&amp;</span>
+brew reinstall gdal2 <span class="se">\</span>
+    <span class="nt">--with-armadillo</span> <span class="nt">--with-complete</span> <span class="nt">--with-libkml</span> <span class="se">\</span>
+    <span class="nt">--with-opencl</span> <span class="nt">--with-postgresql</span> <span class="nt">--with-unsupported</span>
+<span class="nv">$ </span>brew reinstall qgis2 <span class="nt">--with-grass</span> <span class="nt">--with-saga-gis-lts</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>After that and compiling here and there, I was able to open QGIS.app again.</p>
+
+<p>This left me with QGIS in <code class="highlighter-rouge">/usr/local/Cellar/qgis2/2.18.14</code>. But I want to have QGIS.app in <code class="highlighter-rouge">/Applications</code> folder so I have two options. First one is run in the following command in the terminal, as advised by Homebrew:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew linkapps <span class="o">[</span><span class="nt">--local</span><span class="o">]</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>However, I prefer to move the actual app to the <code class="highlighter-rouge">/Applications</code> folder and create a symbolic link on the <code class="highlighter-rouge">/Cellar</code> folder.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>mv <span class="nt">-f</span> /usr/local/Cellar/qgis2/2.18.14/QGIS.app /Applications
+<span class="nv">$ </span>ln <span class="nt">-s</span> /Applications/QGIS.app /usr/local/Cellar/qgis2/2.18.14/QGIS.app
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Yet, weren’t we going to install the last version of QGIS? This isn’t the last version. OK…</p>
+
+<h3 id="qgis-21817">QGIS 2.18.17</h3>
+
+<p>To install the last version you need to change the the QGIS formulae to make it to download the last version from the LTR. Since Homebrew isn’t anything more than a git with Ruby scripts I recommend you to make a branch in the repository and change the formula. You aren’t going to change anything in Homebrew, but in a branch of tap, in the <a href="https://github.com/OSGeo/homebrew-osgeo4mac">OSGeo/homebrew-osgeo4mac</a> tap. I did the following.</p>
+
+<p>First, I create a branch and checked out on it.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cd</span> /usr/local/Homebrew/Library/Taps/osgeo/homebrew-osgeo4mac
+<span class="nv">$ </span>git checkout <span class="nt">-b</span> QGIS2.18.17
+<span class="nv">$ </span>brew edit qgis2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now you can edit the formula to be able to install QGIS 2.18.17. ~You can see how I modify mine~~<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> below that has highlighted the lines I’ve changed.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="o">&lt;</span><span class="n">pre</span> <span class="k">class</span><span class="o">=</span><span class="s2">"nums:true lang:ruby mark:12-13 decode:true"</span> <span class="n">title</span><span class="o">=</span><span class="s2">"qgis2.rb"</span> <span class="n">data</span><span class="o">-</span><span class="n">url</span><span class="o">=</span><span class="s2">"https://raw.githubusercontent.com/luisspuerto/homebrew-osgeo4mac/QGIS2.18.17/Formula/qgis2.rb"</span><span class="o">&gt;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now you just commit.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git stage Formula/qgis2.rb
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"qgis update to 2.18.17"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And now you just reinstall QGIS and move to <code class="highlighter-rouge">/Applications</code>:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew reinstall qgis2 <span class="nt">--with-grass</span> <span class="nt">--with-saga-gis-lts</span>
+<span class="nv">$ </span>mv <span class="nt">-f</span> /usr/local/Cellar/qgis2/2.18.17/QGIS.app /Applications
+<span class="nv">$ </span>ln <span class="nt">-s</span> /Applications/QGIS.app /usr/local/Cellar/qgis2/2.18.17/QGIS.app
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<figure class="align-center">
+  <a href="/assets/images/blog/2018/Screen-Shot-2018-03-12-at-10.27.28.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2018-03-12-at-10.27.28.png" alt="QGIS 2.18.17 splash screen" /></a>
+  
+    <figcaption>QGIS 2.18.17 splash screen
+</figcaption>
+  
+</figure>
+
+<figure class="align-center">
+  <a href="/assets/images/blog/2018/Screen-Shot-2018-03-12-at-10.27.49.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2018-03-12-at-10.27.49.png" alt="QGIS 2.18.17 interface" /></a>
+  
+    <figcaption>QGIS 2.18.17 interface
+</figcaption>
+  
+</figure>
+
+<h3 id="matplotlib">Matplotlib</h3>
+
+<p>Since <a href="https://github.com/Homebrew">Homebrew</a>/<a href="https://github.com/Homebrew/homebrew-science">homebrew-science</a> has been deprecated and some of the formulae wasn’t migrated to the <a href="https://github.com/Homebrew">Homebrew</a>/<a href="https://github.com/Homebrew/homebrew-core">homebrew-core</a> this left us with a message at the end of the QGIS’ compilation asking us to install <a href="https://matplotlib.org">matplotlib</a> via pip.</p>
+
+<p>The following Python modules are needed by QGIS during run-time:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>The following Python modules are needed by QGIS during run-time:
+
+    matplotlib, pyparsing
+
+You can install manually, via installer package or with <span class="sb">`</span>pip<span class="sb">`</span> <span class="o">(</span><span class="k">if </span>availble<span class="o">)</span>:
+
+    pip install &lt;module&gt;  OR  pip-2.7 install &lt;module&gt;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>I had a problem and when I tried to install using <code class="highlighter-rouge">pip install matplotlib</code> threw me an error, though.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="rouge-code"><pre>Collecting matplotlib
+  Using cached matplotlib-2.2.0-cp27-cp27m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl
+Requirement already satisfied: subprocess32 <span class="k">in</span> /usr/local/lib/python2.7/site-packages <span class="o">(</span>from matplotlib<span class="o">)</span>
+Requirement already satisfied: backports.functools-lru-cache <span class="k">in</span> /usr/local/lib/python2.7/site-packages <span class="o">(</span>from matplotlib<span class="o">)</span>
+Requirement already satisfied: pyparsing!<span class="o">=</span>2.0.4,!<span class="o">=</span>2.1.2,!<span class="o">=</span>2.1.6,&gt;<span class="o">=</span>2.0.1 <span class="k">in</span> /usr/local/lib/python2.7/site-packages <span class="o">(</span>from matplotlib<span class="o">)</span>
+Requirement already satisfied: cycler&gt;<span class="o">=</span>0.10 <span class="k">in</span> /usr/local/lib/python2.7/site-packages <span class="o">(</span>from matplotlib<span class="o">)</span>
+Requirement already satisfied: numpy&gt;<span class="o">=</span>1.7.1 <span class="k">in</span> /usr/local/lib/python2.7/site-packages <span class="o">(</span>from matplotlib<span class="o">)</span>
+Requirement already satisfied: kiwisolver&gt;<span class="o">=</span>1.0.1 <span class="k">in</span> /usr/local/lib/python2.7/site-packages <span class="o">(</span>from matplotlib<span class="o">)</span>
+Requirement already satisfied: pytz <span class="k">in</span> /usr/local/lib/python2.7/site-packages <span class="o">(</span>from matplotlib<span class="o">)</span>
+Requirement already satisfied: python-dateutil&gt;<span class="o">=</span>2.1 <span class="k">in</span> /usr/local/lib/python2.7/site-packages <span class="o">(</span>from matplotlib<span class="o">)</span>
+Requirement already satisfied: six&gt;<span class="o">=</span>1.10 <span class="k">in</span> /usr/local/lib/python2.7/site-packages <span class="o">(</span>from matplotlib<span class="o">)</span>
+Requirement already satisfied: setuptools <span class="k">in</span> /usr/local/lib/python2.7/site-packages <span class="o">(</span>from kiwisolver&gt;<span class="o">=</span>1.0.1-&gt;matplotlib<span class="o">)</span>
+Installing collected packages: matplotlib
+Exception:
+Traceback <span class="o">(</span>most recent call last<span class="o">)</span>:
+  File <span class="s2">"/usr/local/lib/python2.7/site-packages/pip/basecommand.py"</span>, line 215, <span class="k">in </span>main
+    status <span class="o">=</span> self.run<span class="o">(</span>options, args<span class="o">)</span>
+  File <span class="s2">"/usr/local/lib/python2.7/site-packages/pip/commands/install.py"</span>, line 342, <span class="k">in </span>run
+    <span class="nv">prefix</span><span class="o">=</span>options.prefix_path,
+  File <span class="s2">"/usr/local/lib/python2.7/site-packages/pip/req/req_set.py"</span>, line 784, <span class="k">in </span>install
+    <span class="k">**</span>kwargs
+  File <span class="s2">"/usr/local/lib/python2.7/site-packages/pip/req/req_install.py"</span>, line 851, <span class="k">in </span>install
+    self.move_wheel_files<span class="o">(</span>self.source_dir, <span class="nv">root</span><span class="o">=</span>root, <span class="nv">prefix</span><span class="o">=</span>prefix<span class="o">)</span>
+  File <span class="s2">"/usr/local/lib/python2.7/site-packages/pip/req/req_install.py"</span>, line 1064, <span class="k">in </span>move_wheel_files
+    <span class="nv">isolated</span><span class="o">=</span>self.isolated,
+  File <span class="s2">"/usr/local/lib/python2.7/site-packages/pip/wheel.py"</span>, line 345, <span class="k">in </span>move_wheel_files
+    clobber<span class="o">(</span><span class="nb">source</span>, lib_dir, True<span class="o">)</span>
+  File <span class="s2">"/usr/local/lib/python2.7/site-packages/pip/wheel.py"</span>, line 323, <span class="k">in </span>clobber
+    shutil.copyfile<span class="o">(</span>srcfile, destfile<span class="o">)</span>
+  File <span class="s2">"/usr/local/Cellar/python@2/2.7.14_3/Frameworks/Python.framework/Versions/2.7/lib/python2.7/shutil.py"</span>, line 97, <span class="k">in </span>copyfile
+    with open<span class="o">(</span>dst, <span class="s1">'wb'</span><span class="o">)</span> as fdst:
+IOError: <span class="o">[</span>Errno 13] Permission denied: <span class="s1">'/usr/local/lib/python2.7/site-packages/matplotlib/legend.pyc'</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Basically I had a ownership problem, that can be solve using <code class="highlighter-rouge">sudo</code>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>pip install matplotlib
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Or fixing the <a href="https://stackoverflow.com/questions/27870003/pip-install-please-check-the-permissions-and-owner-of-that-directory">ownership</a> like this:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>chown <span class="nt">-R</span> <span class="k">$(</span><span class="nb">echo</span> <span class="nv">$USER</span><span class="k">)</span> ~/Library/Caches/pip
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now, I was able to install.</p>
+
+<h2 id="how-to-install-qgis-3">How to install QGIS 3?</h2>
+
+<p>Well, this is a little bit more challenging, but just a little bit. The only version of a Homebrew formula that is available to install QGIS 3 is the developer version one that is in this <a href="https://github.com/qgis">qgis</a>/<a href="https://github.com/qgis/homebrew-qgisdev">homebrew-qgisdev</a> repo-tap. So I just have to tap that repo:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew tap qgis/homebrew-qgisdev
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>However, I needed to make changes in the formula to be able to install because it has a dependency on Matplotlib on <a href="https://github.com/Homebrew">Homebrew</a>/<a href="https://github.com/Homebrew/homebrew-science">homebrew-science</a> and as we learned before that formula doesn’t exist anymore. In this case, it isn’t like in the QGIS 2, that it builds anyway and then ask you to install Matplotlib. It just doesn’t build and throws an <a href="https://github.com/qgis/homebrew-qgisdev/issues/50">error</a>.</p>
+
+<p>I have two options here. I can just delete or comment the line where the dependency is called, or I can replace it for the legacy formula, which is located in the <a href="https://github.com/brewsci">brewsci</a>/<a href="https://github.com/brewsci/homebrew-science">homebrew-science</a> tap. Either way I proceeded in the same way as I did previously.</p>
+
+<p>First, I created a branch and edited the formulae.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cd</span> /usr/local/Homebrew/Library/Taps/qgis/homebrew-qgisdev
+<span class="nv">$ </span>git checkout <span class="nt">-b</span> matplotlib-fix
+<span class="nv">$ </span>brew edit qgis3-dev
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You can check how I’ve edited <a href="https://github.com/luisspuerto/homebrew-qgisdev/blob/master/Formula/qgis3-dev.rb">mine</a>. The important part is in the highlighted 86-87 lines.</p>
+
+<p>Then, I just committed my edits</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git add Formula/qgis3-dev.rb
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"fix for matplotlib"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Before I tried to build I have to do two more tweaks to be able to compile without <a href="https://github.com/qgis/homebrew-qgisdev/issues/66#issuecomment-372069535">errors</a>. First I have to reinstall <a href="https://www.gnu.org/software/bison/">Bison</a>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew reinstall bison
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And then I have to modify the file <code class="highlighter-rouge">/usr/local/bin/pyrcc5</code> and change <code class="highlighter-rouge">pythonw2.7</code> to <code class="highlighter-rouge">python3</code>.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c">#!/bin/sh</span>
+<span class="nb">exec </span>python3 <span class="nt">-m</span> PyQt5.pyrcc_main <span class="k">${</span><span class="nv">1</span><span class="p">+</span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="k">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now I could build QGIS 3 developer edition:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>brew install <span class="nt">--no-sandbox</span> qgis3-dev <span class="nt">--with-grass</span> <span class="nt">--with-saga-gis-lts</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<figure class="align-center">
+  <a href="/assets/images/blog/2018/Screen-Shot-2018-03-12-at-10.27.58.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2018-03-12-at-10.27.58.png" alt="QGIS 3 dev splash screen" /></a>
+  
+    <figcaption>QGIS 3 dev splash screen
+</figcaption>
+  
+</figure>
+
+<figure class="align-center">
+  <a href="/assets/images/blog/2018/Screen-Shot-2018-03-12-at-10.28.22.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2018-03-12-at-10.28.22.png" alt="QGIS 3 interface" /></a>
+  
+    <figcaption>QGIS 3 interface
+</figcaption>
+  
+</figure>
+
+<p>After I finished building the QGIS 3, I moved the app from the Homebrew Cellar to the <code class="highlighter-rouge">/Applications</code> folder in the same way I moved QGIS 2, but since I want to keep QGIS 2 and QGIS 3, in the process I renamed the app to <code class="highlighter-rouge">QGIS 3.app</code>.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>mv /usr/local/opt/qgis3-dev/QGIS.app /Applications/QGIS<span class="se">\ </span>3.app
+<span class="nv">$ </span>ln <span class="nt">-s</span> /Applications/QGIS<span class="se">\ </span>3.app /usr/local/opt/qgis3-dev/QGIS.app
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="final-thoughts">Final thoughts</h2>
+
+<p>I hope that in the near future the situation improve and we can enjoy the last version of QGIS on macOS in a easier way. Perhaps even without needed to compile. However, in this very moment isn’t the case.</p>
+
+<p>You have to take into account that with this method you are installing the QGIS 3 developer version, so probably isn’t going to be really stable, or perhaps you are going to have no problem. I guess that you can install the stable version using the QGIS3-dev formulae, you just have to change the values <code class="highlighter-rouge">branch =&gt;</code> to <code class="highlighter-rouge">"release-3_0"</code> in line 37 and <code class="highlighter-rouge">version</code> to <code class="highlighter-rouge">"3.0"</code> on line 38.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+</pre></td><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Qgis3DevUnlinkedFormulae</span> <span class="o">&lt;</span> <span class="no">Requirement</span>
+  <span class="n">fatal</span> <span class="kp">true</span>
+  <span class="n">satisfy</span><span class="p">(</span><span class="ss">:build_env</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span> <span class="p">{</span> <span class="o">!</span><span class="n">qt4_linked</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">pyqt4_linked</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">txt2tags_linked</span> <span class="p">}</span>
+
+  <span class="k">def</span> <span class="nf">qt4_linked</span>
+    <span class="p">(</span><span class="no">Formula</span><span class="p">[</span><span class="s2">"qt"</span><span class="p">].</span><span class="nf">linked_keg</span><span class="o">/</span><span class="s2">"lib/QtCore.framework/Versions/4"</span><span class="p">).</span><span class="nf">exist?</span>
+  <span class="k">rescue</span>
+    <span class="k">return</span> <span class="kp">false</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">pyqt4_linked</span>
+    <span class="p">(</span><span class="no">Formula</span><span class="p">[</span><span class="s2">"pyqt"</span><span class="p">].</span><span class="nf">linked_keg</span><span class="o">/</span><span class="s2">"lib/python2.7/site-packages/PyQt"</span><span class="p">).</span><span class="nf">exist?</span>
+  <span class="k">rescue</span>
+    <span class="k">return</span> <span class="kp">false</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">txt2tags_linked</span>
+    <span class="no">Formula</span><span class="p">[</span><span class="s2">"txt2tags"</span><span class="p">].</span><span class="nf">linked_keg</span><span class="p">.</span><span class="nf">exist?</span>
+  <span class="k">rescue</span>
+    <span class="k">return</span> <span class="kp">false</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">message</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s2">"Compilation can fail if these formulae are installed and linked:</span><span class="se">\n\n</span><span class="s2">"</span>
+
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">"Unlink with `brew unlink qt` or remove with `brew uninstall qt`</span><span class="se">\n</span><span class="s2">"</span> <span class="k">if</span> <span class="n">qt4_linked</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">"Unlink with `brew unlink pyqt` or remove with `brew uninstall pyqt`</span><span class="se">\n</span><span class="s2">"</span> <span class="k">if</span> <span class="n">pyqt4_linked</span>
+    <span class="n">s</span> <span class="o">+=</span> <span class="s2">"Unlink with `brew unlink txt2tags` or remove with `brew uninstall txt2tags`</span><span class="se">\n</span><span class="s2">"</span> <span class="k">if</span> <span class="n">txt2tags_linked</span>
+    <span class="n">s</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">class</span> <span class="nc">Qgis3Dev</span> <span class="o">&lt;</span> <span class="no">Formula</span>
+  <span class="n">desc</span> <span class="s2">"User friendly open source Geographic Information System"</span>
+  <span class="n">homepage</span> <span class="s2">"https://www.qgis.org"</span>
+
+  <span class="n">url</span> <span class="s2">"https://github.com/qgis/QGIS.git"</span><span class="p">,</span> <span class="ss">:branch</span> <span class="o">=&gt;</span> <span class="s2">"release-3_0"</span>
+  <span class="n">version</span> <span class="s2">"3.0"</span>
+
+  <span class="n">option</span> <span class="s2">"without-ninja"</span><span class="p">,</span> <span class="s2">"Disable use of ninja CMake generator"</span>
+  <span class="n">option</span> <span class="s2">"without-debug"</span><span class="p">,</span> <span class="s2">"Disable debug build, which outputs info to system.log or console"</span>
+  <span class="n">option</span> <span class="s2">"without-qt5-webkit"</span><span class="p">,</span> <span class="s2">"Build without webkit based functionality"</span>
+  <span class="n">option</span> <span class="s2">"without-pyqt5-webkit"</span><span class="p">,</span> <span class="s2">"Build without webkit python bindings"</span>
+  <span class="n">option</span> <span class="s2">"without-server"</span><span class="p">,</span> <span class="s2">"Build without QGIS Server (qgis_mapserv.fcgi)"</span>
+  <span class="n">option</span> <span class="s2">"without-postgresql"</span><span class="p">,</span> <span class="s2">"Build without current PostgreSQL client"</span>
+  <span class="n">option</span> <span class="s2">"with-globe"</span><span class="p">,</span> <span class="s2">"Build with Globe plugin, based upon osgEarth"</span>
+  <span class="n">option</span> <span class="s2">"with-grass"</span><span class="p">,</span> <span class="s2">"Build with GRASS 7 integration plugin and Processing plugin support (or install grass-7x first)"</span>
+  <span class="n">option</span> <span class="s2">"with-oracle"</span><span class="p">,</span> <span class="s2">"Build extra Oracle geospatial database and raster support"</span>
+  <span class="n">option</span> <span class="s2">"with-orfeo5"</span><span class="p">,</span> <span class="s2">"Build extra Orfeo Toolbox for Processing plugin"</span>
+  <span class="n">option</span> <span class="s2">"with-r"</span><span class="p">,</span> <span class="s2">"Build extra R for Processing plugin"</span>
+  <span class="n">option</span> <span class="s2">"with-saga-gis-lts"</span><span class="p">,</span> <span class="s2">"Build extra Saga GIS for Processing plugin"</span>
+  <span class="c1"># option "with-qt-mysql", "Build extra Qt MySQL plugin for eVis plugin"</span>
+  <span class="n">option</span> <span class="s2">"with-qspatialite"</span><span class="p">,</span> <span class="s2">"Build QSpatialite Qt database driver"</span>
+  <span class="n">option</span> <span class="s2">"with-api-docs"</span><span class="p">,</span> <span class="s2">"Build the API documentation with Doxygen and Graphviz"</span>
+  <span class="n">option</span> <span class="s2">"with-3d"</span><span class="p">,</span> <span class="s2">"Build with 3D Map View panel"</span>
+
+  <span class="n">depends_on</span> <span class="no">Qgis3DevUnlinkedFormulae</span>
+
+  <span class="c1"># core qgis</span>
+  <span class="n">depends_on</span> <span class="s2">"cmake"</span> <span class="o">=&gt;</span> <span class="ss">:build</span>
+  <span class="n">depends_on</span> <span class="s2">"ninja"</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:build</span><span class="p">,</span> <span class="ss">:recommended</span><span class="p">]</span>
+  <span class="n">depends_on</span> <span class="s2">"bison"</span> <span class="o">=&gt;</span> <span class="ss">:build</span>
+  <span class="n">depends_on</span> <span class="s2">"flex"</span> <span class="o">=&gt;</span> <span class="ss">:build</span>
+  <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"api-docs"</span>
+    <span class="n">depends_on</span> <span class="s2">"graphviz"</span>
+    <span class="n">depends_on</span> <span class="s2">"doxygen"</span>
+  <span class="k">end</span>
+
+  <span class="n">depends_on</span> <span class="ss">:python3</span>
+
+  <span class="n">depends_on</span> <span class="s2">"qt"</span> <span class="c1"># keg_only</span>
+  <span class="n">depends_on</span> <span class="s2">"osgeo/osgeo4mac/qt5-webkit"</span> <span class="o">=&gt;</span> <span class="ss">:recommended</span> <span class="c1"># keg_only</span>
+  <span class="n">depends_on</span> <span class="s2">"sip"</span>
+  <span class="n">depends_on</span> <span class="s2">"pyqt"</span>
+  <span class="n">depends_on</span> <span class="s2">"osgeo/osgeo4mac/pyqt5-webkit"</span> <span class="o">=&gt;</span> <span class="ss">:recommended</span>
+  <span class="n">depends_on</span> <span class="s2">"qca"</span>
+  <span class="n">depends_on</span> <span class="s2">"qtkeychain"</span>
+  <span class="n">depends_on</span> <span class="s2">"qscintilla2"</span>
+  <span class="n">depends_on</span> <span class="s2">"qwt"</span>
+  <span class="n">depends_on</span> <span class="s2">"qwtpolar"</span>
+  <span class="n">depends_on</span> <span class="s2">"gsl"</span>
+  <span class="n">depends_on</span> <span class="s2">"sqlite"</span> <span class="c1"># keg_only</span>
+  <span class="n">depends_on</span> <span class="s2">"expat"</span> <span class="c1"># keg_only</span>
+  <span class="n">depends_on</span> <span class="s2">"proj"</span>
+  <span class="n">depends_on</span> <span class="s2">"spatialindex"</span>
+  <span class="c1"># depends_on "homebrew/science/matplotlib" # deprecated</span>
+  <span class="n">depends_on</span> <span class="s2">"brewsci/science/matplotlib"</span>
+  <span class="n">depends_on</span> <span class="s2">"fcgi"</span> <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"server"</span>
+  <span class="c1"># use newer postgresql client than Apple's, also needed by `psycopg2`</span>
+  <span class="n">depends_on</span> <span class="s2">"postgresql"</span> <span class="o">=&gt;</span> <span class="ss">:recommended</span>
+  <span class="n">depends_on</span> <span class="s2">"libzip"</span>
+
+  <span class="c1"># needed for PKI authentication methods that require PKCS#8-&gt;PKCS#1 conversion</span>
+  <span class="n">depends_on</span> <span class="s2">"libtasn1"</span>
+
+  <span class="c1"># core providers</span>
+  <span class="n">depends_on</span> <span class="s2">"osgeo/osgeo4mac/gdal2"</span> <span class="c1"># keg_only</span>
+  <span class="n">depends_on</span> <span class="s2">"osgeo/osgeo4mac/gdal2-python"</span> <span class="c1"># keg_only</span>
+  <span class="n">depends_on</span> <span class="s2">"osgeo/osgeo4mac/oracle-client-sdk"</span> <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"oracle"</span>
+  <span class="c1"># TODO: add MSSQL third-party support formula?, :optional</span>
+
+  <span class="c1"># core plugins (c++ and python)</span>
+  <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"grass"</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="no">HOMEBREW_PREFIX</span><span class="o">/</span><span class="s2">"opt/grass7"</span><span class="p">).</span><span class="nf">exist?</span>
+    <span class="n">depends_on</span> <span class="s2">"osgeo/osgeo4mac/grass7"</span>
+    <span class="n">depends_on</span> <span class="s2">"gettext"</span> <span class="c1"># keg_only</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Not until osgearth is Qt5-ready</span>
+  <span class="c1"># if build.with? "globe"</span>
+  <span class="c1">#   # this is pretty borked with OS X &gt;= 10.10+</span>
+  <span class="c1">#   depends on "open-scene-graph"</span>
+  <span class="c1">#   depends on "homebrew/science/osgearth"</span>
+  <span class="c1"># end</span>
+
+  <span class="n">depends_on</span> <span class="s2">"gpsbabel"</span> <span class="o">=&gt;</span> <span class="ss">:optional</span>
+  <span class="c1"># TODO: remove "pyspatialite" when PyPi package supports spatialite 4.x</span>
+  <span class="c1">#       or DB Manager supports libspatialite &gt;= 4.2.0 (with mod_spatialite)</span>
+
+  <span class="c1"># TODO: what to do for Py3 and pyspatialite?</span>
+  <span class="c1"># depends on "pyspatialite" # for DB Manager</span>
+  <span class="c1"># depends on "qt-mysql" =&gt; :optional # for eVis plugin (non-functional in 2.x?)</span>
+
+  <span class="c1"># core processing plugin extras</span>
+  <span class="c1"># see `grass` above</span>
+  <span class="n">depends_on</span> <span class="s2">"osgeo/osgeo4mac/orfeo5"</span> <span class="o">=&gt;</span> <span class="ss">:optional</span>
+  <span class="n">depends_on</span> <span class="s2">"r"</span> <span class="o">=&gt;</span> <span class="ss">:optional</span>
+  <span class="n">depends_on</span> <span class="s2">"osgeo/osgeo4mac/saga-gis-lts"</span> <span class="o">=&gt;</span> <span class="ss">:optional</span>
+  <span class="c1"># TODO: LASTools straight build (2 reporting tools), or via `wine` (10 tools)</span>
+  <span class="c1"># TODO: Fusion from USFS (via `wine`?)</span>
+
+  <span class="c1"># TODO: add one for Py3</span>
+  <span class="c1">#       (only necessary when macOS ships a Python3 or 3rd-party isolation is needed)</span>
+  <span class="c1"># resource "pyqgis-startup" do</span>
+  <span class="c1">#   url "https://gist.githubusercontent.com/dakcarto/11385561/raw/e49f75ecec96ed7d6d3950f45ad3f30fe94d4fb2/pyqgis_startup.py"</span>
+  <span class="c1">#   sha256 "385dce925fc2d29f05afd6508bc1f46ec84c0bc607cc0c8dfce78a4bb93b9c4e"</span>
+  <span class="c1">#   version "2.14.0"</span>
+  <span class="c1"># end</span>
+
+  <span class="n">needs</span> <span class="ss">:cxx11</span>
+
+  <span class="k">def</span> <span class="nf">install</span>
+    <span class="no">ENV</span><span class="p">.</span><span class="nf">cxx11</span>
+
+    <span class="c1"># when gdal2-python.rb loaded, PYTHONPATH gets set to 2.7 site-packages...</span>
+    <span class="c1">#   clear it before calling any local python3 functions</span>
+    <span class="no">ENV</span><span class="p">[</span><span class="s2">"PYTHONPATH"</span><span class="p">]</span> <span class="o">=</span> <span class="kp">nil</span>
+    <span class="k">if</span> <span class="no">ARGV</span><span class="p">.</span><span class="nf">debug?</span>
+      <span class="nb">puts</span> <span class="s2">"python_exec: </span><span class="si">#{</span><span class="n">python_exec</span><span class="si">}</span><span class="s2">"</span>
+      <span class="nb">puts</span> <span class="s2">"py_ver: </span><span class="si">#{</span><span class="n">py_ver</span><span class="si">}</span><span class="s2">"</span>
+      <span class="nb">puts</span> <span class="s2">"brewed_python?: </span><span class="si">#{</span><span class="n">brewed_python?</span><span class="si">}</span><span class="s2">"</span>
+      <span class="nb">puts</span> <span class="s2">"python_site_packages: </span><span class="si">#{</span><span class="n">python_site_packages</span><span class="si">}</span><span class="s2">"</span>
+      <span class="nb">puts</span> <span class="s2">"python_prefix: </span><span class="si">#{</span><span class="n">python_prefix</span><span class="si">}</span><span class="s2">"</span>
+      <span class="nb">puts</span> <span class="s2">"qgis_python_packages: </span><span class="si">#{</span><span class="n">qgis_python_packages</span><span class="si">}</span><span class="s2">"</span>
+      <span class="nb">puts</span> <span class="s2">"gdal_python_packages: </span><span class="si">#{</span><span class="n">gdal_python_packages</span><span class="si">}</span><span class="s2">"</span>
+      <span class="nb">puts</span> <span class="s2">"gdal_python_opt_bin: </span><span class="si">#{</span><span class="n">gdal_python_opt_bin</span><span class="si">}</span><span class="s2">"</span>
+      <span class="nb">puts</span> <span class="s2">"gdal_opt_bin: </span><span class="si">#{</span><span class="n">gdal_opt_bin</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">end</span>
+
+    <span class="c1"># Vendor required python3 pkgs if they are missing</span>
+    <span class="c1"># TODO: this should really be a requirements.txt in src tree</span>
+    <span class="n">py_req</span> <span class="o">=</span> <span class="sx">%w[
+      future
+      psycopg2
+      python-dateutil
+      httplib2
+      pytz
+      six
+      nose2
+      pygments
+      jinja2
+      pyyaml
+      requests
+      owslib
+    ]</span><span class="p">.</span><span class="nf">freeze</span>
+
+    <span class="n">orig_user_base</span> <span class="o">=</span> <span class="no">ENV</span><span class="p">[</span><span class="s2">"PYTHONUSERBASE"</span><span class="p">]</span>
+    <span class="no">ENV</span><span class="p">[</span><span class="s2">"PYTHONUSERBASE"</span><span class="p">]</span> <span class="o">=</span> <span class="n">libexec</span><span class="o">/</span><span class="s2">"python"</span>
+    <span class="nb">system</span> <span class="no">HOMEBREW_PREFIX</span><span class="o">/</span><span class="s2">"bin/pip3"</span><span class="p">,</span> <span class="s2">"install"</span><span class="p">,</span> <span class="s2">"--user"</span><span class="p">,</span> <span class="o">*</span><span class="n">py_req</span>
+    <span class="no">ENV</span><span class="p">[</span><span class="s2">"PYTHONUSERBASE"</span><span class="p">]</span> <span class="o">=</span> <span class="n">orig_user_base</span>
+
+    <span class="c1"># Set bundling level back to 0 (the default in all versions prior to 1.8.0)</span>
+    <span class="c1"># so that no time and energy is wasted copying the Qt frameworks into QGIS.</span>
+
+    <span class="c1"># Install custom widgets Designer plugin to local qt plugins prefix</span>
+    <span class="n">mkdir</span> <span class="n">lib</span><span class="o">/</span><span class="s2">"qt/plugins/designer"</span>
+    <span class="n">inreplace</span> <span class="s2">"src/customwidgets/CMakeLists.txt"</span><span class="p">,</span>
+              <span class="s2">"${QT_PLUGINS_DIR}/designer"</span><span class="p">,</span> <span class="n">lib</span><span class="o">/</span><span class="s2">"qt/plugins/designer"</span><span class="p">.</span><span class="nf">to_s</span>
+
+    <span class="c1"># Fix custom widgets Designer module install path</span>
+    <span class="n">mkdir</span> <span class="n">lib</span><span class="o">/</span><span class="s2">"python</span><span class="si">#{</span><span class="n">py_ver</span><span class="si">}</span><span class="s2">/site-packages/PyQt5"</span>
+    <span class="n">inreplace</span> <span class="s2">"CMakeLists.txt"</span><span class="p">,</span>
+              <span class="s2">"${PYQT5_MOD_DIR}"</span><span class="p">,</span> <span class="n">lib</span><span class="o">/</span><span class="s2">"python</span><span class="si">#{</span><span class="n">py_ver</span><span class="si">}</span><span class="s2">/site-packages/PyQt5"</span><span class="p">.</span><span class="nf">to_s</span>
+
+    <span class="c1"># Install db plugins to local qt plugins prefix</span>
+    <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"qspatialite"</span>
+      <span class="n">mkdir</span> <span class="n">lib</span><span class="o">/</span><span class="s2">"qt/plugins/sqldrivers"</span>
+      <span class="n">inreplace</span> <span class="s2">"src/providers/spatialite/qspatialite/CMakeLists.txt"</span><span class="p">,</span>
+                <span class="s2">"${QT_PLUGINS_DIR}/sqldrivers"</span><span class="p">,</span> <span class="n">lib</span><span class="o">/</span><span class="s2">"qt/plugins/sqldrivers"</span><span class="p">.</span><span class="nf">to_s</span>
+    <span class="k">end</span>
+    <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"oracle"</span>
+      <span class="n">inreplace</span> <span class="s2">"src/providers/oracle/ocispatial/CMakeLists.txt"</span><span class="p">,</span>
+                <span class="s2">"${QT_PLUGINS_DIR}/sqldrivers"</span><span class="p">,</span> <span class="n">lib</span><span class="o">/</span><span class="s2">"qt/plugins/sqldrivers"</span><span class="p">.</span><span class="nf">to_s</span>
+    <span class="k">end</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">std_cmake_args</span>
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DCMAKE_BUILD_TYPE=RelWithDebInfo"</span> <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"debug"</span> <span class="c1"># override</span>
+
+    <span class="n">cmake_prefixes</span> <span class="o">=</span> <span class="sx">%w[
+      qt5
+      qt5-webkit
+      qscintilla2
+      qwt
+      qwtpolar
+      qca
+      gdal2
+      gsl
+      geos
+      proj
+      libspatialite
+      spatialindex
+      expat
+      sqlite
+      libzip
+      flex
+      bison
+      fcgi
+    ]</span><span class="p">.</span><span class="nf">freeze</span>
+    <span class="c1"># Force CMake to search HB/opt paths first, so headers in HB/include are not found instead;</span>
+    <span class="c1"># specifically, ensure any gdal v1 includes are not used</span>
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DCMAKE_PREFIX_PATH=</span><span class="si">#{</span><span class="n">cmake_prefixes</span><span class="p">.</span><span class="nf">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="no">Formula</span><span class="p">[</span><span class="n">f</span><span class="p">.</span><span class="nf">to_s</span><span class="p">].</span><span class="nf">opt_prefix</span> <span class="si">}</span><span class="s2">.join("</span><span class="p">;</span><span class="s2">")}"</span>
+
+    <span class="n">args</span> <span class="o">+=</span> <span class="sx">%w[
+      -DENABLE_TESTS=FALSE
+      -DENABLE_MODELTEST=FALSE
+      -DQGIS_MACAPP_BUNDLE=0
+      -DQGIS_MACAPP_INSTALL_DEV=FALSE
+      -DWITH_QWTPOLAR=TRUE
+      -DWITH_INTERNAL_QWTPOLAR=FALSE
+      -DWITH_ASTYLE=FALSE
+      -DWITH_QSCIAPI=TRUE
+      -DWITH_STAGED_PLUGINS=TRUE
+      -DWITH_GRASS=FALSE
+      -DWITH_CUSTOM_WIDGETS=TRUE
+    ]</span>
+
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DWITH_QTWEBKIT=</span><span class="si">#{</span><span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"qt5-webkit"</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"TRUE"</span> <span class="p">:</span> <span class="s2">"FALSE"</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="c1"># Prefer opt_prefix for CMake modules that find versioned prefix by default</span>
+    <span class="c1"># This keeps non-critical dependency upgrades from breaking QGIS linking</span>
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DGDAL_LIBRARY=</span><span class="si">#{</span><span class="no">Formula</span><span class="p">[</span><span class="s2">"gdal2"</span><span class="p">].</span><span class="nf">opt_lib</span><span class="si">}</span><span class="s2">/libgdal.dylib"</span>
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DGEOS_LIBRARY=</span><span class="si">#{</span><span class="no">Formula</span><span class="p">[</span><span class="s2">"geos"</span><span class="p">].</span><span class="nf">opt_lib</span><span class="si">}</span><span class="s2">/libgeos_c.dylib"</span>
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DGSL_CONFIG=</span><span class="si">#{</span><span class="no">Formula</span><span class="p">[</span><span class="s2">"gsl"</span><span class="p">].</span><span class="nf">opt_bin</span><span class="si">}</span><span class="s2">/gsl-config"</span>
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DGSL_INCLUDE_DIR=</span><span class="si">#{</span><span class="no">Formula</span><span class="p">[</span><span class="s2">"gsl"</span><span class="p">].</span><span class="nf">opt_include</span><span class="si">}</span><span class="s2">"</span>
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DGSL_LIBRARIES='-L</span><span class="si">#{</span><span class="no">Formula</span><span class="p">[</span><span class="s2">"gsl"</span><span class="p">].</span><span class="nf">opt_lib</span><span class="si">}</span><span class="s2"> -lgsl -lgslcblas'"</span>
+
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DWITH_SERVER=</span><span class="si">#{</span><span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"server"</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"TRUE"</span> <span class="p">:</span> <span class="s2">"FALSE"</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DPOSTGRES_CONFIG=</span><span class="si">#{</span><span class="no">Formula</span><span class="p">[</span><span class="s2">"postgresql"</span><span class="p">].</span><span class="nf">opt_bin</span><span class="si">}</span><span class="s2">/pg_config"</span> <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"postgresql"</span>
+
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DWITH_GRASS7=</span><span class="si">#{</span><span class="p">(</span><span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"grass"</span><span class="p">)</span> <span class="o">||</span> <span class="n">brewed_grass7?</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"TRUE"</span> <span class="p">:</span> <span class="s2">"FALSE"</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"grass"</span><span class="p">)</span> <span class="o">||</span> <span class="n">brewed_grass7?</span>
+      <span class="c1"># this is to build the GRASS Plugin, not for Processing plugin support</span>
+      <span class="n">grass7</span> <span class="o">=</span> <span class="no">Formula</span><span class="p">[</span><span class="s2">"grass7"</span><span class="p">]</span>
+      <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DGRASS_PREFIX7='</span><span class="si">#{</span><span class="n">grass7</span><span class="p">.</span><span class="nf">opt_prefix</span><span class="si">}</span><span class="s2">/grass-base'"</span>
+      <span class="c1"># Keep superenv from stripping (use Cellar prefix)</span>
+      <span class="no">ENV</span><span class="p">.</span><span class="nf">append</span> <span class="s2">"CXXFLAGS"</span><span class="p">,</span> <span class="s2">"-isystem </span><span class="si">#{</span><span class="n">grass7</span><span class="p">.</span><span class="nf">prefix</span><span class="p">.</span><span class="nf">resolved_path</span><span class="si">}</span><span class="s2">/grass-base/include"</span>
+      <span class="c1"># So that `libintl.h` can be found (use Cellar prefix; should not be needed anymore with QGIS 2.99+)</span>
+      <span class="c1"># ENV.append "CXXFLAGS", "-isystem #{Formula["gettext"].include.resolved_path}"</span>
+    <span class="k">end</span>
+
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DWITH_GLOBE=</span><span class="si">#{</span><span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"globe"</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"TRUE"</span> <span class="p">:</span> <span class="s2">"FALSE"</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"globe"</span>
+      <span class="n">osg</span> <span class="o">=</span> <span class="no">Formula</span><span class="p">[</span><span class="s2">"open-scene-graph"</span><span class="p">]</span>
+      <span class="n">opoo</span> <span class="s2">"`open-scene-graph` formula's keg not linked."</span> <span class="k">unless</span> <span class="n">osg</span><span class="p">.</span><span class="nf">linked_keg</span><span class="p">.</span><span class="nf">exist?</span>
+      <span class="c1"># must be HOMEBREW_PREFIX/lib/osgPlugins-#.#.#, since all osg plugins are symlinked there</span>
+      <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DOSG_PLUGINS_PATH=</span><span class="si">#{</span><span class="no">HOMEBREW_PREFIX</span><span class="si">}</span><span class="s2">/lib/osgPlugins-</span><span class="si">#{</span><span class="n">osg</span><span class="p">.</span><span class="nf">version</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">end</span>
+
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DWITH_ORACLE=</span><span class="si">#{</span><span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"oracle"</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"TRUE"</span> <span class="p">:</span> <span class="s2">"FALSE"</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"oracle"</span>
+      <span class="n">oracle_opt</span> <span class="o">=</span> <span class="no">Formula</span><span class="p">[</span><span class="s2">"oracle-client-sdk"</span><span class="p">].</span><span class="nf">opt_prefix</span>
+      <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DOCI_INCLUDE_DIR=</span><span class="si">#{</span><span class="n">oracle_opt</span><span class="si">}</span><span class="s2">/include/oci"</span>
+      <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DOCI_LIBRARY=</span><span class="si">#{</span><span class="n">oracle_opt</span><span class="si">}</span><span class="s2">/lib/libclntsh.dylib"</span>
+    <span class="k">end</span>
+
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DWITH_QSPATIALITE=</span><span class="si">#{</span><span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"qspatialite"</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"TRUE"</span> <span class="p">:</span> <span class="s2">"FALSE"</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DWITH_APIDOC=</span><span class="si">#{</span><span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"api-docs"</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"TRUE"</span> <span class="p">:</span> <span class="s2">"FALSE"</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DWITH_3D=</span><span class="si">#{</span><span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"3d"</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"TRUE"</span> <span class="p">:</span> <span class="s2">"FALSE"</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="c1"># nix clang tidy runs</span>
+    <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s2">"-DCLANG_TIDY_EXE="</span>
+
+    <span class="c1"># if using Homebrew's Python, make sure its components are always found first</span>
+    <span class="c1"># see: https://github.com/Homebrew/homebrew/pull/28597</span>
+    <span class="no">ENV</span><span class="p">[</span><span class="s2">"PYTHONHOME"</span><span class="p">]</span> <span class="o">=</span> <span class="n">python_prefix</span>
+
+    <span class="c1"># handle custom site-packages for keg-only modules and packages</span>
+    <span class="no">ENV</span><span class="p">.</span><span class="nf">append_path</span> <span class="s2">"PYTHONPATH"</span><span class="p">,</span> <span class="n">python_site_packages</span>
+    <span class="no">ENV</span><span class="p">.</span><span class="nf">append_path</span> <span class="s2">"PYTHONPATH"</span><span class="p">,</span> <span class="n">libexec</span><span class="o">/</span><span class="s2">"python/lib/python/site-packages"</span>
+
+    <span class="c1"># handle some compiler warnings</span>
+    <span class="c1"># ENV["CXX_EXTRA_FLAGS"] = "-Wno-unused-private-field -Wno-deprecated-register"</span>
+    <span class="c1"># if ENV.compiler == :clang &amp;&amp; (MacOS::Xcode.version &gt;= "7.0" || MacOS::CLT.version &gt;= "7.0")</span>
+    <span class="c1">#   ENV.append "CXX_EXTRA_FLAGS", "-Wno-inconsistent-missing-override"</span>
+    <span class="c1"># end</span>
+
+    <span class="no">ENV</span><span class="p">.</span><span class="nf">prepend_path</span> <span class="s2">"PATH"</span><span class="p">,</span> <span class="n">libexec</span><span class="o">/</span><span class="s2">"python/bin"</span>
+
+    <span class="n">mkdir</span> <span class="s2">"build"</span> <span class="k">do</span>
+      <span class="c1"># editor = "/usr/local/bin/bbedit"</span>
+      <span class="c1"># cmake_config = Pathname("#{Dir.pwd}/#{name}_cmake-config.txt")</span>
+      <span class="c1"># cmake_config.write ["cmake ..", *args].join(" \\\n")</span>
+      <span class="c1"># system editor, cmake_config.to_s</span>
+      <span class="c1"># raise</span>
+      <span class="nb">system</span> <span class="s2">"cmake"</span><span class="p">,</span> <span class="s2">"-G"</span><span class="p">,</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span><span class="p">(</span><span class="s2">"ninja"</span><span class="p">)</span> <span class="p">?</span> <span class="s2">"Ninja"</span> <span class="p">:</span> <span class="s2">"Unix Makefiles"</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="s2">".."</span>
+      <span class="c1"># system editor, "CMakeCache.txt"</span>
+      <span class="c1"># raise</span>
+      <span class="nb">system</span> <span class="s2">"cmake"</span><span class="p">,</span> <span class="s2">"--build"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">,</span> <span class="s2">"--target"</span><span class="p">,</span> <span class="s2">"all"</span><span class="p">,</span> <span class="s2">"--"</span><span class="p">,</span> <span class="s2">"-j"</span><span class="p">,</span> <span class="no">Hardware</span><span class="o">::</span><span class="no">CPU</span><span class="p">.</span><span class="nf">cores</span>
+      <span class="nb">system</span> <span class="s2">"cmake"</span><span class="p">,</span> <span class="s2">"--build"</span><span class="p">,</span> <span class="s2">"."</span><span class="p">,</span> <span class="s2">"--target"</span><span class="p">,</span> <span class="s2">"install"</span><span class="p">,</span> <span class="s2">"--"</span><span class="p">,</span> <span class="s2">"-j"</span><span class="p">,</span> <span class="no">Hardware</span><span class="o">::</span><span class="no">CPU</span><span class="p">.</span><span class="nf">cores</span>
+    <span class="k">end</span>
+
+    <span class="c1"># Fixup some errant lib linking</span>
+    <span class="c1"># TODO: fix upstream in CMake</span>
+    <span class="n">dy_libs</span> <span class="o">=</span> <span class="p">[</span><span class="n">lib</span><span class="o">/</span><span class="s2">"qt/plugins/designer/libqgis_customwidgets.dylib"</span><span class="p">]</span>
+    <span class="n">dy_libs</span> <span class="o">&lt;&lt;</span> <span class="n">lib</span><span class="o">/</span><span class="s2">"qt/plugins/sqldrivers/libqsqlspatialite.dylib"</span> <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"qspatialite"</span>
+    <span class="n">dy_libs</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">dy_lib</span><span class="o">|</span>
+      <span class="no">MachO</span><span class="o">::</span><span class="no">Tools</span><span class="p">.</span><span class="nf">dylibs</span><span class="p">(</span><span class="n">dy_lib</span><span class="p">.</span><span class="nf">to_s</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i_n</span><span class="o">|</span>
+        <span class="sx">%w[core gui native]</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">f_n</span><span class="o">|</span>
+          <span class="n">sufx</span> <span class="o">=</span> <span class="n">i_n</span><span class="p">[</span><span class="sr">/(qgis_</span><span class="si">#{</span><span class="n">f_n</span><span class="si">}</span><span class="sr">\.framework.*)/</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+          <span class="k">next</span> <span class="k">if</span> <span class="n">sufx</span><span class="p">.</span><span class="nf">nil?</span>
+          <span class="n">i_n_to</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">opt_prefix</span><span class="si">}</span><span class="s2">/QGIS.app/Contents/Frameworks/</span><span class="si">#{</span><span class="n">sufx</span><span class="si">}</span><span class="s2">"</span>
+          <span class="nb">puts</span> <span class="s2">"Changing install name </span><span class="si">#{</span><span class="n">i_n</span><span class="si">}</span><span class="s2"> to </span><span class="si">#{</span><span class="n">i_n_to</span><span class="si">}</span><span class="s2"> in </span><span class="si">#{</span><span class="n">dy_lib</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="no">ARGV</span><span class="p">.</span><span class="nf">debug?</span>
+          <span class="n">dy_lib</span><span class="p">.</span><span class="nf">ensure_writable</span> <span class="k">do</span>
+            <span class="no">MachO</span><span class="o">::</span><span class="no">Tools</span><span class="p">.</span><span class="nf">change_install_name</span><span class="p">(</span><span class="n">dy_lib</span><span class="p">.</span><span class="nf">to_s</span><span class="p">,</span> <span class="n">i_n</span><span class="p">.</span><span class="nf">to_s</span><span class="p">,</span> <span class="n">i_n_to</span><span class="p">,</span> <span class="ss">:strict</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span>
+          <span class="k">end</span>
+        <span class="k">end</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="c1"># Update .app's bundle identifier, so other installers doesn't get confused</span>
+    <span class="n">inreplace</span> <span class="n">prefix</span><span class="o">/</span><span class="s2">"QGIS.app/Contents/Info.plist"</span><span class="p">,</span>
+              <span class="s2">"org.qgis.qgis3"</span><span class="p">,</span> <span class="s2">"org.qgis.qgis3-hb-dev"</span>
+
+    <span class="n">py_lib</span> <span class="o">=</span> <span class="n">lib</span><span class="o">/</span><span class="s2">"python</span><span class="si">#{</span><span class="n">py_ver</span><span class="si">}</span><span class="s2">/site-packages"</span>
+    <span class="n">py_lib</span><span class="p">.</span><span class="nf">mkpath</span>
+    <span class="n">ln_s</span> <span class="s2">"../../../QGIS.app/Contents/Resources/python/qgis"</span><span class="p">,</span> <span class="n">py_lib</span><span class="o">/</span><span class="s2">"qgis"</span>
+
+    <span class="n">ln_s</span> <span class="s2">"QGIS.app/Contents/MacOS/fcgi-bin"</span><span class="p">,</span> <span class="n">prefix</span><span class="o">/</span><span class="s2">"fcgi-bin"</span> <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"server"</span>
+
+    <span class="n">doc</span><span class="p">.</span><span class="nf">mkpath</span>
+    <span class="n">mv</span> <span class="n">prefix</span><span class="o">/</span><span class="s2">"QGIS.app/Contents/Resources/doc/api"</span><span class="p">,</span> <span class="n">doc</span><span class="o">/</span><span class="s2">"api"</span> <span class="k">if</span> <span class="n">build</span><span class="p">.</span><span class="nf">with?</span> <span class="s2">"api-docs"</span>
+    <span class="n">ln_s</span> <span class="s2">"../../../QGIS.app/Contents/Resources/doc"</span><span class="p">,</span> <span class="n">doc</span><span class="o">/</span><span class="s2">"doc"</span>
+
+    <span class="c1"># copy PYQGIS_STARTUP file pyqgis_startup.py, even if not isolating (so tap can be untapped)</span>
+    <span class="c1"># only works with QGIS &gt; 2.0.1</span>
+    <span class="c1"># doesn't need executable bit set, loaded by Python runner in QGIS</span>
+    <span class="c1"># TODO: for Py3</span>
+    <span class="c1"># (libexec/"python").install resource("pyqgis-startup")</span>
+
+    <span class="n">bin</span><span class="p">.</span><span class="nf">mkdir</span>
+    <span class="n">qgis_bin</span> <span class="o">=</span> <span class="n">bin</span><span class="o">/</span><span class="nb">name</span><span class="p">.</span><span class="nf">to_s</span>
+    <span class="n">touch</span> <span class="n">qgis_bin</span><span class="p">.</span><span class="nf">to_s</span> <span class="c1"># so it will be linked into HOMEBREW_PREFIX</span>
+    <span class="n">qgis_bin</span><span class="p">.</span><span class="nf">chmod</span> <span class="mo">0755</span>
+    <span class="n">post_install</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">post_install</span>
+    <span class="c1"># configure environment variables for .app and launching binary directly.</span>
+    <span class="c1"># having this in `post_intsall` allows it to be individually run *after* installation with:</span>
+    <span class="c1">#    `brew postinstall -v &lt;formula-name&gt;`</span>
+
+    <span class="n">app</span> <span class="o">=</span> <span class="n">prefix</span><span class="o">/</span><span class="s2">"QGIS.app"</span>
+    <span class="n">tab</span> <span class="o">=</span> <span class="no">Tab</span><span class="p">.</span><span class="nf">for_formula</span><span class="p">(</span><span class="nb">self</span><span class="p">)</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="n">tab</span><span class="p">.</span><span class="nf">used_options</span>
+
+    <span class="c1"># define default isolation env vars</span>
+    <span class="n">pthsep</span> <span class="o">=</span> <span class="no">File</span><span class="o">::</span><span class="no">PATH_SEPARATOR</span>
+    <span class="n">pypth</span> <span class="o">=</span> <span class="n">python_site_packages</span><span class="p">.</span><span class="nf">to_s</span>
+    <span class="n">pths</span> <span class="o">=</span> <span class="sx">%w[
+      /usr/bin
+      /bin
+      /usr/sbin
+      /sbin
+      /opt/X11/bin
+      /usr/X11/bin
+      #{opt_libexec}/python/bin
+    ]</span>
+
+    <span class="c1"># unless opts.include?("with-isolation")</span>
+    <span class="c1">#   pths = ORIGINAL_PATHS.dup</span>
+    <span class="c1">#   pyenv = ENV["PYTHONPATH"]</span>
+    <span class="c1">#   if pyenv</span>
+    <span class="c1">#     pypth = pyenv.include?(pypth) ? pyenv : pypth + pthsep + pyenv</span>
+    <span class="c1">#   end</span>
+    <span class="c1"># end</span>
+
+    <span class="k">unless</span> <span class="n">pths</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="no">HOMEBREW_PREFIX</span><span class="o">/</span><span class="s2">"bin"</span><span class="p">)</span>
+      <span class="n">pths</span> <span class="o">=</span> <span class="n">pths</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="no">HOMEBREW_PREFIX</span><span class="o">/</span><span class="s2">"bin"</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="c1"># set install's lib/python#{py_ver}/site-packages first, so app will work if unlinked</span>
+    <span class="n">pypths</span> <span class="o">=</span> <span class="sx">%W[
+      </span><span class="si">#{</span><span class="n">opt_lib</span><span class="si">}</span><span class="sx">/python</span><span class="si">#{</span><span class="n">py_ver</span><span class="si">}</span><span class="sx">/site-packages
+      </span><span class="si">#{</span><span class="n">opt_libexec</span><span class="si">}</span><span class="sx">/python/lib/python/site-packages
+      </span><span class="si">#{</span><span class="n">pypth</span><span class="si">}</span><span class="sx">
+    ]</span>
+
+    <span class="n">pths</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">gdal_opt_bin</span><span class="p">)</span>
+    <span class="n">pths</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">gdal_python_opt_bin</span><span class="p">)</span>
+    <span class="n">pypths</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">gdal_python_packages</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">opts</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s2">"with-gpsbabel"</span><span class="p">)</span>
+      <span class="n">pths</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="no">Formula</span><span class="p">[</span><span class="s2">"gpsbabel"</span><span class="p">].</span><span class="nf">opt_bin</span><span class="p">.</span><span class="nf">to_s</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">envars</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="ss">:PATH</span> <span class="o">=&gt;</span> <span class="n">pths</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">pthsep</span><span class="p">),</span>
+      <span class="ss">:PYTHONPATH</span> <span class="o">=&gt;</span> <span class="n">pypths</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">pthsep</span><span class="p">),</span>
+      <span class="ss">:GDAL_DRIVER_PATH</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">#{</span><span class="no">HOMEBREW_PREFIX</span><span class="si">}</span><span class="s2">/lib/gdalplugins"</span><span class="p">,</span>
+      <span class="ss">:GDAL_DATA</span> <span class="o">=&gt;</span> <span class="s2">"</span><span class="si">#{</span><span class="no">Formula</span><span class="p">[</span><span class="s2">"gdal2"</span><span class="p">].</span><span class="nf">opt_share</span><span class="si">}</span><span class="s2">/gdal"</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># handle multiple Qt plugins directories</span>
+    <span class="n">qtplgpths</span> <span class="o">=</span> <span class="sx">%W[
+      </span><span class="si">#{</span><span class="no">Formula</span><span class="p">[</span><span class="s2">"qt"</span><span class="p">].</span><span class="nf">opt_prefix</span><span class="si">}</span><span class="sx">/plugins
+      </span><span class="si">#{</span><span class="no">HOMEBREW_PREFIX</span><span class="si">}</span><span class="sx">/lib/qt/plugins
+    ]</span>
+    <span class="n">envars</span><span class="p">[</span><span class="ss">:QT_PLUGIN_PATH</span><span class="p">]</span> <span class="o">=</span> <span class="n">qtplgpths</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">pthsep</span><span class="p">)</span>
+
+    <span class="n">proc_algs</span> <span class="o">=</span> <span class="s2">"Contents/Resources/python/plugins/processing/algs"</span>
+    <span class="k">if</span> <span class="n">opts</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s2">"with-grass"</span><span class="p">)</span> <span class="o">||</span> <span class="n">brewed_grass7?</span>
+      <span class="n">grass7</span> <span class="o">=</span> <span class="no">Formula</span><span class="p">[</span><span class="s2">"grass7"</span><span class="p">]</span>
+      <span class="c1"># for core integration plugin support</span>
+      <span class="n">envars</span><span class="p">[</span><span class="ss">:GRASS_PREFIX</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="n">grass7</span><span class="p">.</span><span class="nf">opt_prefix</span><span class="si">}</span><span class="s2">/grass-base"</span>
+      <span class="k">begin</span>
+        <span class="n">inreplace</span> <span class="n">app</span><span class="o">/</span><span class="s2">"</span><span class="si">#{</span><span class="n">proc_algs</span><span class="si">}</span><span class="s2">/grass7/Grass7Utils.py"</span><span class="p">,</span>
+                  <span class="s2">"'/Applications/GRASS-7.{}.app/Contents/MacOS'.format(version)"</span><span class="p">,</span>
+                  <span class="s2">"'</span><span class="si">#{</span><span class="n">grass7</span><span class="p">.</span><span class="nf">opt_prefix</span><span class="si">}</span><span class="s2">/grass-base'"</span>
+        <span class="nb">puts</span> <span class="s2">"GRASS 7 GrassUtils.py has been updated"</span>
+      <span class="k">rescue</span> <span class="no">Utils</span><span class="o">::</span><span class="no">InreplaceError</span>
+        <span class="nb">puts</span> <span class="s2">"GRASS 7 GrassUtils.py already updated"</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+
+    <span class="k">unless</span> <span class="n">opts</span><span class="p">.</span><span class="nf">include?</span><span class="p">(</span><span class="s2">"without-globe"</span><span class="p">)</span>
+      <span class="n">osg</span> <span class="o">=</span> <span class="no">Formula</span><span class="p">[</span><span class="s2">"open-scene-graph"</span><span class="p">]</span>
+      <span class="n">envars</span><span class="p">[</span><span class="ss">:OSG_LIBRARY_PATH</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"</span><span class="si">#{</span><span class="no">HOMEBREW_PREFIX</span><span class="si">}</span><span class="s2">/lib/osgPlugins-</span><span class="si">#{</span><span class="n">osg</span><span class="p">.</span><span class="nf">version</span><span class="si">}</span><span class="s2">"</span>
+    <span class="k">end</span>
+
+    <span class="c1"># TODO: add for Py3</span>
+    <span class="c1"># if opts.include?("with-isolation") || File.exist?("/Library/Frameworks/GDAL.framework")</span>
+    <span class="c1">#   envars[:PYQGIS_STARTUP] = opt_libexec/"python/pyqgis_startup.py"</span>
+    <span class="c1"># end</span>
+
+    <span class="c1"># envars.each { |key, value| puts "#{key.to_s}=#{value}" }</span>
+    <span class="c1"># exit</span>
+
+    <span class="c1"># add env vars to QGIS.app's Info.plist, in LSEnvironment section</span>
+    <span class="n">plst</span> <span class="o">=</span> <span class="n">app</span><span class="o">/</span><span class="s2">"Contents/Info.plist"</span>
+    <span class="c1"># first delete any LSEnvironment setting, ignoring errors</span>
+    <span class="c1"># CAUTION!: may not be what you want, if .app already has LSEnvironment settings</span>
+    <span class="n">dflt</span> <span class="o">=</span> <span class="sb">`defaults read-type </span><span class="se">\"</span><span class="si">#{</span><span class="n">plst</span><span class="si">}</span><span class="se">\"</span><span class="sb"> LSEnvironment 2&gt; /dev/null`</span>
+    <span class="sb">`defaults delete </span><span class="se">\"</span><span class="si">#{</span><span class="n">plst</span><span class="si">}</span><span class="se">\"</span><span class="sb"> LSEnvironment`</span> <span class="k">if</span> <span class="n">dflt</span>
+    <span class="n">kv</span> <span class="o">=</span> <span class="s2">"{ "</span>
+    <span class="n">envars</span><span class="p">.</span><span class="nf">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="n">kv</span> <span class="o">+=</span> <span class="s2">"'</span><span class="si">#{</span><span class="n">key</span><span class="si">}</span><span class="s2">' = '</span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="s2">'; "</span> <span class="p">}</span>
+    <span class="n">kv</span> <span class="o">+=</span> <span class="s2">"}"</span>
+    <span class="sb">`defaults write </span><span class="se">\"</span><span class="si">#{</span><span class="n">plst</span><span class="si">}</span><span class="se">\"</span><span class="sb"> LSEnvironment </span><span class="se">\"</span><span class="si">#{</span><span class="n">kv</span><span class="si">}</span><span class="se">\"</span><span class="sb">`</span>
+    <span class="c1"># add ability to toggle high resolution in Get Info dialog for app</span>
+    <span class="n">hrc</span> <span class="o">=</span> <span class="sb">`defaults read-type </span><span class="se">\"</span><span class="si">#{</span><span class="n">plst</span><span class="si">}</span><span class="se">\"</span><span class="sb"> NSHighResolutionCapable 2&gt; /dev/null`</span>
+    <span class="sb">`defaults delete </span><span class="se">\"</span><span class="si">#{</span><span class="n">plst</span><span class="si">}</span><span class="se">\"</span><span class="sb"> NSHighResolutionCapable`</span> <span class="k">if</span> <span class="n">hrc</span>
+    <span class="sb">`defaults write </span><span class="se">\"</span><span class="si">#{</span><span class="n">plst</span><span class="si">}</span><span class="se">\"</span><span class="sb"> NSHighResolutionCapable </span><span class="se">\"</span><span class="sb">True</span><span class="se">\"</span><span class="sb">`</span>
+    <span class="c1"># leave the plist readable; convert from binary to XML format</span>
+    <span class="sb">`plutil -convert xml1 -- </span><span class="se">\"</span><span class="si">#{</span><span class="n">plst</span><span class="si">}</span><span class="se">\"</span><span class="sb">`</span>
+    <span class="c1"># make sure plist is readble by all users</span>
+    <span class="n">plst</span><span class="p">.</span><span class="nf">chmod</span> <span class="mo">0644</span>
+    <span class="c1"># update modification date on app bundle, or changes won't take effect</span>
+    <span class="n">touch</span> <span class="n">app</span><span class="p">.</span><span class="nf">to_s</span>
+
+    <span class="c1"># add env vars to launch script for QGIS app's binary</span>
+    <span class="n">qgis_bin</span> <span class="o">=</span> <span class="n">bin</span><span class="o">/</span><span class="nb">name</span><span class="p">.</span><span class="nf">to_s</span>
+    <span class="n">rm_f</span> <span class="n">qgis_bin</span> <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="n">qgis_bin</span><span class="p">)</span> <span class="c1"># install generates empty file</span>
+    <span class="n">bin_cmds</span> <span class="o">=</span> <span class="sx">%W[#!/bin/sh</span><span class="se">\n</span><span class="sx">]</span>
+    <span class="c1"># setup shell-prepended env vars (may result in duplication of paths)</span>
+    <span class="k">unless</span> <span class="n">pths</span><span class="p">.</span><span class="nf">include?</span> <span class="no">HOMEBREW_PREFIX</span><span class="o">/</span><span class="s2">"bin"</span>
+      <span class="n">pths</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="no">HOMEBREW_PREFIX</span><span class="o">/</span><span class="s2">"bin"</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="c1"># even though this should be affected by with-isolation, allow local env override</span>
+    <span class="n">pths</span> <span class="o">&lt;&lt;</span> <span class="s2">"$PATH"</span>
+    <span class="n">pypths</span> <span class="o">&lt;&lt;</span> <span class="s2">"$PYTHONPATH"</span>
+    <span class="n">envars</span><span class="p">[</span><span class="ss">:PATH</span><span class="p">]</span> <span class="o">=</span> <span class="n">pths</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">pthsep</span><span class="p">)</span>
+    <span class="n">envars</span><span class="p">[</span><span class="ss">:PYTHONPATH</span><span class="p">]</span> <span class="o">=</span> <span class="n">pypths</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">pthsep</span><span class="p">)</span>
+    <span class="n">envars</span><span class="p">.</span><span class="nf">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="n">bin_cmds</span> <span class="o">&lt;&lt;</span> <span class="s2">"export </span><span class="si">#{</span><span class="n">key</span><span class="si">}</span><span class="s2">=</span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span> <span class="p">}</span>
+    <span class="n">bin_cmds</span> <span class="o">&lt;&lt;</span> <span class="n">opt_prefix</span><span class="o">/</span><span class="s2">"QGIS.app/Contents/MacOS/QGIS </span><span class="se">\"</span><span class="s2">$@</span><span class="se">\"</span><span class="s2">"</span>
+    <span class="n">qgis_bin</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">bin_cmds</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">))</span>
+    <span class="n">qgis_bin</span><span class="p">.</span><span class="nf">chmod</span> <span class="mo">0755</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">caveats</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="p">.</span><span class="nf">undent</span><span class="sh">
+      Bottles support only Homebrew's Python3
+
+      QGIS is built as an application bundle. Environment variables for the
+      Homebrew prefix are embedded in QGIS.app:
+        </span><span class="si">#{</span><span class="n">opt_prefix</span><span class="si">}</span><span class="sh">/QGIS.app
+
+      You may also symlink QGIS.app into /Applications or ~/Applications:
+        brew linkapps [--local]
+
+      To directly run the `QGIS.app/Contents/MacOS/QGIS` binary use the wrapper
+      script pre-defined with Homebrew prefix environment variables:
+        </span><span class="si">#{</span><span class="n">opt_bin</span><span class="si">}</span><span class="sh">/</span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="sh">
+
+      NOTE: Your current PATH and PYTHONPATH environment variables are honored
+            when launching via the wrapper script, while launching QGIS.app
+            bundle they are not.
+
+      For standalone Python3 development, set the following environment variable:
+        export PYTHONPATH=</span><span class="si">#{</span><span class="n">qgis_python_packages</span><span class="si">}</span><span class="sh">:</span><span class="si">#{</span><span class="n">gdal_python_packages</span><span class="si">}</span><span class="sh">:</span><span class="si">#{</span><span class="n">python_site_packages</span><span class="si">}</span><span class="sh">:$PYTHONPATH
+
+</span><span class="no">    EOS</span>
+
+    <span class="n">s</span> <span class="o">+=</span> <span class="o">&lt;&lt;-</span><span class="no">EOS</span><span class="p">.</span><span class="nf">undent</span><span class="sh">
+      If you have built GRASS 7 for the Processing plugin set the following in QGIS:
+        Processing-&gt;Options: Providers-&gt;GRASS GIS 7 commands-&gt;GRASS 7 folder to:
+           </span><span class="si">#{</span><span class="no">HOMEBREW_PREFIX</span><span class="si">}</span><span class="sh">/opt/grass7/grass-base
+
+</span><span class="no">    EOS</span>
+
+    <span class="n">s</span>
+  <span class="k">end</span>
+
+  <span class="nb">test</span> <span class="k">do</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="sb">`</span><span class="si">#{</span><span class="n">bin</span><span class="si">}</span><span class="sb">/</span><span class="si">#{</span><span class="nb">name</span><span class="p">.</span><span class="nf">to_s</span><span class="si">}</span><span class="sb"> --help 2&gt;&amp;1`</span> <span class="c1"># why does help go to stderr?</span>
+    <span class="n">assert_match</span> <span class="sr">/^QGIS is a user friendly/</span><span class="p">,</span> <span class="n">output</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+
+  <span class="k">def</span> <span class="nf">brewed_grass7?</span>
+    <span class="no">Formula</span><span class="p">[</span><span class="s2">"grass7"</span><span class="p">].</span><span class="nf">opt_prefix</span><span class="p">.</span><span class="nf">exist?</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">python_exec</span>
+    <span class="k">if</span> <span class="n">brewed_python?</span>
+      <span class="no">Formula</span><span class="p">[</span><span class="s2">"python3"</span><span class="p">].</span><span class="nf">opt_bin</span><span class="o">/</span><span class="s2">"python3"</span>
+    <span class="k">else</span>
+      <span class="n">py_exec</span> <span class="o">=</span> <span class="sb">`which python3`</span><span class="p">.</span><span class="nf">strip</span>
+      <span class="k">raise</span> <span class="k">if</span> <span class="n">py_exec</span> <span class="o">==</span> <span class="s2">""</span>
+      <span class="n">py_exec</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">py_ver</span>
+    <span class="sb">`</span><span class="si">#{</span><span class="n">python_exec</span><span class="si">}</span><span class="sb"> -c 'import sys;print("{0}.{1}".format(sys.version_info[0],sys.version_info[1]))'`</span><span class="p">.</span><span class="nf">strip</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">brewed_python?</span>
+    <span class="no">Formula</span><span class="p">[</span><span class="s2">"python3"</span><span class="p">].</span><span class="nf">linked_keg</span><span class="p">.</span><span class="nf">exist?</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">python_site_packages</span>
+    <span class="no">HOMEBREW_PREFIX</span><span class="o">/</span><span class="s2">"lib/python</span><span class="si">#{</span><span class="n">py_ver</span><span class="si">}</span><span class="s2">/site-packages"</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">python_prefix</span>
+    <span class="sb">`</span><span class="si">#{</span><span class="n">python_exec</span><span class="si">}</span><span class="sb"> -c 'import sys;print(sys.prefix)'`</span><span class="p">.</span><span class="nf">strip</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">qgis_python_packages</span>
+    <span class="n">opt_lib</span><span class="o">/</span><span class="s2">"python</span><span class="si">#{</span><span class="n">py_ver</span><span class="si">}</span><span class="s2">/site-packages"</span><span class="p">.</span><span class="nf">to_s</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">gdal_python_packages</span>
+    <span class="no">Formula</span><span class="p">[</span><span class="s2">"gdal2-python"</span><span class="p">].</span><span class="nf">opt_lib</span><span class="o">/</span><span class="s2">"python</span><span class="si">#{</span><span class="n">py_ver</span><span class="si">}</span><span class="s2">/site-packages"</span><span class="p">.</span><span class="nf">to_s</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">gdal_python_opt_bin</span>
+    <span class="no">Formula</span><span class="p">[</span><span class="s2">"gdal2-python"</span><span class="p">].</span><span class="nf">opt_bin</span><span class="p">.</span><span class="nf">to_s</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">gdal_opt_bin</span>
+    <span class="no">Formula</span><span class="p">[</span><span class="s2">"gdal2"</span><span class="p">].</span><span class="nf">opt_bin</span><span class="p">.</span><span class="nf">to_s</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">module_importable?</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+    <span class="sb">`</span><span class="si">#{</span><span class="n">python_exec</span><span class="si">}</span><span class="sb"> -c 'import sys;sys.path.insert(1, "</span><span class="si">#{</span><span class="n">gdal_python_packages</span><span class="si">}</span><span class="sb">"); import </span><span class="si">#{</span><span class="n">mod</span><span class="si">}</span><span class="sb">'`</span><span class="p">.</span><span class="nf">strip</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Anyhow, I think I’m going to keep the 3.1 version for a while.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>No, you can see that because I deteletd the branch… Sorry. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </div>
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/homebrew" class="page__taxonomy-item" rel="tag">homebrew</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/macos" class="page__taxonomy-item" rel="tag">macOS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/qgis" class="page__taxonomy-item" rel="tag">qgis</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/gis" class="page__taxonomy-item" rel="tag">GIS</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/personal" class="page__taxonomy-item" rel="tag">Personal</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/technology" class="page__taxonomy-item" rel="tag">Technology</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-03-12T14:31:26+00:00">Monday, 12 March 2018 14:31 UTC</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lpuerto&text=QGIS+on+macOS+with+Homebrew%20https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F03%2F12%2Fqgis-on-macos-with-homebrew%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F03%2F12%2Fqgis-on-macos-with-homebrew%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F03%2F12%2Fqgis-on-macos-with-homebrew%2F&title=QGIS on macOS with Homebrew" class="btn btn--reddit" title="Share on Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F03%2F12%2Fqgis-on-macos-with-homebrew%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/2018/03/04/jekyll/" class="pagination--pager" title="Jekyll
+">Previous</a>
+    
+    
+      <a href="/blog/2018/03/19/updating-to-r-3-4-4-someone-to-lean-on/" class="pagination--pager" title="Updating to R 3.4.4 “Someone to Lean On”
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/jekyll.png"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">New Web in Jekyll
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As you probably have noticed, some days ago I rolled out a new version of my website, which you probably think it’s pretty similar to the previous one, at least talking about its external appearance. However, it’s really different in the inside, since it’s a static web build with Jekyll, while the previous one was build on Wordpress. This isn’t ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/Luis-Puerto-The-Entreprenour2.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">16 Personalities: Apparently I’m an Entrepreneur
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Not long ago, while I was taking a course in Finland, they asked us to take a personality test online called 16 personalities. It wasn’t nothing really official or for much purpose of scrutinize us, but just to know ourselves a little bit more and we can work our strengths and weakness. To my surprise, the test told me that I have an entrepreneu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/R-Homebrew.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">Installing R with Homebrew with all the capabilities
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As I explained in my previous post if you installed R with Homebrew you have less capabilities than with a R installed from CRAN’s binary. But, can you have all the capabilities while you still use Homebrew to install R? Yes! However… why you bother to install it with Homebrew at all instead of installing it from CRAN. Well, it’s true that CRAN ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><div class="search-searchbar"></div>
+    <div class="search-hits"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lpuerto"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+      <li><a href="https://www.linkedin.com/in/lpuerto"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+    
+    
+    
+      <li><a href="https://github.com/luisspuerto"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+<!--
+    
+    
+-->
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Luis Puerto |
+  
+  <a href="https://github.com/luisspuerto/luisspuerto.net-src"><i class="fas fa-code" aria-hidden="true"></i> Source Code</a> | 
+  
+Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: 'NSAWFR2G1K',
+  apiKey: 'b63bbd39b0bf76207cf9bebdb9c2b7dd',
+  indexName: 'luisspuerto-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://luisspuerto.net/blog/2018/03/12/qgis-on-macos-with-homebrew/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/blog/2018/03/12/qgis-on-macos-with-homebrew"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://luisspuerto-net.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+    <script>
+//open external links in a new window
+function external_new_window() {
+    for(var c = document.getElementsByTagName("a"), a = 0;a < c.length;a++) {
+    var b = c[a];
+    b.getAttribute("href") && b.hostname !== location.hostname && (b.target = "_blank")
+    }
+}
+//open PDF links in a new window
+function pdf_new_window ()
+{
+    if (!document.getElementsByTagName) return false;
+    var links = document.getElementsByTagName("a");
+    for (var eleLink=0; eleLink < links.length; eleLink ++) {
+    if ((links[eleLink].href.indexOf('.pdf') !== -1)||(links[eleLink].href.indexOf('.doc') !== -1)||(links[eleLink].href.indexOf('.docx') !== -1)) {
+        links[eleLink].onclick =
+        function() {
+            window.open(this.href);
+            return false;
+        }
+    }
+    }
+} 
+pdf_new_window()
+external_new_window();
+</script>
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+  </body>
+</html>

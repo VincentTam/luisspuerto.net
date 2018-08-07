@@ -1,0 +1,954 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Homebrew’s R doesn’t have all the capabilities | Luis Puerto</title>
+<meta name="description" content="A couple of days ago I just found out that when you install R with Homebrew you don’t get all the capabilities that the binary from CRAN have. In other words, you have a kind of second class install, in some regards, and depending on how you do install and for what you are going to use R.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Luis Puerto">
+<meta property="og:title" content="Homebrew’s R doesn’t have all the capabilities">
+<meta property="og:url" content="https://luisspuerto.net/blog/2018/05/11/homebrews-r-doesnt-have-all-the-capabilities/">
+
+
+  <meta property="og:description" content="A couple of days ago I just found out that when you install R with Homebrew you don’t get all the capabilities that the binary from CRAN have. In other words, you have a kind of second class install, in some regards, and depending on how you do install and for what you are going to use R.">
+
+
+
+  <meta property="og:image" content="https://luisspuerto.net/assets/images/blog/2018/R-Homebrew.jpg">
+
+
+
+  <meta name="twitter:site" content="@lpuerto">
+  <meta name="twitter:title" content="Homebrew’s R doesn’t have all the capabilities">
+  <meta name="twitter:description" content="A couple of days ago I just found out that when you install R with Homebrew you don’t get all the capabilities that the binary from CRAN have. In other words, you have a kind of second class install, in some regards, and depending on how you do install and for what you are going to use R.">
+  <meta name="twitter:url" content="https://luisspuerto.net/blog/2018/05/11/homebrews-r-doesnt-have-all-the-capabilities/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://luisspuerto.net/assets/images/blog/2018/R-Homebrew.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2018-05-11T10:35:32+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://luisspuerto.net/blog/2018/05/11/homebrews-r-doesnt-have-all-the-capabilities/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://luisspuerto.net",
+      "logo": "https://luisspuerto.net/assets/images/pages/header-splash.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Luis Puerto",
+      "url": "https://luisspuerto.net",
+      "sameAs": ["https://twitter.com/lpuerto","https://www.linkedin.com/in/lpuerto","https://github.com/luisspuerto","https://www.flickr.com/photos/luisspuerto"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="2AztHRijor0b6F_0DFrw0mYxhQVvLKT3rlFp7PxTS1M" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Luis Puerto Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link href="https://fonts.googleapis.com/css?family=Mr+Dafoe" rel="stylesheet">
+
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Luis Puerto</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/" >Home</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/aboutme" >About Me</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/resume" >Résumé</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/blog" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/contact" >Contact</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="
+          background-image:
+            url('/assets/images/blog/2018/R-Homebrew.jpg');
+          "
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Homebrew’s R doesn’t have all the capabilities
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="/aboutme">
+          <img src="/assets/images/pages/20121231-035-ol.jpg" alt="Luis Puerto" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="/aboutme"><h3 class="author__name" itemprop="name">Luis Puerto</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Born in Ponferrada, Spain. A Forest Engineer interested in Science and Technology. Fascinated about almost everything
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">🇪🇺🇪🇸🇸🇪🇫🇮🇺🇸</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:luis@luisspuerto.net">
+            <meta itemprop="email" content="luis@luisspuerto.net" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://instagram.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://luisspuerto.tumblr.com" itemprop="sameAs">
+            <i class="fab fa-fw fa-tumblr-square" aria-hidden="true"></i> Tumblr
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.flickr.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-flickr" aria-hidden="true"></i> Flickr
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Homebrew’s R doesn’t have all the capabilities">
+    <meta itemprop="description" content="A couple of days ago I just found out that when you install R with Homebrew you don’t get all the capabilities that the binary from CRAN have. In other words, you have a kind of second class install, in some regards, and depending on how you do install and for what you are going to use R.">
+    <meta itemprop="datePublished" content="Friday, 11 May 2018 10:35 UTC">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+      
+
+        </header>
+
+      <section class="page__content" itemprop="text">
+        
+        <div class="post__content">
+          <p>A couple of days ago I just found out that when you install R with Homebrew you don’t get all the capabilities that the binary from CRAN have. In other words, you have a kind of <em>second class install</em>, in some regards, and depending on how you do install and for what you are going to use R.</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="w"> </span><span class="o">&gt;</span><span class="n">capabilities</span><span class="p">()</span><span class="w">
+
+       </span><span class="n">jpeg</span><span class="w">         </span><span class="n">png</span><span class="w">        </span><span class="n">tiff</span><span class="w">       </span><span class="n">tcltk</span><span class="w">         </span><span class="n">X</span><span class="m">11</span><span class="w">        </span><span class="n">aqua</span><span class="w">
+      </span><span class="kc">FALSE</span><span class="w">       </span><span class="kc">FALSE</span><span class="w">       </span><span class="kc">FALSE</span><span class="w">       </span><span class="kc">FALSE</span><span class="w">       </span><span class="kc">FALSE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">
+   </span><span class="n">http</span><span class="o">/</span><span class="n">ftp</span><span class="w">     </span><span class="n">sockets</span><span class="w">      </span><span class="n">libxml</span><span class="w">        </span><span class="n">fifo</span><span class="w">      </span><span class="n">cledit</span><span class="w">       </span><span class="n">iconv</span><span class="w">
+       </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">
+        </span><span class="n">NLS</span><span class="w">     </span><span class="n">profmem</span><span class="w">       </span><span class="n">cairo</span><span class="w">         </span><span class="n">ICU</span><span class="w"> </span><span class="n">long.double</span><span class="w">     </span><span class="n">libcurl</span><span class="w">
+       </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">       </span><span class="kc">FALSE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="o">&gt;</span><span class="n">capabilities</span><span class="p">()</span><span class="w">
+       </span><span class="n">jpeg</span><span class="w">         </span><span class="n">png</span><span class="w">        </span><span class="n">tiff</span><span class="w">       </span><span class="n">tcltk</span><span class="w">         </span><span class="n">X</span><span class="m">11</span><span class="w">        </span><span class="n">aqua</span><span class="w">
+       </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">
+   </span><span class="n">http</span><span class="o">/</span><span class="n">ftp</span><span class="w">     </span><span class="n">sockets</span><span class="w">      </span><span class="n">libxml</span><span class="w">        </span><span class="n">fifo</span><span class="w">      </span><span class="n">cledit</span><span class="w">       </span><span class="n">iconv</span><span class="w">
+       </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">
+        </span><span class="n">NLS</span><span class="w">     </span><span class="n">profmem</span><span class="w">       </span><span class="n">cairo</span><span class="w">         </span><span class="n">ICU</span><span class="w"> </span><span class="n">long.double</span><span class="w">     </span><span class="n">libcurl</span><span class="w">
+       </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">        </span><span class="kc">TRUE</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>How did I notice? Well basically I was about to update the <a href="https://cran.r-project.org/web/packages/sm/">sm package</a> in one of my computers and R yield an error similar to this one (sorry I didn’t copy the original one):</p>
+
+<!-- this code was wrapped-->
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="n">Error</span><span class="o">:</span><span class="w"> </span><span class="n">package</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">‘</span><span class="n">tcltk</span><span class="err">’</span><span class="o">:</span><span class="w">
+ </span><span class="n">.onLoad</span><span class="w"> </span><span class="n">failed</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">loadNamespace</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="s1">'tcltk'</span><span class="p">,</span><span class="w"> </span><span class="n">details</span><span class="o">:</span><span class="w">
+  </span><span class="n">call</span><span class="o">:</span><span class="w"> </span><span class="n">fun</span><span class="p">(</span><span class="n">libname</span><span class="p">,</span><span class="w"> </span><span class="n">pkgname</span><span class="p">)</span><span class="w">
+  </span><span class="n">error</span><span class="o">:</span><span class="w"> </span><span class="n">Tcl</span><span class="o">/</span><span class="n">Tk</span><span class="w"> </span><span class="n">support</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">system</span><span class="w">
+</span><span class="n">In</span><span class="w"> </span><span class="n">addition</span><span class="o">:</span><span class="w"> </span><span class="n">Warning</span><span class="w"> </span><span class="n">message</span><span class="o">:</span><span class="w">
+</span><span class="n">S</span><span class="m">3</span><span class="w"> </span><span class="n">methods</span><span class="w"> </span><span class="err">‘</span><span class="n">as.character.tclObj</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">as.character.tclVar</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">as.double.tclObj</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">as.integer.tclObj</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">as.logical.tclObj</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">as.raw.tclObj</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">print.tclObj</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="p">[[</span><span class="n">.tclArray</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="p">[[</span><span class="o">&lt;-</span><span class="n">.tclArray</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="o">$</span><span class="n">.tclArray</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="o">$&lt;-</span><span class="n">.tclArray</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">names.tclArray</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">names</span><span class="o">&lt;-</span><span class="n">.tclArray</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">length.tclArray</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">length</span><span class="o">&lt;-</span><span class="n">.tclArray</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">tclObj.tclVar</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">tclObj</span><span class="o">&lt;-</span><span class="n">.tclVar</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">tclvalue.default</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">tclvalue.tclObj</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">tclvalue.tclVar</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">tclvalue</span><span class="o">&lt;-</span><span class="n">.default</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">tclvalue</span><span class="o">&lt;-</span><span class="n">.tclVar</span><span class="err">’</span><span class="p">,</span><span class="w"> </span><span class="err">‘</span><span class="n">close.tkProgressBar</span><span class="err">’</span><span class="w"> </span><span class="n">were</span><span class="w"> </span><span class="n">declared</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">NAMESPACE</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">found</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>As you can see I’ve highlighted the key line, R doesn’t have <a href="https://en.wikipedia.org/wiki/Tcl">tcltk</a> available and running in that system and if you run <code class="highlighter-rouge">capabilities()</code> in the R console you’ll probably get something similar to the first code-block. After researching a little bit about the problem [<a href="https://discourse.brew.sh/t/r-installs-on-high-sierra-without-tcl-tk-support/1190">1</a> &amp; <a href="https://discourse.brew.sh/t/r-bottle-options-graphics-capabilities/1785/10">2</a>], I found out what I’ve already said, Homebrew R isn’t build with those capabilities. Why? Well…</p>
+
+<ol>
+  <li>It seems that those capabilities are optional when you build R from source and build R with those capabilities / options on Homebrew’s bottle server is “error prone”.</li>
+  <li>To have some of the missing capabilities you must have in your system <a href="https://www.xquartz.org">X11/XQuartz</a>, which isn’t installed in every Mac, because it’s not longer provided as macOS basic installation.</li>
+  <li>You can install X11/XQuartz, but you have to do it with Homebrew Cask, since it can’t be build from source. As a consequence is a off project dependency and they don’t want to rely on that.</li>
+  <li>Homebrew seems to be heading to a option-less direction where the formulas aren’t going to have any option at all. So if you want to have options or different kind of build they encourage you to have your <a href="https://docs.brew.sh/How-to-Create-and-Maintain-a-Tap.html">own tap</a>.</li>
+</ol>
+
+<p>Whether you agree or not, you have to understand that the maintainers of Homebrew-core took this direction for a reason, which is probably they have already too much work to do. Don’t forget they maintain the package manager for free. If you disagree, <a href="https://discourse.brew.sh/t/r-bottle-options-graphics-capabilities/1785/9?u=luisspuerto">as I do</a>, at least partly, please be polite. A lot of users have been expressing their disagreement in really bad manners lately and that is not acceptable.</p>
+
+<p>Lucky for us users, there is a solution to the problem. You can always create your own tap of Homebrew and tweak the formula to fit your needs, as maintainers suggest. As a result <a href="https://discourse.brew.sh/t/r-installs-on-high-sierra-without-tcl-tk-support/1190/16?u=luisspuerto">someone already did that</a> and there is already a tap which you can install R with the same formula we installed R when it was in Homebrew Science, but up to day.</p>
+
+<p>I’ll explain in <a href="https://wp.me/p8vFcV-tC">my next post</a> how to install R using that tap.</p>
+
+        </div>
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/homebrew" class="page__taxonomy-item" rel="tag">homebrew</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/rsoft" class="page__taxonomy-item" rel="tag">RSoft</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/rstats" class="page__taxonomy-item" rel="tag">RStats</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/professional" class="page__taxonomy-item" rel="tag">Professional</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/rstats" class="page__taxonomy-item" rel="tag">RStats</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/technology" class="page__taxonomy-item" rel="tag">Technology</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-05-11T10:35:32+00:00">Friday, 11 May 2018 10:35 UTC</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lpuerto&text=Homebrew%27s+R+doesn%27t+have+all+the+capabilities%20https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F05%2F11%2Fhomebrews-r-doesnt-have-all-the-capabilities%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F05%2F11%2Fhomebrews-r-doesnt-have-all-the-capabilities%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F05%2F11%2Fhomebrews-r-doesnt-have-all-the-capabilities%2F&title=Homebrew's R doesn't have all the capabilities" class="btn btn--reddit" title="Share on Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F05%2F11%2Fhomebrews-r-doesnt-have-all-the-capabilities%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/2018/05/02/mbp-wakes-up-from-sleep-to-back-screen-solution/" class="pagination--pager" title="MBP wakes up from sleep to back screen —  Solution
+">Previous</a>
+    
+    
+      <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" class="pagination--pager" title="Installing R with Homebrew with all the capabilities
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/jekyll.png"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">New Web in Jekyll
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As you probably have noticed, some days ago I rolled out a new version of my website, which you probably think it’s pretty similar to the previous one, at least talking about its external appearance. However, it’s really different in the inside, since it’s a static web build with Jekyll, while the previous one was build on Wordpress. This isn’t ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/Luis-Puerto-The-Entreprenour2.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">16 Personalities: Apparently I’m an Entrepreneur
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Not long ago, while I was taking a course in Finland, they asked us to take a personality test online called 16 personalities. It wasn’t nothing really official or for much purpose of scrutinize us, but just to know ourselves a little bit more and we can work our strengths and weakness. To my surprise, the test told me that I have an entrepreneu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/R-Homebrew.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">Installing R with Homebrew with all the capabilities
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As I explained in my previous post if you installed R with Homebrew you have less capabilities than with a R installed from CRAN’s binary. But, can you have all the capabilities while you still use Homebrew to install R? Yes! However… why you bother to install it with Homebrew at all instead of installing it from CRAN. Well, it’s true that CRAN ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><div class="search-searchbar"></div>
+    <div class="search-hits"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lpuerto"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+      <li><a href="https://www.linkedin.com/in/lpuerto"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+    
+    
+    
+      <li><a href="https://github.com/luisspuerto"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+<!--
+    
+    
+-->
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Luis Puerto |
+  
+  <a href="https://github.com/luisspuerto/luisspuerto.net-src"><i class="fas fa-code" aria-hidden="true"></i> Source Code</a> | 
+  
+Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: 'NSAWFR2G1K',
+  apiKey: 'b63bbd39b0bf76207cf9bebdb9c2b7dd',
+  indexName: 'luisspuerto-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://luisspuerto.net/blog/2018/05/11/homebrews-r-doesnt-have-all-the-capabilities/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/blog/2018/05/11/homebrews-r-doesnt-have-all-the-capabilities"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://luisspuerto-net.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+    <script>
+//open external links in a new window
+function external_new_window() {
+    for(var c = document.getElementsByTagName("a"), a = 0;a < c.length;a++) {
+    var b = c[a];
+    b.getAttribute("href") && b.hostname !== location.hostname && (b.target = "_blank")
+    }
+}
+//open PDF links in a new window
+function pdf_new_window ()
+{
+    if (!document.getElementsByTagName) return false;
+    var links = document.getElementsByTagName("a");
+    for (var eleLink=0; eleLink < links.length; eleLink ++) {
+    if ((links[eleLink].href.indexOf('.pdf') !== -1)||(links[eleLink].href.indexOf('.doc') !== -1)||(links[eleLink].href.indexOf('.docx') !== -1)) {
+        links[eleLink].onclick =
+        function() {
+            window.open(this.href);
+            return false;
+        }
+    }
+    }
+} 
+pdf_new_window()
+external_new_window();
+</script>
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+  </body>
+</html>

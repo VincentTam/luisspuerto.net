@@ -1,0 +1,1144 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Disconnecting the dGPU in a late 2011 MacBook Pro —third way | Luis Puerto</title>
+<meta name="description" content="Update 2017.12.12-14.20 EET: whether or not I use the AMDGPUWakeHandler and whether I sleep or hibernate I can’t wake up of the hibernation/sleep. Depending on if I have AMDGPUWakeHandler on or off I get different outputs, but none of those end in a successful wakeup.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Luis Puerto">
+<meta property="og:title" content="Disconnecting the dGPU in a late 2011 MacBook Pro —third way">
+<meta property="og:url" content="https://luisspuerto.net/blog/2017/12/11/disconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way/">
+
+
+  <meta property="og:description" content="Update 2017.12.12-14.20 EET: whether or not I use the AMDGPUWakeHandler and whether I sleep or hibernate I can’t wake up of the hibernation/sleep. Depending on if I have AMDGPUWakeHandler on or off I get different outputs, but none of those end in a successful wakeup.">
+
+
+
+  <meta property="og:image" content="https://luisspuerto.net/assets/images/blog/2018/grey_screen.jpg">
+
+
+
+  <meta name="twitter:site" content="@lpuerto">
+  <meta name="twitter:title" content="Disconnecting the dGPU in a late 2011 MacBook Pro —third way">
+  <meta name="twitter:description" content="Update 2017.12.12-14.20 EET: whether or not I use the AMDGPUWakeHandler and whether I sleep or hibernate I can’t wake up of the hibernation/sleep. Depending on if I have AMDGPUWakeHandler on or off I get different outputs, but none of those end in a successful wakeup.">
+  <meta name="twitter:url" content="https://luisspuerto.net/blog/2017/12/11/disconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://luisspuerto.net/assets/images/blog/2018/grey_screen.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2017-12-11T15:03:16+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://luisspuerto.net/blog/2017/12/11/disconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://luisspuerto.net",
+      "logo": "https://luisspuerto.net/assets/images/pages/header-splash.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Luis Puerto",
+      "url": "https://luisspuerto.net",
+      "sameAs": ["https://twitter.com/lpuerto","https://www.linkedin.com/in/lpuerto","https://github.com/luisspuerto","https://www.flickr.com/photos/luisspuerto"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="2AztHRijor0b6F_0DFrw0mYxhQVvLKT3rlFp7PxTS1M" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Luis Puerto Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link href="https://fonts.googleapis.com/css?family=Mr+Dafoe" rel="stylesheet">
+
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Luis Puerto</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/" >Home</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/aboutme" >About Me</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/resume" >Résumé</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/blog" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/contact" >Contact</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="
+          background-image:
+            url('/assets/images/blog/2018/grey_screen.jpg');
+          "
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Disconnecting the dGPU in a late 2011 MacBook Pro —third way
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="/aboutme">
+          <img src="/assets/images/pages/20121231-035-ol.jpg" alt="Luis Puerto" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="/aboutme"><h3 class="author__name" itemprop="name">Luis Puerto</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Born in Ponferrada, Spain. A Forest Engineer interested in Science and Technology. Fascinated about almost everything
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">🇪🇺🇪🇸🇸🇪🇫🇮🇺🇸</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:luis@luisspuerto.net">
+            <meta itemprop="email" content="luis@luisspuerto.net" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://instagram.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://luisspuerto.tumblr.com" itemprop="sameAs">
+            <i class="fab fa-fw fa-tumblr-square" aria-hidden="true"></i> Tumblr
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.flickr.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-flickr" aria-hidden="true"></i> Flickr
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Disconnecting the dGPU in a late 2011 MacBook Pro —third way">
+    <meta itemprop="description" content="Update 2017.12.12-14.20 EET: whether or not I use the AMDGPUWakeHandler and whether I sleep or hibernate I can’t wake up of the hibernation/sleep. Depending on if I have AMDGPUWakeHandler on or off I get different outputs, but none of those end in a successful wakeup.">
+    <meta itemprop="datePublished" content="Monday, 11 December 2017 15:03 UTC">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+</p>
+      
+
+        </header>
+
+      <section class="page__content" itemprop="text">
+        
+        <div class="post__content">
+          <p><strong>Update 2017.12.12-14.20 EET</strong>: whether or not I use the <a href="https://github.com/blackgate/AMDGPUWakeHandler">AMDGPUWakeHandler</a> and whether I sleep or hibernate I can’t wake up of the hibernation/sleep. Depending on if I have <a href="https://github.com/blackgate/AMDGPUWakeHandler">AMDGPUWakeHandler</a> on or off I get different outputs, but none of those end in a successful wakeup.</p>
+
+<p><strong>Update 2017.12.13-09.08 EET</strong>: After checking about the wake up problem after sleeping / hibernating with the people form MacRumors, I reached some conclusions.</p>
+
+<ol>
+  <li>You don’t use <a href="https://github.com/blackgate/AMDGPUWakeHandler">AMDGPUWakeHandler</a> with this solution, since it could create a kernel panic… so for that reason doesn’t work.</li>
+  <li><code class="highlighter-rouge">pmset gpuswitch</code> option can help, but it’s really undocumented officially, so we really don’t know what the values for 0, 1 and 2 stand for, and can vary from machine to machine I guess, or at least to macOS version to version.</li>
+  <li>gfxCardStatus can help since the problem after wake up is the dGPU activates and the computer freezes.</li>
+</ol>
+
+<p>I’ve updated steps 11 and 12 in consequence.</p>
+
+<p><strong>Update 2017.12.18-14.42 EET</strong>: I’ve tried to wake up from hibernation without gxfCardStatus and it worked pretty well I didn’t have any issue, so if you don’t want to have it installed or at least running in the background I think it’s OK.</p>
+
+<p><strong>Update 2018.01.09-21.35 EET</strong>: After install the <a href="https://support.apple.com/en-gb/HT208397">security update to mitigate the effects of Spectre</a>, I have to apply the fix again as explained <a href="/blog/2017/12/11/disconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way/#in-case-you-have-to-update">here</a>. Everything worked fine, but on wake up of hibernation I got a black screen a couple of times. Also the computer didn’t turn off and got stuck in a black screen. I really don’t know what is the reason, but seems it’s related to the <code class="highlighter-rouge">gpuswitch</code> parameter. I changed to 0 and then to 2 again, and seems that everything is normal again. But I don’t know if it’s really that or it’s other thing.</p>
+
+<p><strong>Update 2018.01.21-09.20 EET</strong>: I just installed macOS update 10.13.3 and after testing a little bit I got to the conclusion that what work best for me is to set <code class="highlighter-rouge">pmset -a gpuswitch 1</code></p>
+
+<hr />
+
+<p>Ok!!!!!! There is a third, and I think final, solution to totally deactivate the dGPU. Till this moment this is my favorite solution and I even have the brightness back to my computer. Also it sleeps correctly. You can check my previous post also <a href="/blog/2017/12/05/my-macbook-pro-late-2011s-discrete-graphics-card-said-ciao-again/">1</a> &amp; <a href="/blog/2017/12/08/disconnecting-the-dgpu-in-a-late-2011-macbook-pro-another-way/">2</a>.</p>
+
+<p>We all have to thank to <a href="https://forums.macrumors.com/threads/force-2011-macbook-pro-8-2-with-failed-amd-gpu-to-always-use-intel-integrated-gpu-efi-variable-fix.2037591/page-50#post-25581450">MacRumors community</a> that all of them have been working really hard to create a workable solution to all of us. This guide is almost a exact copy of the one posted by MikeyN <a href="https://forums.macrumors.com/threads/force-2011-macbook-pro-8-2-with-failed-amd-gpu-to-always-use-intel-integrated-gpu-efi-variable-fix.2037591/page-35#post-24956091">here</a>. I’ve just changed somethings and added the <a href="https://github.com/blackgate/AMDGPUWakeHandler">AMDGPUWakeHandler</a> to manage the sleep.</p>
+
+<h2 id="the-fix">The fix</h2>
+
+<p>Let’s explain how it’s done:</p>
+
+<ol>
+  <li>As always you have to reset <a href="https://support.apple.com/en-us/HT201295">SMC</a> and <a href="https://support.apple.com/en-us/HT204063">PRAM/NVRAM</a> before you do anything else.
+    <ul>
+      <li><strong>SMC</strong>: shutdown, unplug everything except power, now hold <code class="highlighter-rouge">leftShift + Ctrl + Opt/Alt + Power</code> for about 10” and release at the same time.</li>
+      <li><strong>PRAM/NVRAM</strong>: with the power cord on, power on and immediately later and before the chime hold <code class="highlighter-rouge">cmd + Opt/Alt + P + R</code> at the same time until you hear the chime for the second time. Try to do the following step just right after, so you don’t let the computer to load —and fail.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Now, boot into recovery single user mode by holding: <code class="highlighter-rouge">cmd + R + S</code>. When finish to load, you run:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>csrutil disable <span class="c"># to disable SIP</span>
+<span class="nv">$ </span>nvram fa4ce28d-b62f-4c99-9cc3-6815686e30f9:gpu-power-prefs<span class="o">=</span>%01%00%00%00 <span class="c"># to disable the dGPU on boot.</span>
+<span class="nv">$ </span>nvram boot-args<span class="o">=</span><span class="s2">"-v"</span> <span class="c"># Load in verbose mode</span>
+<span class="nv">$ </span>reboot
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Reboot in single user mode holding on boot <code class="highlighter-rouge">cmd + S</code></p>
+  </li>
+  <li>
+    <p>Now we are going to mount the hard drive and move the driver of the dGPU <code class="highlighter-rouge">AMDRadeonX3000.kext</code> out of the drivers folder.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>/sbin/mount <span class="nt">-uw</span> / <span class="c"># mount root partition writeable</span>
+<span class="nv">$ </span>mkdir <span class="nt">-p</span> /System/Library/Extensions-off <span class="c"># make a kext-backup directory</span>
+<span class="nv">$ </span>mv /System/Library/Extensions/AMDRadeonX3000.kext /System/Library/Extensions-off/ <span class="c"># only move ONE offending kext out of the way</span>
+<span class="nv">$ </span>touch /System/Library/Extensions/ <span class="c"># let the system update its kextcache</span>
+<span class="nv">$ </span>reboot
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Now you’re going to be able to load your desktop normally, but with an accelerated iGPU display. However, the system doesn’t know how to power-management the failed AMD-chip, so you are going to need to load it manually.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>kextload /System/Library/Extensions-off/AMDRadeonX3000.kext
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>You can automate the loading with the doing the following:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>mkdir <span class="nt">-p</span> /Library/LoginHook <span class="c"># Creating a folder to store the script.</span>
+<span class="nv">$ </span><span class="nb">sudo </span>nano /Library/LoginHook/LoadX3000.sh <span class="c"># Creating the script.</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>On nano you type/paste:</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c">#!/bin/bash</span>
+kextload /System/Library/Extensions-off/AMDRadeonX3000.kext
+<span class="c"># pmset -a gpuswitch 0 # to prevent to switch to the dGPU</span>
+<span class="nb">exit </span>0
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p>* I’ve decided to comment the line 3 since I’m not sure that 0 is the correct value. Besides, in the step 12 I set <code class="highlighter-rouge">gpuswitch 2</code>.</p>
+  </li>
+  <li>
+    <p>You make it executable active:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>chmod a+x /Library/LoginHook/LoadX3000.sh
+<span class="nv">$ </span><span class="nb">sudo </span>defaults write com.apple.loginwindow LoginHook /Library/LoginHook/LoadX3000.sh
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>This is what I like the most. You create a script in the root of your hard drive to automate the process in case of an update.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>nano /force-iGPU-boot.sh <span class="c"># Creates the script in the root</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p>With the following content.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c">#/bin/sh</span>
+<span class="nb">sudo </span>nvram boot-args<span class="o">=</span><span class="s2">"-v"</span>
+<span class="nb">sudo </span>nvram fa4ce28d-b62f-4c99-9cc3-6815686e30f9:gpu-power-prefs<span class="o">=</span>%01%00%00%00
+<span class="nb">exit </span>0
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Now you make it executable and I hide to avoid delete it:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>chmod a+x /force-iGPU-boot.sh <span class="c"># make ir executable</span>
+<span class="nv">$ </span><span class="nb">sudo </span>chflags hidden /force-iGPU-boot.sh <span class="c"># hide the file.</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p>In the future if you reset SMC and PRAM/NVRAM you just have to load in single user mode holding <code class="highlighter-rouge">cmd + S</code> and run:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>sh /force-iGPU-boot.sh
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li><del>Then, you can copy the <a href="https://github.com/blackgate/AMDGPUWakeHandler">AMDGPUWakeHandler</a>, or the one I created A<a href="/assets/docs/AMDGPUWakeHandler.kext.zip/">MDGPUWakeHandler.kext</a>, to <code class="highlighter-rouge">/Library/Extensions</code> and run the following commands:</del>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="c"># sudo chmod -R 755 /Library/Extensions/AMDGPUWakeHandler.kext</span>
+<span class="nv">$ </span><span class="c"># sudo chown -R root:wheel /Library/Extensions/AMDGPUWakeHandler.kext</span>
+<span class="nv">$ </span><span class="c"># sudo touch /Library/Extensions</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p><del>This time you don’t need to change the way the machine sleeps. And you can reboot</del></p>
+
+    <p>I recommend you the way the machine sleeps to hibernate, but I haven’t tested if it can sleeps normally after we apply the following step</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>pmset <span class="nt">-a</span> hibernatemode 25
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+
+    <p>All the fuss about the wake up after sleep / hibernate is related to when the computer wake ups checks the GPUs and somehow it gets stuck to dGPU. For that reason some people has changed the variable gpuswitch in pmset. Nevertheless, this variable is really undocumented and you find explanations to what the values to that variable (0, 1 and 2) do on internet. <del>At this moment I have it set as default 2</del> I’ve decided to change to 1.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>pmset <span class="nt">-a</span> gpuswitch 1
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+
+    <p><del>Which I thing it’s the default value.</del> The default value is 2.</p>
+
+    <p>You can try the different values, reboot and then close the lid and wake up and see the results.</p>
+
+    <p>What has worked for me is leave it in <code class="highlighter-rouge">1</code> <del>and install <a href="https://gfx.io">gfxCardStatus</a>, and every time I boot change to <code class="highlighter-rouge">integrated only</code>. But still testing. I’ve tried to wake up from hibernation without gfxCardStatus and it also worked, so I guess it’s optional.</del> <a href="https://gfx.io">gfxCardStatus</a> can help, but at least I’m not using it right now. I wake up from hibernation without it perfectly.</p>
+  </li>
+  <li>
+    <p>After you reboot and if everything goes smoothly, perhaps you wan to return to the normal boot mode. You can room in terminal:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>nvram boot-args<span class="o">=</span><span class="s2">""</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Now I just going to copy paste from <a href="https://forums.macrumors.com/threads/force-2011-macbook-pro-8-2-with-failed-amd-gpu-to-always-use-intel-integrated-gpu-efi-variable-fix.2037591/page-35#post-24956091">MikeyN’s post</a></p>
+
+<blockquote>
+  <p>This setup has now one kext in a place Apple’s installers do not expect. That is why in this guide <span style="background-color: #ffff00;">SIP has not been reenabled. If an update that contains changes to the AMD drivers is about to take place it is advisable to move back the AMDRadeonX3000.kext to its default location before the update process. Otherwise the updater writes at least another kext of a different version to its default location or at worst you end up with an undefined state of partially non-matching drivers.</span></p>
+
+  <p><span style="background-color: #ffff00;">After any system update the folder /System/Library/Extensions has to be checked for the offending kext.</span> Its presence there will lead to e.g. a boot hang on Yosemite and Sierra, an overheating boot-loop in High Sierra.</p>
+
+  <p>Further: this laptop is overheating, no matter what you do. The cooling system is inadequate and the huge number of failing AMD chips are just proof of that.</p>
+</blockquote>
+
+<h2 id="in-case-you-have-to-update">In case you have to update</h2>
+
+<p>So, before you update the system, please remember to run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>cp <span class="nt">-r</span> /System/Library/Extensions-off/AMDRadeonX3000.kext /System/Library/Extensions/
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then you update. If you can’t normally load your computer, you can hold <code class="highlighter-rouge">cmd + S</code> and run:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>sh /force-iGPU-boot.sh
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Then you can reboot again on single user mode holding <code class="highlighter-rouge">cmd + S</code> and then run</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>mv /System/Library/Extensions/AMDRadeonX3000.kext /System/Library/Extensions-off/
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>To move again the kext. Keep in mid that the other one still there do you are going to probably rename it in this fashion:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>mv /System/Library/Extensions/AMDRadeonX3000.kext /System/Library/Extensions-off/AMDRadeonX3000-1.kext
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="checking-that-everything-is-ok">Checking that everything is OK</h2>
+
+<p>If you run in terminal</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>kextstat | <span class="nb">grep </span>AMD
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>You have to get something similar to this:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>111    2 0xffffff7f82da8000 0x122000   0x122000   com.apple.kext.AMDLegacySupport <span class="o">(</span>1.6.0<span class="o">)</span> 3BE3756A-6D69-3CD0-B18A-BC844EE2A4DF &lt;105 12 11 7 5 4 3 1&gt;
+130    0 0xffffff7f83631000 0x12e000   0x12e000   com.apple.kext.AMD6000Controller <span class="o">(</span>1.6.0<span class="o">)</span> DC45A18B-6F81-38D5-85CB-06BFBD74B524 &lt;111 105 12 11 5 4 3 1&gt;
+146    0 0xffffff7f83126000 0x22000    0x22000    com.apple.kext.AMDLegacyFramebuffer <span class="o">(</span>1.6.0<span class="o">)</span> 5F948DD4-8D1E-31BD-A7EE-C44254CBA506 &lt;111 105 12 11 7 5 4 3 1&gt;
+174    0 0xffffff7f83ab3000 0x56c000   0x56c000   com.apple.kext.AMDRadeonX3000 <span class="o">(</span>1.6.0<span class="o">)</span> 7E721EBE-AD4B-3C53-A70A-1FFF3C231968 &lt;173 147 105 12 7 5 4 3 1&gt;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>In the beginning I wasn’t getting any of these and the system just loaded AMDRadeonX3000. That resulting in a little bit of overheating in the dGPU and I wasn’t able to sleep the computer. The reason for the system to not load the kext was I moved them that much that I changed the ownership of the files. If that is your case you can run in terminal:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>chown <span class="nt">-R</span> root:wheel /System/Library/Extensions/AMD<span class="k">*</span>.<span class="k">*</span>
+<span class="nv">$ </span><span class="nb">sudo </span>chown <span class="nt">-R</span> root:wheel /System/Library/Extensions-off/AMD<span class="k">*</span>.<span class="k">*</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>to return the ownership to the System / Root</p>
+
+<p>Let’s hope that everything goes smoothly from now on. You have to see the bright side of life, now you have a quite cold running Mac since the dGPU is totally deactivated. After a while your temps have to be something similar to this:</p>
+
+<figure class="align-center">
+  <a href="/assets/images/blog/2018/Screen-Shot-2017-12-11-at-14.46.20.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2017-12-11-at-14.46.20.png" alt="GPU diode and GPU proximity are the dGPU sensors. GPU PECI is the iGPU sensor." /></a>
+  
+    <figcaption>GPU diode and GPU proximity are the dGPU sensors. GPU PECI is the iGPU sensor.
+</figcaption>
+  
+</figure>
+
+        </div>
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/dgpu" class="page__taxonomy-item" rel="tag">dGPU</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/graphic-card" class="page__taxonomy-item" rel="tag">graphic card</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/high-sierra" class="page__taxonomy-item" rel="tag">high sierra</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/how-to" class="page__taxonomy-item" rel="tag">how to</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/macos" class="page__taxonomy-item" rel="tag">macOS</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/personal" class="page__taxonomy-item" rel="tag">Personal</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/technology" class="page__taxonomy-item" rel="tag">Technology</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2017-12-11T15:03:16+00:00">Monday, 11 December 2017 15:03 UTC</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lpuerto&text=Disconnecting+the+dGPU+in+a+late+2011+MacBook+Pro+%E2%80%94third+way%20https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F12%2F11%2Fdisconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F12%2F11%2Fdisconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F12%2F11%2Fdisconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way%2F&title=Disconnecting the dGPU in a late 2011 MacBook Pro —third way" class="btn btn--reddit" title="Share on Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2017%2F12%2F11%2Fdisconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/2017/12/08/disconnecting-the-dgpu-in-a-late-2011-macbook-pro-another-way/" class="pagination--pager" title="Disconnecting the dGPU in a late 2011 MacBook Pro —another way
+">Previous</a>
+    
+    
+      <a href="/blog/2017/12/31/happy-new-year-12018/" class="pagination--pager" title="Happy New Year 12018 🎉
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/jekyll.png"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">New Web in Jekyll
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As you probably have noticed, some days ago I rolled out a new version of my website, which you probably think it’s pretty similar to the previous one, at least talking about its external appearance. However, it’s really different in the inside, since it’s a static web build with Jekyll, while the previous one was build on Wordpress. This isn’t ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/Luis-Puerto-The-Entreprenour2.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">16 Personalities: Apparently I’m an Entrepreneur
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Not long ago, while I was taking a course in Finland, they asked us to take a personality test online called 16 personalities. It wasn’t nothing really official or for much purpose of scrutinize us, but just to know ourselves a little bit more and we can work our strengths and weakness. To my surprise, the test told me that I have an entrepreneu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/R-Homebrew.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">Installing R with Homebrew with all the capabilities
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As I explained in my previous post if you installed R with Homebrew you have less capabilities than with a R installed from CRAN’s binary. But, can you have all the capabilities while you still use Homebrew to install R? Yes! However… why you bother to install it with Homebrew at all instead of installing it from CRAN. Well, it’s true that CRAN ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><div class="search-searchbar"></div>
+    <div class="search-hits"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lpuerto"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+      <li><a href="https://www.linkedin.com/in/lpuerto"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+    
+    
+    
+      <li><a href="https://github.com/luisspuerto"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+<!--
+    
+    
+-->
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Luis Puerto |
+  
+  <a href="https://github.com/luisspuerto/luisspuerto.net-src"><i class="fas fa-code" aria-hidden="true"></i> Source Code</a> | 
+  
+Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: 'NSAWFR2G1K',
+  apiKey: 'b63bbd39b0bf76207cf9bebdb9c2b7dd',
+  indexName: 'luisspuerto-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://luisspuerto.net/blog/2017/12/11/disconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/blog/2017/12/11/disconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://luisspuerto-net.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+    <script>
+//open external links in a new window
+function external_new_window() {
+    for(var c = document.getElementsByTagName("a"), a = 0;a < c.length;a++) {
+    var b = c[a];
+    b.getAttribute("href") && b.hostname !== location.hostname && (b.target = "_blank")
+    }
+}
+//open PDF links in a new window
+function pdf_new_window ()
+{
+    if (!document.getElementsByTagName) return false;
+    var links = document.getElementsByTagName("a");
+    for (var eleLink=0; eleLink < links.length; eleLink ++) {
+    if ((links[eleLink].href.indexOf('.pdf') !== -1)||(links[eleLink].href.indexOf('.doc') !== -1)||(links[eleLink].href.indexOf('.docx') !== -1)) {
+        links[eleLink].onclick =
+        function() {
+            window.open(this.href);
+            return false;
+        }
+    }
+    }
+} 
+pdf_new_window()
+external_new_window();
+</script>
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+  </body>
+</html>

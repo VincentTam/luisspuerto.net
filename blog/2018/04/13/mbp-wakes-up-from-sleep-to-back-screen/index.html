@@ -1,0 +1,1062 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.12.0 by Michael Rose
+  Copyright 2013-2018 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>MBP wakes up from sleep to back screen | Luis Puerto</title>
+<meta name="description" content="As you know, I have had problems with my old MacBook Pro Late 2011 and its dGPU which I’ve been able to patch to make the computer work again. In the beginning, the side effect of the fix was not to be able to wake up properly the Mac from sleep mode. The computer woke up to a black or grey screen and the fans started to work at full speed to finally turn off itself. This was cause because on the wake up process the computer decided to stuck to the faulty dGPU instead to the iGPU. Luckily, this problem was solve as you can see in the final fix.">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Luis Puerto">
+<meta property="og:title" content="MBP wakes up from sleep to back screen">
+<meta property="og:url" content="https://luisspuerto.net/blog/2018/04/13/mbp-wakes-up-from-sleep-to-back-screen/">
+
+
+  <meta property="og:description" content="As you know, I have had problems with my old MacBook Pro Late 2011 and its dGPU which I’ve been able to patch to make the computer work again. In the beginning, the side effect of the fix was not to be able to wake up properly the Mac from sleep mode. The computer woke up to a black or grey screen and the fans started to work at full speed to finally turn off itself. This was cause because on the wake up process the computer decided to stuck to the faulty dGPU instead to the iGPU. Luckily, this problem was solve as you can see in the final fix.">
+
+
+
+  <meta property="og:image" content="https://luisspuerto.net/assets/images/blog/2018/apple-wake-up.jpg">
+
+
+
+  <meta name="twitter:site" content="@lpuerto">
+  <meta name="twitter:title" content="MBP wakes up from sleep to back screen">
+  <meta name="twitter:description" content="As you know, I have had problems with my old MacBook Pro Late 2011 and its dGPU which I’ve been able to patch to make the computer work again. In the beginning, the side effect of the fix was not to be able to wake up properly the Mac from sleep mode. The computer woke up to a black or grey screen and the fans started to work at full speed to finally turn off itself. This was cause because on the wake up process the computer decided to stuck to the faulty dGPU instead to the iGPU. Luckily, this problem was solve as you can see in the final fix.">
+  <meta name="twitter:url" content="https://luisspuerto.net/blog/2018/04/13/mbp-wakes-up-from-sleep-to-back-screen/">
+
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://luisspuerto.net/assets/images/blog/2018/apple-wake-up.jpg">
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2018-04-13T17:37:52+00:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://luisspuerto.net/blog/2018/04/13/mbp-wakes-up-from-sleep-to-back-screen/">
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://luisspuerto.net",
+      "logo": "https://luisspuerto.net/assets/images/pages/header-splash.jpg"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Person",
+      "name": "Luis Puerto",
+      "url": "https://luisspuerto.net",
+      "sameAs": ["https://twitter.com/lpuerto","https://www.linkedin.com/in/lpuerto","https://github.com/luisspuerto","https://www.flickr.com/photos/luisspuerto"]
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="2AztHRijor0b6F_0DFrw0mYxhQVvLKT3rlFp7PxTS1M" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Luis Puerto Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+    <!-- start custom head snippets -->
+<link href="https://fonts.googleapis.com/css?family=Mr+Dafoe" rel="stylesheet">
+
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="/">Luis Puerto</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/" >Home</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/aboutme" >About Me</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/resume" >Résumé</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/blog" >Blog</a>
+            </li>
+          
+            
+            <li class="masthead__menu-item">
+              <a href="https://luisspuerto.net/contact" >Contact</a>
+            </li>
+          
+        </ul>
+        
+        <button class="search__toggle" type="button">
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle Menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="
+          background-image:
+            url('/assets/images/blog/2018/apple-wake-up.jpg');
+          "
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          MBP wakes up from sleep to back screen
+
+        
+      </h1>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        
+        <a href="/aboutme">
+          <img src="/assets/images/pages/20121231-035-ol.jpg" alt="Luis Puerto" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="/aboutme"><h3 class="author__name" itemprop="name">Luis Puerto</h3></a>
+    
+    
+      <p class="author__bio" itemprop="description">
+        Born in Ponferrada, Spain. A Forest Engineer interested in Science and Technology. Fascinated about almost everything
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="http://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">🇪🇺🇪🇸🇸🇪🇫🇮🇺🇸</span>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:luis@luisspuerto.net">
+            <meta itemprop="email" content="luis@luisspuerto.net" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://instagram.com/lpuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram
+          </a>
+        </li>
+      
+
+      
+        <li>
+          <a href="https://luisspuerto.tumblr.com" itemprop="sameAs">
+            <i class="fab fa-fw fa-tumblr-square" aria-hidden="true"></i> Tumblr
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://github.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.flickr.com/luisspuerto" itemprop="sameAs">
+            <i class="fab fa-fw fa-flickr" aria-hidden="true"></i> Flickr
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="MBP wakes up from sleep to back screen">
+    <meta itemprop="description" content="As you know, I have had problems with my old MacBook Pro Late 2011 and its dGPU which I’ve been able to patch to make the computer work again. In the beginning, the side effect of the fix was not to be able to wake up properly the Mac from sleep mode. The computer woke up to a black or grey screen and the fans started to work at full speed to finally turn off itself. This was cause because on the wake up process the computer decided to stuck to the faulty dGPU instead to the iGPU. Luckily, this problem was solve as you can see in the final fix.">
+    <meta itemprop="datePublished" content="Friday, 13 April 2018 17:37 UTC">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+</p>
+      
+
+        </header>
+
+      <section class="page__content" itemprop="text">
+        
+        <div class="post__content">
+          <p>As you know, I have had problems with my old MacBook Pro Late 2011 and its <a href="/tags/#dgpu">dGPU</a> which I’ve been able to <em>patch</em> to make the computer work again. In the beginning, the side effect of the fix was not to be able to wake up properly the Mac from sleep mode. The computer woke up to a black or grey screen and the fans started to work at full speed to finally turn off itself. This was cause because on the wake up process the computer decided to stuck to the faulty dGPU instead to the iGPU. Luckily, this problem was solve as you can see in the <a href="/blog/2017/12/11/disconnecting-the-dgpu-in-a-late-2011-macbook-pro-third-way/">final fix</a>.</p>
+
+<p>However, my Mac still wakes up to a black screen from time to time. This isn’t a new behavior at all, just happen to come up more often. Perhaps, in the past, this problem happened once per month or two months or even once every six months.</p>
+
+<p>Basically, the computer wakes up from sleep mode to a black screen that remains black no matter you do or what key you punch, while the computer seems to perfectly work in the dark. In this case, the fans don’t run at full speed and seems that the computer can stay like that for long. I haven’t tried, but I guess you can even log in remotely. If your Mac happen to have the iconic glowing apple in the lid you can put there a source of light —the flashlight of your smartphone for example— and you’ll probably be able to see the login screen —just the part around the Apple logo. Basically, what is going on in most of the cases, is the computer wakes up but it doesn’t turn on the blacklight of the screen for some reason.</p>
+
+<p>This is a quite a <a href="https://www.google.com/search?newwindow=1&amp;client=safari&amp;rls=en&amp;ei=t63QWq7hDcb_swHCg6mIBg&amp;q=macbook+black+screen+wake+up&amp;oq=macbook+black+screen+wa&amp;gs_l=psy-ab.3.1.0j0i22i30k1l6.20990.25239.0.27396.7.6.1.0.0.0.168.909.0j6.6.0....0...1c.1.64.psy-ab..0.7.949...35i39k1j0i67k1.0.t79Q76vUQP0">common problem</a> on MacBooks and if you search on internet about it you are going to find multiple solutions. Till now, none of them has really worked for me, but if you have this problem perhaps some of them are going to work for your, so why not to give it a try.</p>
+
+<h2 id="reset-smc-and-pramnvram">Reset SMC and <strong>PRAM/NVRAM</strong></h2>
+
+<p>This is the most common solution you are going to find our there since perhaps the problem is related to those basic configurations. Yet, in my case I can’t do that —or I rather not— because the solution for disable the dGPU of my MPB is partly a setting on the NVRAM, so if I reset it I need to reapply the whole thing again, or at least that.</p>
+
+<p>If you want to give it a try to can reset those settings with this directions:</p>
+
+<ul>
+  <li><a href="https://support.apple.com/en-us/HT201295"><strong>SMC</strong></a>: shutdown, unplug everything except power, now hold <code class="highlighter-rouge">leftShift + Ctrl + Opt/Alt + Power</code> for about 10” and release at the same time.</li>
+  <li><a href="https://support.apple.com/en-us/HT204063"><strong>PRAM/NVRAM</strong></a>: with the power cord on, power on and immediately later and before the chime hold <code class="highlighter-rouge">cmd + Opt/Alt + P + R</code> at the same time until you hear the chime for the second time.</li>
+</ul>
+
+<h2 id="making-it-sleep-again">Making it sleep again</h2>
+
+<p>Some people argue that the problem is related to the the lid itself that becomes a little bit faulty, either in the hinge or in the magnet, so it doesn’t send the proper signal to the computer to wake up when you open the lid. In in this camp I’ve seen like a couple of solutions.</p>
+
+<h4 id="try-to-log-in-and-make-it-sleep-again">Try to log in and make it sleep again</h4>
+
+<p>Since you computer seems to work properly but the screen if not receiving backlight, so it remains black, you can log in and command your computer to sleep again to reattempt to wake up properly this time. You can check if this is your case, if your lid’s Apple logo is not glowing chances are that the problem is just the backlight. You can put a source of light there —the flashlight of your smartphone, as suggested before— and see in you can spot the login screen. That means your computer is up and running perfectly.</p>
+
+<p>Then, you can type your password, log in and after that push the power button for just a couple of seconds —no more or you are going to turn off the computer and we are trying to avoid that. That we’re trying to accomplish here is to make to show up the power / shut down menu in macOS. If we’ve succeeded we can hit the S key next and your computer should sleep again.</p>
+
+<figure class="align-center">
+  <a href="/assets/images/blog/2018/Screen-Shot-2018-04-13-at-13.16.22.png">
+  <img src="/assets/images/blog/2018/Screen-Shot-2018-04-13-at-13.16.22.png" alt="macOS power / shut down menu" /></a>
+  
+    <figcaption>macOS power / shut down menu
+</figcaption>
+  
+</figure>
+
+<p>If your computer doesn’t go to sleep, don’t worry, mine either. I haven’t been able to make this solution yet a single time.</p>
+
+<h4 id="push-the-power-button-and-close-the-lid">Push the power button and close the lid</h4>
+
+<p>When you see that your Mac doesn’t wake up in the correct way, one of the most obvious behaviors is close the lid again —like trying to make this a bad dream— and open again, to give another try. Also pushing buttons here and there, scape key —let me get out of this nightmare, I don’t want to lose my 150 pages document that I didn’t save before and I’ve been working the whole week when I sent the Mac to sleep— and the power button and go on and so for. That has worked for me in the past sometimes, not always. Sometimes the computer turned the screen on again and some others it just reboots.</p>
+
+<p>Some people say that the correct way to do this just push the power button and close the lid, to open it again after a couple of seconds. But I haven’t try this yet. I don’t remember if the times I’ve succeeded to be back to life the computer I’ve followed that sequence by any chance. Who knows!!</p>
+
+<h2 id="changing-energy-parameters">Changing energy parameters</h2>
+
+<p>Other solution I’ve read about is just change the way your Mac sleeps. You Mac can be sent to sleep in two ways, simple sleep or Safe Sleep —the last one is/was called hibernation in windows— so macOS has three different setups for sleeping —only simple sleep, only safe sleep or both. You can see your config using the command:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>pmset <span class="nt">-g</span> custom
+  Battery Power:
+   lidwake              0
+   standbydelay         4200
+   standby              0
+   ttyskeepawake        1
+   hibernatemode        0
+   gpuswitch            1
+   hibernatefile        /var/vm/sleepimage
+   displaysleep         2
+   sleep                10
+   acwake               0
+   halfdim              1
+   sms                  1
+   lessbright           1
+   disksleep            10
+  AC Power:
+   lidwake              0
+   standbydelay         4200
+   standby              0
+   ttyskeepawake        1
+   hibernatemode        0
+   gpuswitch            1
+   hibernatefile        /var/vm/sleepimage
+   womp                 0
+   displaysleep         10
+   networkoversleep     0
+   sleep                0
+   acwake               0
+   halfdim              1
+   sms                  1
+   disksleep            10
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The variable that holds this setting is <code class="highlighter-rouge">hibernatemode</code> and  <code class="highlighter-rouge">0</code> is simple sleep, <code class="highlighter-rouge">3</code> is both and <code class="highlighter-rouge">25</code> is just safe sleep. In essence what is going on here is:</p>
+
+<ul>
+  <li>Simple Sleep — `hibernatemode 0`: Your computer keeps all the info in the RAM and stops all the rest of the computer. The RAM still has power and if you happen to run our of battery —after quite long time— you lose everything —not really, but let’s be catastrophical and think in the worse picture. However, you usually you don’t let your Mac sleeping and unplugged for more than a week, do you? I think the battery in this state can last more than a week, let be conservative here. This mode is the quickest, and usually your Mac is sleeping just after a couple of seconds you close the lid.</li>
+  <li>Both — <code class="highlighter-rouge">hibenatemode 3</code>: This is the standard mode and how most of the MacBooks behave. When you close the lid the Mac just normally sleep, but before it’s going to save its state in the <code class="highlighter-rouge">sleepimage</code>. If it doesn’t run out of battery, it usually wakes up normally, from the info in the RAM and you continue working as usually. If it runs out of battery it’s going to switch to safe sleep before it loses power. In this case when you open the lid you have to push the power button and your Mac is going to recover from the <code class="highlighter-rouge">sleepimage</code>. This is the safest… since it’s redundant, but it’s is slower than just sleep. This in modern MacBooks with SSD is call Standby Mode, and instead of waiting till the total lost of power between 1 h or 3h —depending on the year model— it goes to safe sleep.</li>
+  <li>Safe Sleep — <code class="highlighter-rouge">hibernatemode 25</code>: This is the hibernation mode in windows, in other words, the computer saves everything to the <code class="highlighter-rouge">sleepimage</code> and them disconnect power from everything. This mode is also really safe, perhaps safer than the previous one for some people and cases, but it’s the slowest. Usually the sleep process is the same than in the previous one, but it’s always going to wake up from the sleepimage, regardless of it has run out of battery or not. So it’s going to take more or less time depending of the capacity of your machine to read the <code class="highlighter-rouge">sleepimage</code>.</li>
+</ul>
+
+<p>There is more info about the sleep modes <a href="https://support.apple.com/en-us/HT202824">here</a>.</p>
+
+<figure class="">
+  <a href="/assets/images/blog/2018/macos-sierra-mbp-progress-bar-after-deep-sleep.png">
+  <img src="/assets/images/blog/2018/macos-sierra-mbp-progress-bar-after-deep-sleep.png" alt="Waking up from safe sleep" /></a>
+  
+    <figcaption>Waking up from safe sleep
+</figcaption>
+  
+</figure>
+
+<p>Some people argue that the back screen problem is related to the sleep image or the <code class="highlighter-rouge">hibernatemode 3</code>, so you have two options, change to <code class="highlighter-rouge">hibernatemode 0</code> —the one I have right now— or to <code class="highlighter-rouge">hibernatemode 25</code>. If the problem is in the <code class="highlighter-rouge">sleepimage</code> the obvious candidate is the zero mode, but I’ve tried it and I’ve just woken up to a back screen. On the other hand,  while I was trying to fix the dGPU problem I had set the 25 mode for long, but sometimes it also woke up to the back screen. So this isn’t working for me.</p>
+
+<p>To change the sleep behavior you can run the following commands</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="c"># Just sleep mode</span>
+<span class="nv">$ </span><span class="nb">sudo </span>pmset <span class="nt">-a</span> hibernationmode 0
+<span class="c"># Sleep mode + safe sleep</span>
+<span class="nv">$ </span><span class="nb">sudo </span>pmset <span class="nt">-a</span> hibernationmode 3
+<span class="c"># Just safe sleep</span>
+<span class="nv">$ </span><span class="nb">sudo </span>pmset <span class="nt">-a</span> hibernationmode 25
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="highlighter-rouge">-a</code> is for all —when you are on power ac and battery— but you can specify different settings. <code class="highlighter-rouge">-b</code> for battery and <code class="highlighter-rouge">-c</code> wall power.</p>
+
+<p>If you decide to go for <code class="highlighter-rouge">hibernatemode 0</code> you can also delete de <code class="highlighter-rouge">sleepimage</code> and sabe some space in your hard drive.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>rm <span class="nt">-f</span> /var/vm/sleepimage
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="the-lidwake-on-test">The lidwake (on test)</h2>
+
+<p>Since some people say that the problem is related to the lid I’ve decided to change the way the computer wakes up. Instead of waking it up when I open the lid I going to wake up it pushing a key after opening the lid.</p>
+
+<p>You can achieve this changing the <code class="highlighter-rouge">lidwake</code> parameter to <code class="highlighter-rouge">0</code>:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>pmset <span class="nt">-a</span> lidwake 0
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The normal value is <code class="highlighter-rouge">1</code>.</p>
+
+<p>Let’s see how this pan out and I’m able to stop the back screen wake up.</p>
+
+<h3 id="final-thoughts">Final thoughts</h3>
+
+<p>The issue isn’t incredible problematic, even more right now that in modern system is really difficult to lose data because a force reboot. However, isn’t a normal behavior and is something that Apple should take a look to it. Seems that the problem extents across several generation of Macs and for some people has become more acute with High Sierra. Perhaps this is my case, but I don’t really know. I’ve <a href="/blog/2017/11/08/updated-to-high-sierra/">installed High Sierra</a> around beginning of November and in the beginning of December my dGPU crashed. So it’s difficult for me if this behavior has increased due to the crash, due to High Sierra or just because my Mac is old.</p>
+
+        </div>
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/dgpu" class="page__taxonomy-item" rel="tag">dGPU</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/high-sierra" class="page__taxonomy-item" rel="tag">high sierra</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/macos" class="page__taxonomy-item" rel="tag">macOS</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/personal" class="page__taxonomy-item" rel="tag">Personal</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/technology" class="page__taxonomy-item" rel="tag">Technology</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2018-04-13T17:37:52+00:00">Friday, 13 April 2018 17:37 UTC</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?via=lpuerto&text=MBP+wakes+up+from+sleep+to+back+screen%20https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F04%2F13%2Fmbp-wakes-up-from-sleep-to-back-screen%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F04%2F13%2Fmbp-wakes-up-from-sleep-to-back-screen%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+
+  <a href="https://www.reddit.com/submit?url=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F04%2F13%2Fmbp-wakes-up-from-sleep-to-back-screen%2F&title=MBP wakes up from sleep to back screen" class="btn btn--reddit" title="Share on Reddit"><i class="fab fa-fw fa-reddit" aria-hidden="true"></i><span> Reddit</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fluisspuerto.net%2Fblog%2F2018%2F04%2F13%2Fmbp-wakes-up-from-sleep-to-back-screen%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/2018/03/28/r-and-java-10/" class="pagination--pager" title="R and Java 10
+">Previous</a>
+    
+    
+      <a href="/blog/2018/04/28/r-3-5-joy-in-playing/" class="pagination--pager" title="R 3.5 “Joy in Playing”
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/jekyll.png"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/07/23/new-web-in-jekyll/" rel="permalink">New Web in Jekyll
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As you probably have noticed, some days ago I rolled out a new version of my website, which you probably think it’s pretty similar to the previous one, at least talking about its external appearance. However, it’s really different in the inside, since it’s a static web build with Jekyll, while the previous one was build on Wordpress. This isn’t ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/Luis-Puerto-The-Entreprenour2.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/21/16-personalities-apparently-im-an-entrepreneur/" rel="permalink">16 Personalities: Apparently I’m an Entrepreneur
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Not long ago, while I was taking a course in Finland, they asked us to take a personality test online called 16 personalities. It wasn’t nothing really official or for much purpose of scrutinize us, but just to know ourselves a little bit more and we can work our strengths and weakness. To my surprise, the test told me that I have an entrepreneu...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+      <div class="archive__item-teaser">
+          
+            <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">
+              <img src=
+                
+                  "/assets/images/blog/2018/R-Homebrew.jpg"
+                
+                alt="">
+            </a>
+          
+      </div>
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/blog/2018/05/11/installing-r-with-homebrew-with-all-the-capabilities/" rel="permalink">Installing R with Homebrew with all the capabilities
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">As I explained in my previous post if you installed R with Homebrew you have less capabilities than with a R installed from CRAN’s binary. But, can you have all the capabilities while you still use Homebrew to install R? Yes! However… why you bother to install it with Homebrew at all instead of installing it from CRAN. Well, it’s true that CRAN ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><div class="search-searchbar"></div>
+    <div class="search-hits"></div></div>
+      </div>
+    
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/lpuerto"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+      <li><a href="https://www.linkedin.com/in/lpuerto"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+    
+    
+    
+      <li><a href="https://github.com/luisspuerto"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+<!--
+    
+    
+-->
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2018 Luis Puerto |
+  
+  <a href="https://github.com/luisspuerto/luisspuerto.net-src"><i class="fas fa-code" aria-hidden="true"></i> Source Code</a> | 
+  
+Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+
+
+<!-- Including InstantSearch.js library and styling -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.3/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+// Instanciating InstantSearch.js with Algolia credentials
+const search = instantsearch({
+  appId: 'NSAWFR2G1K',
+  apiKey: 'b63bbd39b0bf76207cf9bebdb9c2b7dd',
+  indexName: 'luisspuerto-net',
+  searchParameters: {
+    restrictSearchableAttributes: [
+      'title',
+      'content'
+    ]
+  }
+});
+
+const hitTemplate = function(hit) {
+  const url = hit.url;
+  const title = hit._highlightResult.title.value;
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+        <h2 class="archive__item-title" itemprop="headline"><a href="${url}">${title}</a></h2>
+        <div class="archive__item-excerpt" itemprop="description">${content}</div>
+      </article>
+    </div>
+  `;
+}
+
+// Adding searchbar and results widgets
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '.search-searchbar',
+    poweredBy: true,
+    placeholder: 'Enter your search term...'
+  })
+);
+search.addWidget(
+  instantsearch.widgets.hits({
+    container: '.search-hits',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+// Starting the search
+search.start();
+</script>
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://luisspuerto.net/blog/2018/04/13/mbp-wakes-up-from-sleep-to-back-screen/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/blog/2018/04/13/mbp-wakes-up-from-sleep-to-back-screen"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://luisspuerto-net.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+    <script>
+//open external links in a new window
+function external_new_window() {
+    for(var c = document.getElementsByTagName("a"), a = 0;a < c.length;a++) {
+    var b = c[a];
+    b.getAttribute("href") && b.hostname !== location.hostname && (b.target = "_blank")
+    }
+}
+//open PDF links in a new window
+function pdf_new_window ()
+{
+    if (!document.getElementsByTagName) return false;
+    var links = document.getElementsByTagName("a");
+    for (var eleLink=0; eleLink < links.length; eleLink ++) {
+    if ((links[eleLink].href.indexOf('.pdf') !== -1)||(links[eleLink].href.indexOf('.doc') !== -1)||(links[eleLink].href.indexOf('.docx') !== -1)) {
+        links[eleLink].onclick =
+        function() {
+            window.open(this.href);
+            return false;
+        }
+    }
+    }
+} 
+pdf_new_window()
+external_new_window();
+</script>
+    <style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>
+  </body>
+</html>
