@@ -1,6 +1,9 @@
 {% if page.author_profile or layout.author_profile or page.sidebar %}
   <div class="sidebar sticky">
   {% if page.author_profile or layout.author_profile %}{% include author-profile.html %}{% endif %}
+  {% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+    {% assign tags = site_tags | split:',' | sort %}
+  {% include tagcloud.html %}
   {% if page.sidebar %}
     {% for s in page.sidebar %}
       {% if s.image %}
